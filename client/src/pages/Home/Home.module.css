@@ -1,0 +1,25 @@
+.homePage {
+}
+
+.logo {
+  width: 450px;
+  height: 302px;
+  filter: drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.25));
+}
+
+.statement {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Button style */
+.button {
+  background: var(--dark-red);
+  width: 450px;
+  height: 54px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0px;
+  font-size: 26px;
+  color: var(--font);
+}
