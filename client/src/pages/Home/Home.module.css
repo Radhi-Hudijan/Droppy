@@ -1,25 +1,60 @@
 .homePage {
+  width: 95vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
 }
 
-.logo {
-  width: 450px;
-  height: 302px;
-  filter: drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.25));
+.allCards {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: auto;
 }
 
-.statement {
-  font-weight: bold;
-  font-size: 20px;
+.infoCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3% 5%;
+  background-color: var(--beige);
+  width: 250px;
+  height: 100px;
 }
 
-/* Button style */
-.button {
-  background: var(--dark-red);
-  width: 450px;
-  height: 54px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 20px 0px;
-  font-size: 26px;
-  color: var(--font);
+.cardImage {
+  width: 80px;
+  margin: 10px;
+}
+
+.cardText {
+  font-weight: 700;
+  color: var(--highlight);
+}
+
+/* Media Queries */
+@media screen and (max-width: 1000px) {
+  .infoCard {
+    padding: 3% 1%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .homePage {
+    padding-bottom: 10%;
+  }
+
+  .allCards {
+    flex-direction: column;
+  }
+
+  .infoCard {
+    width: 90%;
+    margin: 20px auto;
+  }
 }

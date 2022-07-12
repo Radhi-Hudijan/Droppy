@@ -1,0 +1,76 @@
+html {
+  background-image: url("./van-image.jpg");
+  background-color: var(--background-opacity);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+#root {
+  background-color: var(--background-opacity);
+}
+
+.light-theme {
+  --font-dark: #041b15;
+  --font-light: #d9d9d9;
+  --shadow: #084233;
+  --highlight: #8a365e;
+  --background: #caafb3;
+  --background-opacity: rgba(245, 234, 235, 0.8);
+  --beige: #beb7a4;
+}
+
+.dark-theme {
+  --font-dark: #041b15;
+  --font-light: #caafb3;
+  --shadow: #084233;
+  --highlight: #8a365e;
+  --background: #041b15;
+  --background-opacity: rgba(4, 27, 21, 0.8);
+  --beige: #beb7a4;
+}
+
+.h1-desktop {
+  font-family: "Teko", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 69px;
+  letter-spacing: -0.02em;
+}
+
+.h2-desktop {
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+}
+
+.body-desktop {
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: -0.02em;
+}
+
+@media screen and (max-width: 450px) {
+  .h1-desktop {
+    font-size: 48px;
+    line-height: 69px;
+  }
+
+  .h2-desktop {
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  .body-desktop {
+    font-size: 13px;
+    line-height: 15px;
+  }
+}
