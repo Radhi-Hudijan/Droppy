@@ -57,12 +57,10 @@ const Nav = ({ opened }) => {
   return (
     <div className={styles.nav}>
       {!isMdScreen && (
-        <motion.div
-          whileTap={{ scale: 0.9 }}
-          onClick={openHandler}
-          className={styles.navNormal}
-        >
-          <img src="./burger-icon.svg" />
+        <motion.div className={styles.navNormal}>
+          <motion.div whileTap={{ scale: 0.9 }} onClick={openHandler}>
+            <img src="./burger-icon.svg" />
+          </motion.div>
         </motion.div>
       )}
       <div className={styles.drawer}>
