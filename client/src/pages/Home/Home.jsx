@@ -21,7 +21,7 @@ const Home = () => {
       <div className={style.homePage}>
         <Logo src={logo} />
         <p className="body-desktop">Looking for help to move some stuff?</p>
-        <Button />
+        <Button>GET STARTED</Button>
         <div>
           Already have an account? <a href="">Log in here</a>
         </div>
