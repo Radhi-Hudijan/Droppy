@@ -19,7 +19,7 @@ const NAV_CONTENT = [
   { link: "/login", id: TEST_ID.linkToLogin, value: "Login" },
 ];
 const Nav = ({ opened }) => {
-  const match = useMediaQuery(QUERIES.md);
+  const isMdScreen = useMediaQuery(QUERIES.md);
   const [isOpen, setIsOpen] = useState(false);
 
   const openHandler = () => {
@@ -35,7 +35,7 @@ const Nav = ({ opened }) => {
           to={x.link}
           data-testid={x.id}
           onClick={() => {
-            if (match) return;
+            if (isMdScreen) return;
             setIsOpen(false);
             opened();
           }}
@@ -47,7 +47,7 @@ const Nav = ({ opened }) => {
               style={{ flexDirection: "row" }}
             >
               <span>{x.value}</span>
-              {!match && <FontAwesomeIcon icon={faArrowRight} />}
+              {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
             </motion.div>
           </li>
         </Link>
@@ -56,7 +56,7 @@ const Nav = ({ opened }) => {
   );
   return (
     <div className={styles.nav}>
-      {!match && (
+      {!isMdScreen && (
         <motion.div
           whileTap={{ scale: 0.9 }}
           onClick={openHandler}
@@ -67,7 +67,7 @@ const Nav = ({ opened }) => {
       )}
       <div className={styles.drawer}>
         <Logo />
-        {!match && <Divider />}
+        {!isMdScreen && <Divider />}
         {getNavLinks()}
       </div>
     </div>
@@ -77,7 +77,5 @@ const Nav = ({ opened }) => {
 Nav.propTypes = {
   opened: PropTypes.func.isRequired,
 };
-
-Nav.PropTypes;
 
 export default Nav;
