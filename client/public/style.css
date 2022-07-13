@@ -11,7 +11,7 @@ html {
   background-color: var(--background-opacity);
 }
 
-.light-theme {
+:root {
   --font-dark: #041b15;
   --font-light: #d9d9d9;
   --shadow: #084233;
