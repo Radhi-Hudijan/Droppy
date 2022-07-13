@@ -1,9 +1,23 @@
-.light-theme {
+html {
+  background-image: url("./van-image.jpg");
+  background-color: var(--background-opacity);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+#root {
+  background-color: var(--background-opacity);
+}
+
+:root {
   --font-dark: #041b15;
   --font-light: #d9d9d9;
   --shadow: #084233;
   --highlight: #8a365e;
   --background: #caafb3;
+  --background-opacity: rgba(245, 234, 235, 0.8);
   --beige: #beb7a4;
 }
 
@@ -13,6 +27,7 @@
   --shadow: #084233;
   --highlight: #8a365e;
   --background: #041b15;
+  --background-opacity: rgba(4, 27, 21, 0.8);
   --beige: #beb7a4;
 }
 
