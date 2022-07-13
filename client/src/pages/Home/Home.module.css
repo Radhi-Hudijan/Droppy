@@ -9,6 +9,11 @@
   margin: auto;
 }
 
+.homepageContainer {
+  height: 100vh;
+  background-color: aliceblue;
+}
+
 .allCards {
   display: flex;
   justify-content: space-evenly;
@@ -23,8 +28,8 @@
   justify-content: space-between;
   padding: 3% 5%;
   background-color: var(--beige);
-  width: 250px;
-  height: 100px;
+  width: 350px;
+  height: 200px;
 }
 
 .cardImage {
@@ -55,6 +60,7 @@
 
   .infoCard {
     width: 90%;
+    height: 100px;
     margin: 20px auto;
   }
 }
