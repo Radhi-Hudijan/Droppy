@@ -8,7 +8,7 @@ export default function Button(props) {
   return (
     <div>
       <button className={style.button} onClick={props.buttonHandler}>
-        GET STARTED
+        {props.children}
       </button>
     </div>
   );
@@ -16,4 +16,5 @@ export default function Button(props) {
 
 Button.propTypes = {
   buttonHandler: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };
