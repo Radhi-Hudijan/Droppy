@@ -51,6 +51,10 @@
     "husky": "^7.0.0"
   },
   "dependencies": {
-    "concurrently": "^6.4.0"
+    "bcrypt": "^5.0.1",
+    "concurrently": "^6.4.0",
+    "joi": "^17.6.0",
+    "joi-password-complexity": "^5.1.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
