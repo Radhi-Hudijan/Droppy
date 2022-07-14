@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import App from "../App";
 import TEST_ID_HOME from "../pages/Home/Home.testid";
 import TEST_ID_USER_LIST from "../pages/User/UserList.testid";
-import TEST_ID_CREATE_USER from "../pages/User/CreateUser.testid";
+// import TEST_ID_CREATE_USER from "../pages/User/CreateUser.testid";
 import { getUsersSuccessMock } from "../__testUtils__/fetchUserMocks";
 
 beforeEach(() => {
@@ -46,8 +46,6 @@ describe("Routing", () => {
       </MemoryRouter>
     );
 
-    expect(
-      screen.getByTestId(TEST_ID_CREATE_USER.container)
-    ).toBeInTheDocument();
+    expect(screen.getByTestId("container")).toBeInTheDocument();
   });
 });
