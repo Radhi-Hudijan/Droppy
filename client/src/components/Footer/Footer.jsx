@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/droppyLogo.svg";
+import Logo from "../../Logo";
 import styles from "./Footer.module.css";
 
 import {
@@ -48,7 +48,7 @@ const Footer = () => {
         <div className={styles.footerCol}>
           <div className={styles.footerWidget}>
             <div className={styles.footerLogo}>
-              <img src={logo} alt="" />
+             <Logo />
             </div>
             <div className={styles.footerText}>
               <p className="body-desktop">
