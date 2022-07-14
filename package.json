@@ -51,7 +51,6 @@
     "husky": "^7.0.0"
   },
   "dependencies": {
-    "concurrently": "^6.4.0",
-    "react-icons": "^4.4.0"
+    "concurrently": "^6.4.0"
   }
 }
