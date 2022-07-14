@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../Logo";
+import Logo from "../../components/Logo";
 import styles from "./Footer.module.css";
-
 import {
   FaFacebook,
   FaLinkedinIn,

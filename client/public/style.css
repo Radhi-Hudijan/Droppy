@@ -16,6 +16,7 @@ html {
 
 :root {
   --nav-height: 80px;
+  --horizontal-shadow: drop-shadow(0px 5px 13px rgba(0, 0, 0, 0.43));
   --font-dark: #041b15;
   --font-light: #d9d9d9;
   --shadow: #084233;
@@ -23,7 +24,7 @@ html {
   --background: #caafb3;
   --background-opacity: rgba(245, 234, 235, 0.8);
   --beige: #beb7a4;
-  --horizontal-shadow: drop-shadow(0px 5px 13px rgba(0, 0, 0, 0.43));
+  --white: #fff;
 }
 
 .dark-theme {
@@ -83,5 +84,11 @@ html {
   .body-desktop {
     font-size: 13px;
     line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  :root {
+    --nav-height: 60px;
   }
 }
