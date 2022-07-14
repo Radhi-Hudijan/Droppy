@@ -86,12 +86,12 @@ ul a {
   }
 
   .nav ul a {
-    color: white;
+    color: var(--white);
     cursor: pointer;
   }
 
   .nav svg {
-    color: white;
+    color: var(--white);
     width: 100px;
     height: var(--nav-height);
     padding: 10px 0;

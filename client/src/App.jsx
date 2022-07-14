@@ -7,6 +7,7 @@ import UserList from "./pages/User/UserList";
 import { motion } from "framer-motion";
 import styles from "./App.module.css";
 import { useState } from "react";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/user" element={<UserList />} />
         <Route path="/user/create" element={<CreateUser />} />
       </Routes>
+      <Footer />
     </motion.div>
   );
 };
