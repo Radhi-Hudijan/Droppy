@@ -48,7 +48,7 @@ const Footer = () => {
         <div className={styles.footerCol}>
           <div className={styles.footerWidget}>
             <div className={styles.footerLogo}>
-             <Logo />
+              <Logo />
             </div>
             <div className={styles.footerText}>
               <p className="body-desktop">
