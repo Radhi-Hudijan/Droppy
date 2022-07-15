@@ -38,14 +38,4 @@ describe("Routing", () => {
       ).toBeInTheDocument()
     );
   });
-
-  it("Path '/user/create' should go to User create page ", () => {
-    render(
-      <MemoryRouter initialEntries={["/user/create"]}>
-        <App />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByTestId("container")).toBeInTheDocument();
-  });
 });
