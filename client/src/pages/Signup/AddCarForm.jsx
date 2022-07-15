@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import UserInfoContext from "../../context/UserInfoContext";
 
 export default function AddCarForm(props) {
-  const { email, vehicleInfo } = useContext(UserInfoContext);
+  const { email } = useContext(UserInfoContext);
 
   const contactInfoInputRef = useRef();
   const plateInputRef = useRef();
@@ -43,7 +43,6 @@ export default function AddCarForm(props) {
             ref={contactInfoInputRef}
             aria-label="contact info"
             placeholder="Preferred contact info (email/phone number)"
-            value={vehicleInfo.contact}
           />
         </div>
         <div>
@@ -54,7 +53,6 @@ export default function AddCarForm(props) {
             ref={plateInputRef}
             aria-label="plate number"
             placeholder="Plate Number"
-            value={vehicleInfo.plate}
           />
         </div>
         <div>
@@ -66,7 +64,6 @@ export default function AddCarForm(props) {
             ref={widthInputRef}
             aria-label="width"
             placeholder="00cm"
-            value={vehicleInfo.width}
           />
           <input
             type="number"
@@ -75,7 +72,6 @@ export default function AddCarForm(props) {
             ref={heightInputRef}
             aria-label="height"
             placeholder="00cm"
-            value={vehicleInfo.height}
           />
           <input
             type="number"
@@ -84,7 +80,6 @@ export default function AddCarForm(props) {
             ref={lengthInputRef}
             aria-label="length"
             placeholder="00cm"
-            value={vehicleInfo.length}
           />
         </div>
         <div>
