@@ -1,0 +1,17 @@
+.logo {
+  width: 450px;
+  filter: drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.25));
+  margin: 50px 0px 30px;
+}
+
+.logo img {
+  width: 100%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1280px) {
+  .logo {
+    width: 350px;
+    margin: 50px 0px 20px 0px;
+  }
+}
