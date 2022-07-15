@@ -1,0 +1,29 @@
+/* Button style */
+.button {
+  background: var(--highlight);
+  width: 450px;
+  height: 54px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0px 30px;
+  font-size: 26px;
+  color: var(--font-light);
+  border: 2px solid var(--highlight);
+  outline: inherit;
+  transition: 0.4s;
+}
+
+.button:active {
+  background: var(--background);
+  color: var(--highlight);
+  border: 2px solid var(--highlight);
+  transition: 0.1s;
+}
+
+@media screen and (max-width: 1280px) {
+  .button {
+    width: 350px;
+    margin: 10px 0px 20px;
+    font-size: 23px;
+  }
+}
