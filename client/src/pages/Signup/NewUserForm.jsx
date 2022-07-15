@@ -1,9 +1,7 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import UserInfoContext from "../../context/UserInfoContext";
 
 export default function NewUserForm(props) {
-  const { email, name, surname } = useContext(UserInfoContext);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const nameInputRef = useRef();
@@ -37,7 +35,6 @@ export default function NewUserForm(props) {
             ref={emailInputRef}
             aria-label="email"
             placeholder="Email"
-            value={email}
           />
         </div>
         <div>
@@ -58,7 +55,6 @@ export default function NewUserForm(props) {
             ref={nameInputRef}
             aria-label="name"
             placeholder="Name"
-            value={name}
           />
         </div>
         <div>
@@ -69,7 +65,6 @@ export default function NewUserForm(props) {
             ref={surnameInputRef}
             aria-label="surname"
             placeholder="Surname"
-            value={surname}
           />
         </div>
         <div>
