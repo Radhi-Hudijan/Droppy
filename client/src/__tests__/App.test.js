@@ -21,20 +21,4 @@ describe("Routing", () => {
 
     expect(screen.getByTestId(TEST_ID_HOME.container)).toBeInTheDocument();
   });
-
-  it("Path '/user' should go to User list ", async () => {
-    fetch.mockResponseOnce(getUsersSuccessMock());
-
-    render(
-      <MemoryRouter initialEntries={["/user"]}>
-        <App />
-      </MemoryRouter>
-    );
-
-    await waitFor(() =>
-      expect(
-        screen.getByTestId(TEST_ID_USER_LIST.container)
-      ).toBeInTheDocument()
-    );
-  });
 });
