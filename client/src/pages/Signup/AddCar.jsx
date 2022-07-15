@@ -11,7 +11,7 @@ function AddCar() {
   let vehicleInfoOnSuccess;
   const onSuccess = () => {
     setVehicleInfo(vehicleInfoOnSuccess);
-    navigate("/dashboard", {
+    navigate("/", {
       replace: true,
     });
   };
