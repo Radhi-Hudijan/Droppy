@@ -1,6 +1,8 @@
 import React, { useRef, useContext } from "react";
 import PropTypes from "prop-types";
 import UserInfoContext from "../../context/UserInfoContext";
+import Button from "../../components/Button";
+import style from "./NewUserForm.module.css";
 
 export default function AddCarForm(props) {
   const { email } = useContext(UserInfoContext);
@@ -43,6 +45,7 @@ export default function AddCarForm(props) {
             ref={contactInfoInputRef}
             aria-label="contact info"
             placeholder="Preferred contact info (email/phone number)"
+            className={style.signupInput}
           />
         </div>
         <div>
@@ -53,6 +56,7 @@ export default function AddCarForm(props) {
             ref={plateInputRef}
             aria-label="plate number"
             placeholder="Plate Number"
+            className={style.signupInput}
           />
         </div>
         <div>
@@ -64,6 +68,7 @@ export default function AddCarForm(props) {
             ref={widthInputRef}
             aria-label="width"
             placeholder="00cm"
+            className={style.sizeInput}
           />
           <input
             type="number"
@@ -72,6 +77,7 @@ export default function AddCarForm(props) {
             ref={heightInputRef}
             aria-label="height"
             placeholder="00cm"
+            className={style.sizeInput}
           />
           <input
             type="number"
@@ -80,10 +86,13 @@ export default function AddCarForm(props) {
             ref={lengthInputRef}
             aria-label="length"
             placeholder="00cm"
+            className={style.sizeInput}
           />
         </div>
         <div>
-          <button type="submit">Sign up</button>
+          <Button type="submit" path="/user">
+            Sign up
+          </Button>
         </div>
       </form>
     </div>
