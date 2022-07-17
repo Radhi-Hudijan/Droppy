@@ -4,19 +4,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 10px;
   align-items: center;
   text-align: center;
-  margin: auto;
+  margin: 5% auto;
 }
 
 .homepageContainer {
   height: 100vh;
-  background-color: aliceblue;
 }
 
 .allCards {
   display: flex;
   justify-content: space-evenly;
+  gap: 3%;
   width: 100%;
   margin: auto;
 }
@@ -27,7 +28,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 3% 5%;
-  background-color: var(--beige);
+  background-color: var(--white);
   width: 350px;
   height: 200px;
 }
@@ -43,24 +44,21 @@
 }
 
 /* Media Queries */
-@media screen and (max-width: 1000px) {
-  .infoCard {
-    padding: 3% 1%;
-  }
-}
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 740px) {
   .homePage {
     padding-bottom: 10%;
   }
 
   .allCards {
     flex-direction: column;
+    gap: 3%;
   }
 
   .infoCard {
     width: 90%;
     height: 100px;
-    margin: 20px auto;
+    margin: 3% auto;
+    padding: 10% 5%;
   }
 }

@@ -1,0 +1,39 @@
+.signupInput {
+  background: var(--white);
+  width: 450px;
+  margin: 10px 0px 20px;
+  font-size: 23px;
+  height: 54px;
+  border-radius: 5px;
+  color: var(--font-dark);
+  border: 2px solid var(--highlight);
+  outline: inherit;
+  transition: 0.4s;
+  padding: 5px;
+}
+
+.sizeInput {
+  background: var(--white);
+  width: 135px;
+  margin: 10px 10px 20px;
+  font-size: 23px;
+  height: 54px;
+  border-radius: 5px;
+  color: var(--font-dark);
+  border: 2px solid var(--highlight);
+  outline: inherit;
+  transition: 0.4s;
+  padding: 5px;
+}
+
+@media screen and (max-width: 740px) {
+  .signupInput {
+    width: 350px;
+    margin: 10px 0px 20px;
+    font-size: 20px;
+  }
+
+  .sizeInput {
+    width: 100px;
+  }
+}

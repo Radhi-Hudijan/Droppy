@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AddCarForm from "./AddCarForm";
 import useFetch from "../../hooks/useFetch";
 import UserInfoContext from "../../context/UserInfoContext";
+import style from "./Signup.module.css";
 
 function AddCar() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ function AddCar() {
   }
 
   return (
-    <section>
+    <section className={style.signupPage}>
       <h1 className="h1-desktop">Add Car to be a Deliverer</h1>
       <AddCarForm onAddCar={addCarHandler} />
       {statusComponent}

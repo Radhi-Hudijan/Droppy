@@ -139,7 +139,7 @@
 }
 
 /*responsive*/
-@media (max-width: 767px) {
+@media (max-width: 740px) {
   .row {
     flex-direction: column;
     max-width: 95%;

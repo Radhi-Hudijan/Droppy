@@ -21,8 +21,8 @@ html {
   --font-light: #d9d9d9;
   --shadow: #084233;
   --highlight: #8a365e;
-  --background: #caafb3;
-  --background-opacity: rgba(245, 234, 235, 0.8);
+  /* --background: #caafb3; */
+  --background-opacity: rgba(255, 239, 239, 0.851);
   --beige: #beb7a4;
   --white: #fff;
 }

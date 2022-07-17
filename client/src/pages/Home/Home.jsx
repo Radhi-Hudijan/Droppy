@@ -4,9 +4,6 @@ import TEST_ID from "./Home.testid";
 // Style
 import style from "./Home.module.css";
 
-// SVG
-import logo from "../../assets/droppy-logo.svg";
-
 import InformationCard from "./InformationCard";
 // Icons
 import truck from "../../assets/icons/truck-icon.svg";
@@ -19,9 +16,10 @@ const Home = () => {
   return (
     <div data-testid={TEST_ID.container}>
       <div className={style.homePage}>
-        <Logo src={logo} />
+        <Logo />
+
         <p className="body-desktop">Looking for help to move some stuff?</p>
-        <Button>GET STARTED</Button>
+        <Button path="/user/create">GET STARTED</Button>
         <div>
           Already have an account? <a href="">Log in here</a>
         </div>

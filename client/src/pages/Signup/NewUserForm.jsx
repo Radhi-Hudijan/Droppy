@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
+import Button from "../../components/Button";
+import style from "./NewUserForm.module.css";
 
 export default function NewUserForm(props) {
   const emailInputRef = useRef();
@@ -35,6 +37,7 @@ export default function NewUserForm(props) {
             ref={emailInputRef}
             aria-label="email"
             placeholder="Email"
+            className={style.signupInput}
           />
         </div>
         <div>
@@ -45,6 +48,7 @@ export default function NewUserForm(props) {
             ref={passwordInputRef}
             aria-label="password"
             placeholder="Password"
+            className={style.signupInput}
           />
         </div>
         <div>
@@ -55,6 +59,7 @@ export default function NewUserForm(props) {
             ref={nameInputRef}
             aria-label="name"
             placeholder="Name"
+            className={style.signupInput}
           />
         </div>
         <div>
@@ -65,15 +70,22 @@ export default function NewUserForm(props) {
             ref={surnameInputRef}
             aria-label="surname"
             placeholder="Surname"
+            className={style.signupInput}
           />
         </div>
         <div>
-          <button type="submit" onClick={() => props.setIsClicked(true)}>
+          <Button
+            type="submit"
+            path="/user/create/add-car"
+            onClick={() => props.setIsClicked(true)}
+          >
             Add car to be deliverer
-          </button>
+          </Button>
         </div>
         <div>
-          <button type="submit">Sign up</button>
+          <Button type="submit" path="/user">
+            Sign up
+          </Button>
         </div>
       </form>
     </div>

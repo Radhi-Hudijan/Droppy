@@ -20,7 +20,12 @@
   transition: 0.1s;
 }
 
-@media screen and (max-width: 1280px) {
+.buttonLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 740px) {
   .button {
     width: 350px;
     margin: 10px 0px 20px;
