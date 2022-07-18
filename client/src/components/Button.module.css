@@ -7,7 +7,7 @@
   cursor: pointer;
   margin: 20px 0px 30px;
   font-size: 26px;
-  color: var(--font-light);
+  color: var(--white);
   border: 2px solid var(--highlight);
   outline: inherit;
   transition: 0.4s;

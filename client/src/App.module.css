@@ -1,4 +1,109 @@
 .container {
   background-color: var(--background);
   box-shadow: -10px 0px 10px 1px rgba(0, 0, 0, 0.24);
+  background-image: url("assets/images/van.jpg");
+  background-color: var(--background-opacity);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Style from public/style.css */
+html {
+  background-image: url("assets/images/van.jpg");
+  background-color: var(--background-opacity);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+#root {
+  background-color: var(--background-opacity);
+  overflow-x: hidden;
+}
+
+:root {
+  --nav-height: 80px;
+  --horizontal-shadow: drop-shadow(0px 5px 13px rgba(0, 0, 0, 0.43));
+  --font-dark: #041b15;
+  --font-light: #d9d9d9;
+  --shadow: #084233;
+  --highlight: #8a365e;
+  /* --background: #caafb3; */
+  --background-opacity: rgba(255, 239, 239, 0.851);
+  --beige: #beb7a4;
+  --white: #fff;
+}
+
+.darkTheme {
+  --font-dark: #041b15;
+  --font-light: #caafb3;
+  --shadow: #084233;
+  --highlight: #8a365e;
+  --background: #041b15;
+  --background-opacity: rgba(4, 27, 21, 0.8);
+  --beige: #beb7a4;
+}
+
+.h1Desktop {
+  font-family: "Teko", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 69px;
+  letter-spacing: -0.02em;
+}
+
+.h2Desktop {
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+}
+
+.bodyDesktop {
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: -0.02em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 450px) {
+  .h1Desktop {
+    font-size: 48px;
+    line-height: 69px;
+  }
+
+  .h2Desktop {
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  .bodyDesktop {
+    font-size: 13px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  :root {
+    --nav-height: 60px;
+  }
+
+  html {
+    width: 100%;
+    margin-right: -50px;
+  }
 }

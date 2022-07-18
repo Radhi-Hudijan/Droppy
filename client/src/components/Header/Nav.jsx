@@ -2,16 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
-import { CSS_G } from "../../constants";
 import useMediaQuery, { QUERIES } from "../../hooks/useMediaQuery";
 import Logo from "../Logo";
 import styles from "./Nav.module.css";
+import appStyle from "../../App.module.css";
 import TEST_ID from "./Nav.testid";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Divider from "../Divider";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import burger from "../../assets/icons/burger-icon.svg";
 
 const NAV_CONTENT = [
   { link: "/", id: TEST_ID.linkToHome, value: "Home" },
@@ -40,7 +41,7 @@ const Nav = ({ opened }) => {
             opened();
           }}
         >
-          <li className={CSS_G.h2}>
+          <li className={appStyle.h2Desktop}>
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -59,7 +60,7 @@ const Nav = ({ opened }) => {
       {!isMdScreen && (
         <motion.div className={styles.navNormal}>
           <motion.div whileTap={{ scale: 0.9 }} onClick={openHandler}>
-            <img src="./burger-icon.svg" />
+            <img src={burger} />
           </motion.div>
         </motion.div>
       )}
