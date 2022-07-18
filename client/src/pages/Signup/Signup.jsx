@@ -4,6 +4,7 @@ import NewUserForm from "./NewUserForm";
 import useFetch from "../../hooks/useFetch";
 import UserInfoContext from "../../context/UserInfoContext";
 import style from "./Signup.module.css";
+import appStyles from "../../App.module.css";
 
 function Signup() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ function Signup() {
 
   return (
     <section data-testid="container" className={style.signupPage}>
-      <h1 className="h1-desktop">Sign up</h1>
+      <h1 className={appStyles.h1Desktop}>Sign up</h1>
       <NewUserForm onAddUser={addUserHandler} setIsClicked={setIsClicked} />
       {statusComponent}
     </section>

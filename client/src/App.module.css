@@ -1,6 +1,12 @@
 .container {
   background-color: var(--background);
   box-shadow: -10px 0px 10px 1px rgba(0, 0, 0, 0.24);
+  background-image: url("assets/images/van.jpg");
+  background-color: var(--background-opacity);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 
 /* Style from public/style.css */
@@ -31,7 +37,7 @@ html {
   --white: #fff;
 }
 
-.dark-theme {
+.darkTheme {
   --font-dark: #041b15;
   --font-light: #caafb3;
   --shadow: #084233;
@@ -41,7 +47,7 @@ html {
   --beige: #beb7a4;
 }
 
-.h1-desktop {
+.h1Desktop {
   font-family: "Teko", sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -50,7 +56,7 @@ html {
   letter-spacing: -0.02em;
 }
 
-.h2-desktop {
+.h2Desktop {
   font-family: "Ubuntu", sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -59,7 +65,7 @@ html {
   letter-spacing: -0.02em;
 }
 
-.body-desktop {
+.bodyDesktop {
   font-family: "Ubuntu", sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -75,17 +81,17 @@ html {
 }
 
 @media screen and (max-width: 450px) {
-  .h1-desktop {
+  .h1Desktop {
     font-size: 48px;
     line-height: 69px;
   }
 
-  .h2-desktop {
+  .h2Desktop {
     font-size: 20px;
     line-height: 23px;
   }
 
-  .body-desktop {
+  .bodyDesktop {
     font-size: 13px;
     line-height: 15px;
   }
