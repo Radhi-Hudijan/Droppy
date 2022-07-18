@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import NewUserForm from "./NewUserForm";
 import useFetch from "../../hooks/useFetch";
@@ -8,7 +8,6 @@ import appStyles from "../../App.module.css";
 
 function Signup() {
   const navigate = useNavigate();
-  const [isClicked, setIsClicked] = useState(false);
   const { setEmail, setName, setSurname } = useContext(UserInfoContext);
   const userDataOnSuccess = {
     email: "",
@@ -20,7 +19,7 @@ function Signup() {
     setName(userDataOnSuccess.name);
     setSurname(userDataOnSuccess.surname);
     setEmail(userDataOnSuccess.email);
-    navigate(isClicked ? "/user/create/add-car" : "/", {
+    navigate("/user/create/add-car", {
       replace: true,
     });
   };
@@ -58,7 +57,10 @@ function Signup() {
   return (
     <section data-testid="container" className={style.signupPage}>
       <h1 className={appStyles.h1Desktop}>Sign up</h1>
-      <NewUserForm onAddUser={addUserHandler} setIsClicked={setIsClicked} />
+      <NewUserForm onAddUser={addUserHandler} />
+      <div>
+        Already have an account? <a href="">Log in here</a>
+      </div>
       {statusComponent}
     </section>
   );
