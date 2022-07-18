@@ -6,19 +6,29 @@ import { Link } from "react-router-dom";
 import style from "./Button.module.css";
 
 export default function Button(props) {
-  return (
-    <div>
-      <Link to={props.path} className={style.buttonLink}>
+  if (props.path) {
+    return (
+      <div>
+        <Link to={props.path} className={style.buttonLink}>
+          <button className={style.button} onClick={props.buttonHandler}>
+            {props.children}
+          </button>
+        </Link>
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <button className={style.button} onClick={props.buttonHandler}>
           {props.children}
         </button>
-      </Link>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 Button.propTypes = {
-  path: PropTypes.string.isRequired,
+  path: PropTypes.string,
   buttonHandler: PropTypes.func,
   children: PropTypes.elementType.isRequired,
 };
