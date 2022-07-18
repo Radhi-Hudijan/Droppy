@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import Button from "../../components/Button";
 import style from "./NewUserForm.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function NewUserForm(props) {
   const emailInputRef = useRef();
@@ -73,18 +75,9 @@ export default function NewUserForm(props) {
             className={style.signupInput}
           />
         </div>
-        <div>
-          <Button
-            type="submit"
-            path="/user/create/add-car"
-            onClick={() => props.setIsClicked(true)}
-          >
-            Add car to be deliverer
-          </Button>
-        </div>
-        <div>
-          <Button type="submit" path="/user">
-            Sign up
+        <div className={style["btn-next"]}>
+          <Button type="submit">
+            Next <FontAwesomeIcon icon={faArrowRight} />
           </Button>
         </div>
       </form>
@@ -94,5 +87,4 @@ export default function NewUserForm(props) {
 
 NewUserForm.propTypes = {
   onAddUser: PropTypes.func.isRequired,
-  setIsClicked: PropTypes.func.isRequired,
 };
