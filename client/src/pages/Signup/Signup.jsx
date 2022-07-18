@@ -57,6 +57,9 @@ function Signup() {
     <section data-testid="container" className={style.signupPage}>
       <h1 className="h1-desktop">Sign up</h1>
       <NewUserForm onAddUser={addUserHandler} />
+      <div>
+        Already have an account? <a href="">Log in here</a>
+      </div>
       {statusComponent}
     </section>
   );
