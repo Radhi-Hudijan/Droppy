@@ -30,6 +30,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: ["file-loader"],
+      },
     ],
   },
   resolve: {
@@ -38,6 +42,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
+    }),
+
+    new HtmlWebpackPlugin({
+      favicon: "./assets/favicon.ico",
     }),
     // All variables in our .env should be mentioned here
     new webpack.EnvironmentPlugin({
