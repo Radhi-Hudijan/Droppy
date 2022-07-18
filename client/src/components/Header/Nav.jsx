@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Divider from "../Divider";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import burger from "../../assets/icons/burger-icon.svg";
 
 const NAV_CONTENT = [
   { link: "/", id: TEST_ID.linkToHome, value: "Home" },
@@ -59,7 +60,7 @@ const Nav = ({ opened }) => {
       {!isMdScreen && (
         <motion.div className={styles.navNormal}>
           <motion.div whileTap={{ scale: 0.9 }} onClick={openHandler}>
-            <img src="./burger-icon.svg" />
+            <img src={burger} />
           </motion.div>
         </motion.div>
       )}

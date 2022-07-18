@@ -14,6 +14,10 @@
   height: 100vh;
 }
 
+.logoContainer {
+  width: 450px;
+}
+
 .allCards {
   display: flex;
   justify-content: space-evenly;
@@ -48,6 +52,10 @@
 @media screen and (max-width: 740px) {
   .homePage {
     padding-bottom: 10%;
+  }
+
+  .logoContainer {
+    width: 300px;
   }
 
   .allCards {

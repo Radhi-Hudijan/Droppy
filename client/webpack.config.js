@@ -45,7 +45,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      favicon: "./assets/favicon.ico",
+      favicon: "./src/assets/favicon.ico",
     }),
     // All variables in our .env should be mentioned here
     new webpack.EnvironmentPlugin({

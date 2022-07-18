@@ -17,7 +17,9 @@ const Home = () => {
   return (
     <div data-testid={TEST_ID.container}>
       <div className={style.homePage}>
-        <Logo />
+        <div className={style.logoContainer}>
+          <Logo />
+        </div>
 
         <p className={appStyle.h2Desktop}>
           Looking for help to move some stuff?

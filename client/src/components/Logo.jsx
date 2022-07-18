@@ -2,13 +2,7 @@ import React from "react";
 
 const Logo = () => {
   return (
-    <svg
-      width="460"
-      height="314"
-      viewBox="0 0 460 314"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="0 0 460 314" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_d_146_2413)">
         <mask
           id="path-1-outside-1_146_2413"

@@ -101,4 +101,9 @@ html {
   :root {
     --nav-height: 60px;
   }
+
+  html {
+    width: 100%;
+    margin-right: -50px;
+  }
 }
