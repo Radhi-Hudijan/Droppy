@@ -74,6 +74,15 @@ html {
   letter-spacing: -0.02em;
 }
 
+.boldBodyDesktop {
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: -0.02em;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -92,6 +101,11 @@ html {
   }
 
   .bodyDesktop {
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  .boldBodyDesktop {
     font-size: 13px;
     line-height: 15px;
   }

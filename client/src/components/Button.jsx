@@ -38,6 +38,6 @@ export default function Button(props) {
 Button.propTypes = {
   path: PropTypes.string,
   buttonHandler: PropTypes.func,
-  children: PropTypes.elementType.isRequired,
-  class: PropTypes.object,
+  children: PropTypes.node.isRequired,
+  class: PropTypes.string,
 };
