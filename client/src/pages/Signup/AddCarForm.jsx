@@ -90,8 +90,13 @@ export default function AddCarForm(props) {
           />
         </div>
         <div>
-          <Button type="submit" path="/user">
-            Sign up
+          <Button type="submit" path="/user" class="buttonBorder">
+            Register car
+          </Button>
+        </div>
+        <div>
+          <Button type="submit" path="/user" class="button">
+            Skip and sign up
           </Button>
         </div>
       </form>

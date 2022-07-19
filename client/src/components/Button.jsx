@@ -6,11 +6,19 @@ import { Link } from "react-router-dom";
 import style from "./Button.module.css";
 
 export default function Button(props) {
+  let buttonClass;
+
+  if (props.class === "buttonBorder") {
+    buttonClass = style.buttonBorder;
+  } else {
+    buttonClass = style.button;
+  }
+
   if (props.path) {
     return (
       <div>
         <Link to={props.path} className={style.buttonLink}>
-          <button className={style.button} onClick={props.buttonHandler}>
+          <button className={buttonClass} onClick={props.buttonHandler}>
             {props.children}
           </button>
         </Link>
@@ -19,7 +27,7 @@ export default function Button(props) {
   } else {
     return (
       <div>
-        <button className={style.button} onClick={props.buttonHandler}>
+        <button className={buttonClass} onClick={props.buttonHandler}>
           {props.children}
         </button>
       </div>
@@ -31,4 +39,5 @@ Button.propTypes = {
   path: PropTypes.string,
   buttonHandler: PropTypes.func,
   children: PropTypes.elementType.isRequired,
+  class: PropTypes.object,
 };

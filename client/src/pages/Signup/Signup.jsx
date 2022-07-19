@@ -4,6 +4,7 @@ import NewUserForm from "./NewUserForm";
 import useFetch from "../../hooks/useFetch";
 import UserInfoContext from "../../context/UserInfoContext";
 import style from "./Signup.module.css";
+import appStyle from "../../App.module.css";
 import appStyles from "../../App.module.css";
 
 function Signup() {
@@ -58,7 +59,7 @@ function Signup() {
     <section data-testid="container" className={style.signupPage}>
       <h1 className={appStyles.h1Desktop}>Sign up</h1>
       <NewUserForm onAddUser={addUserHandler} />
-      <div>
+      <div className={appStyle.bodyDesktop}>
         Already have an account? <a href="">Log in here</a>
       </div>
       {statusComponent}
