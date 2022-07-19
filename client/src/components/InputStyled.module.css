@@ -1,0 +1,54 @@
+h2 {
+  margin: 30px 0 20px 0;
+  text-align: center;
+  color: var(--font-dark);
+}
+
+.inputDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputDiv label {
+  font-size: 1.2em;
+  position: relative;
+  top: 4px;
+  color: white;
+  background-color: var(--highlight);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index: 2;
+  padding: 2px 5px;
+  box-shadow: -1px -1px 6px var(--highlight-light);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 50px;
+}
+
+.inputDiv label svg {
+  color: var(--white);
+}
+
+.genericInput {
+  background: var(--white);
+  font-size: 1.4em;
+  border-radius: 5px;
+  color: var(--font-dark);
+  outline: inherit;
+  border: none;
+  padding: 8px;
+  box-shadow: 0px 1px 1px var(--font-dark);
+}
+
+.errorMessage {
+  color: red;
+}
+
+.invalid {
+  border: red solid 2px;
+}
