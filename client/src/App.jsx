@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import styles from "./App.module.css";
 import { useState } from "react";
 import Footer from "./components/Footer/Footer";
+import CreateJobController from "./pages/job/CreateJobController";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/user" element={<UserList />} />
         <Route path="/user/create" element={<Signup />}></Route>
         <Route path="/user/create/add-car" element={<AddCar />} />
+        <Route path="/job/create" element={<CreateJobController />} />
       </Routes>
       <Footer />
     </motion.div>
