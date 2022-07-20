@@ -1,0 +1,31 @@
+:root {
+  --accent: #151515;
+  --size: 2.5rem;
+  --duration: 1s;
+}
+
+.spinner {
+  width: var(--size);
+  aspect-ratio: 1;
+  display: grid;
+  mask: conic-gradient(from 22deg, #0001, #000);
+  animation: spin var(--duration) steps(8) infinite;
+  margin: 2rem auto 1rem auto;
+}
+
+.spinner:before {
+  --gradient: linear-gradient(var(--accent) 0 0);
+  background: var(--gradient) 50%/34% 8% space no-repeat,
+    var(--gradient) 50%/8% 34% no-repeat space;
+}
+
+.spinner:before {
+  content: "";
+  transform: rotate(45deg);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

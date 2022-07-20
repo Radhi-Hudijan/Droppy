@@ -18,6 +18,10 @@
   height: 100vh;
 }
 
+.logoContainer {
+  width: 450px;
+}
+
 .allCards {
   display: flex;
   justify-content: space-evenly;
@@ -33,7 +37,8 @@
   justify-content: space-between;
   padding: 3% 5%;
   background-color: var(--white);
-  width: 350px;
+  max-width: 450px;
+  min-width: 200px;
   height: 200px;
 }
 
@@ -45,6 +50,11 @@
 .cardText {
   font-weight: 700;
   color: var(--highlight);
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 23px;
+  letter-spacing: -0.02em;
 }
 
 /* Media Queries */
@@ -52,6 +62,10 @@
 @media screen and (max-width: 740px) {
   .homePage {
     padding-bottom: 10%;
+  }
+
+  .logoContainer {
+    width: 300px;
   }
 
   .allCards {

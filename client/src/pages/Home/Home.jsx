@@ -3,6 +3,7 @@ import TEST_ID from "./Home.testid";
 
 // Style
 import style from "./Home.module.css";
+import appStyle from "../../App.module.css";
 
 import InformationCard from "./InformationCard";
 // Icons
@@ -16,11 +17,15 @@ const Home = () => {
   return (
     <div data-testid={TEST_ID.container}>
       <div className={style.homePage}>
-        <Logo />
+        <div className={style.logoContainer}>
+          <Logo />
+        </div>
 
-        <p className="body-desktop">Looking for help to move some stuff?</p>
+        <p className={appStyle.h2Desktop}>
+          Looking for help to move some stuff?
+        </p>
         <Button path="/user/create">GET STARTED</Button>
-        <div>
+        <div className={appStyle.bodyDesktop}>
           Already have an account? <a href="">Log in here</a>
         </div>
         <div className={style.allCards}>

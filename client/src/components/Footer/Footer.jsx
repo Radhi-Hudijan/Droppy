@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../components/Logo";
+import appStyle from "../../App.module.css";
 import styles from "./Footer.module.css";
 import {
   FaFacebook,
@@ -19,7 +20,7 @@ const Footer = () => {
         <div className={styles.singleCta}>
           <FaMapMarkerAlt className={styles.ctaIcon} />
           <div className={styles.ctaText}>
-            <h4 className="h2-desktop">Find us</h4>
+            <h4 className={appStyle.h2Desktop}>Find us</h4>
             <span>7412 RT, Amsterdam, Netherland</span>
           </div>
         </div>
@@ -27,7 +28,7 @@ const Footer = () => {
         <div className={styles.singleCta}>
           <FaPhoneAlt className={styles.ctaIcon} />
           <div className={styles.ctaText}>
-            <h4 className="h2-desktop">Call us</h4>
+            <h4 className={appStyle.h2Desktop}>Call us</h4>
             <span>98765432100</span>
           </div>
         </div>
@@ -35,7 +36,7 @@ const Footer = () => {
         <div className={styles.singleCta}>
           <FaEnvelopeOpen className={styles.ctaIcon} />
           <div className={styles.ctaText}>
-            <h4 className="h2-desktop">Mail us</h4>
+            <h4 className={appStyle.h2Desktop}>Mail us</h4>
             <span>info@droppy.com</span>
           </div>
         </div>
@@ -50,7 +51,7 @@ const Footer = () => {
               <Logo />
             </div>
             <div className={styles.footerText}>
-              <p className="body-desktop">
+              <p className={appStyle.bodyDesktop}>
                 Droppy is a pay for delivery application ,the app is designed
                 and built by the students of HackYourFuture programme ( class36
                 ) as a graduation project.
@@ -60,8 +61,8 @@ const Footer = () => {
         </div>
 
         <div className={styles.footerCol}>
-          <h4 className="h2-desktop">Quick links</h4>
-          <ul className="body-desktop">
+          <h4 className={appStyle.h2Desktop}>Quick links</h4>
+          <ul className={appStyle.bodyDesktop}>
             <li>
               <Link to={"/"}>about us</Link>
             </li>
@@ -77,8 +78,8 @@ const Footer = () => {
           </ul>
         </div>
         <div className={styles.footerCol}>
-          <h4 className="h2-desktop">legal</h4>
-          <ul className="body-desktop">
+          <h4 className={appStyle.h2Desktop}>legal</h4>
+          <ul className={appStyle.bodyDesktop}>
             <li>
               <Link to={"/"}>privacy Notice</Link>
             </li>
@@ -94,7 +95,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className={styles.footerCol}>
-          <h4 className="h2-desktop">follow us</h4>
+          <h4 className={appStyle.h2Desktop}>follow us</h4>
           <div className={styles.socialLinks}>
             <Link to={"/"}>
               <FaFacebook className={styles.facebook} />
@@ -115,7 +116,7 @@ const Footer = () => {
       <hr />
 
       <div className={styles.copyright}>
-        <p className="body-desktop">
+        <p className={appStyle.bodyDesktop}>
           &copy;{new Date().getFullYear()} Droppy LTD | All rights reserved |
           Terms Of Service | Privacy
         </p>

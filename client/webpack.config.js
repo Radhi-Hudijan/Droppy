@@ -38,7 +38,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
+      favicon: "./src/assets/favicon.ico",
     }),
+
     // All variables in our .env should be mentioned here
     new webpack.EnvironmentPlugin({
       // Default is '' because on our heroku servers we want to have it default to our current URL
