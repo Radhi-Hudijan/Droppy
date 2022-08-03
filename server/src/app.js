@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-
 import userRouter from "./routes/user.js";
+import { userRouter as authRoutes } from "./routes/authentication";
 
 // Create an express server
 const app = express();
@@ -17,5 +17,6 @@ app.use(cors());
  * As we also host our client code on heroku we want to separate the API endpoints.
  */
 app.use("/api/user", userRouter);
+app.use("/api/authentication", authRoutes);
 
 export default app;
