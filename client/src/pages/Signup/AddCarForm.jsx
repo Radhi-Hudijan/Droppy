@@ -8,9 +8,11 @@ import Button from "../../components/Button";
 // Styles
 import style from "./NewUserForm.module.css";
 import appStyle from "../../App.module.css";
+import NotifierContext from "../../context/NotifierContext";
 
 export default function AddCarForm(props) {
   const { email } = useContext(UserInfoContext);
+  const { notifier } = useContext(NotifierContext);
 
   const contactInfoInputRef = useRef();
   const plateInputRef = useRef();
@@ -45,10 +47,11 @@ export default function AddCarForm(props) {
   let car = "";
   const isCar = () => {
     car = true;
+    notifier("Success! Drive safe.");
   };
-
   const isNotCar = () => {
     car = false;
+    notifier("Success! Good luck with your first request.");
   };
 
   function submitHandler(e) {

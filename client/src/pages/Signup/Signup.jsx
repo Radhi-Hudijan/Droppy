@@ -9,6 +9,7 @@ import appStyles from "../../App.module.css";
 
 function Signup() {
   const navigate = useNavigate();
+
   const { setEmail, setName, setSurname } = useContext(UserInfoContext);
   const userDataOnSuccess = {
     email: "",
