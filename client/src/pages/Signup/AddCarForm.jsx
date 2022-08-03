@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import UserInfoContext from "../../context/UserInfoContext";
 
@@ -13,12 +13,6 @@ import NotifierContext from "../../context/NotifierContext";
 export default function AddCarForm(props) {
   const { email } = useContext(UserInfoContext);
   const { notifier } = useContext(NotifierContext);
-
-  const contactInfoInputRef = useRef();
-  const plateInputRef = useRef();
-  const widthInputRef = useRef();
-  const heightInputRef = useRef();
-  const lengthInputRef = useRef();
 
   const [allInputs, setAllInputs] = useState({
     contact: "",
@@ -44,32 +38,19 @@ export default function AddCarForm(props) {
     }
   }, [allInputs]);
 
-  let car = "";
   const isCar = () => {
-    car = true;
     notifier("Success! Drive safe.");
   };
   const isNotCar = () => {
-    car = false;
     notifier("Success! Good luck with your first request.");
   };
 
   function submitHandler(e) {
     e.preventDefault();
 
-    const enteredContactInfo = car ? contactInfoInputRef.current.value : null;
-    const enteredPlate = car ? plateInputRef.current.value : null;
-    const enteredWidth = car ? widthInputRef.current.value : null;
-    const enteredHeight = car ? heightInputRef.current.value : null;
-    const enteredLength = car ? lengthInputRef.current.value : null;
-
     const vehicleInfo = {
       email,
-      contact: enteredContactInfo,
-      plate: enteredPlate,
-      width: enteredWidth,
-      height: enteredHeight,
-      length: enteredLength,
+      ...allInputs,
     };
 
     props.onAddCar(vehicleInfo);
@@ -88,7 +69,6 @@ export default function AddCarForm(props) {
               setAllInputs({ ...allInputs, contact: e.target.value })
             }
             id="contact"
-            ref={contactInfoInputRef}
             aria-label="contact info"
             placeholder="Preferred contact info (email/number)*"
             className={style.signupInput}
@@ -102,7 +82,6 @@ export default function AddCarForm(props) {
               setAllInputs({ ...allInputs, plate: e.target.value })
             }
             id="plate"
-            ref={plateInputRef}
             aria-label="plate number"
             placeholder="Plate Number*"
             className={style.signupInput}
@@ -120,7 +99,6 @@ export default function AddCarForm(props) {
               setAllInputs({ ...allInputs, width: e.target.value })
             }
             id="width"
-            ref={widthInputRef}
             aria-label="width"
             placeholder="00cm*"
             className={style.sizeInput}
@@ -133,7 +111,6 @@ export default function AddCarForm(props) {
               setAllInputs({ ...allInputs, height: e.target.value })
             }
             id="height"
-            ref={heightInputRef}
             aria-label="height"
             placeholder="00cm*"
             className={style.sizeInput}
@@ -146,7 +123,6 @@ export default function AddCarForm(props) {
               setAllInputs({ ...allInputs, length: e.target.value })
             }
             id="length"
-            ref={lengthInputRef}
             aria-label="length"
             placeholder="00cm*"
             className={style.sizeInput}
