@@ -1,0 +1,28 @@
+.alert {
+  padding: 20px;
+  background-color: #1aff0093;
+  color: var(--highlight);
+  margin-bottom: 15px;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: var(--highlight);
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+}
+
+.displayNone {
+  display: none;
+}
+
+.closebtn:hover {
+  transform: scale(0.8);
+}

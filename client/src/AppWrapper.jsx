@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserInfoContextProvider } from "./context/UserInfoContext";
+import { NotifierContextProvider } from "./context/NotifierContext";
 
 /**
  * This component wraps our App with the providers we do not want to have in our tests
@@ -9,7 +10,9 @@ import { UserInfoContextProvider } from "./context/UserInfoContext";
 const AppWrapper = ({ children }) => {
   return (
     <UserInfoContextProvider>
-      <Router>{children}</Router>
+      <NotifierContextProvider>
+        <Router>{children}</Router>
+      </NotifierContextProvider>
     </UserInfoContextProvider>
   );
 };
