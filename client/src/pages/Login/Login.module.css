@@ -1,0 +1,28 @@
+.btn-login {
+  background-color: red;
+  max-width: 40%;
+}
+
+.login {
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 5% auto;
+}
+
+.loginInput {
+  background: var(--white);
+  width: 450px;
+  margin: 10px 0px 20px;
+  font-size: 23px;
+  height: 54px;
+  border-radius: 5px;
+  color: var(--font-dark);
+  border: 2px solid var(--highlight);
+  outline: inherit;
+  transition: 0.4s;
+  padding: 5px;
+}
