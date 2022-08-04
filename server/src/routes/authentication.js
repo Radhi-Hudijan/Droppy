@@ -1,8 +1,8 @@
 import express from "express";
-import { authenticate } from "../controllers/authentication";
+import { authenticate } from "../controllers/authentication.js";
 
-const userRouter = express.Router();
+const authRouter = express.Router();
 
-userRouter.post("/", authenticate);
+authRouter.post("/", authenticate);
 
-export default userRouter;
+export default authRouter;

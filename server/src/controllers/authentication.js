@@ -1,5 +1,5 @@
 // import { logError } from "../util/logging.js";
-import { User } from "../models/User";
+import User from "../models/User.js";
 import Joi from "joi";
 import bcrypt from "bcrypt";
 
