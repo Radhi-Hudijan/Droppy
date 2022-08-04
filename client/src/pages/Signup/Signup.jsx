@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NewUserForm from "./NewUserForm";
 import useFetch from "../../hooks/useFetch";
 import UserInfoContext from "../../context/UserInfoContext";
@@ -59,7 +59,7 @@ function Signup() {
       <h1 className={appStyles.h1Desktop}>Sign up</h1>
       <NewUserForm onAddUser={addUserHandler} />
       <div>
-        Already have an account? <a href="">Log in here</a>
+        Already have an account? <Link to="/login">Log in here</Link>
       </div>
       {statusComponent}
     </section>
