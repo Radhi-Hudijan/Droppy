@@ -12,6 +12,7 @@ import carry from "../../assets/icons/carry-icon.svg";
 import plus from "../../assets/icons/plus-icon.svg";
 import Button from "../../components/Button";
 import Logo from "../../components/Logo";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -26,7 +27,7 @@ const Home = () => {
         </p>
         <Button path="/user/create">GET STARTED</Button>
         <div className={appStyle.bodyDesktop}>
-          Already have an account? <a href="">Log in here</a>
+          Already have an account? <Link to="/login">Log in here</Link>
         </div>
         <div className={style.allCards}>
           <InformationCard
