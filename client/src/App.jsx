@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import styles from "./App.module.css";
 import { useState } from "react";
 import Footer from "./components/Footer/Footer";
+import Login from "./pages/Login/Login";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/user" element={<UserList />} />
         <Route path="/user/create" element={<Signup />}></Route>
         <Route path="/user/create/add-car" element={<AddCar />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </motion.div>
