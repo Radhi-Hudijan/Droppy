@@ -10,14 +10,16 @@ function Login() {
   const navigate = useNavigate();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const { setEmail, setName, setSurname, setVehicleInfo } =
+  const { setEmail, setName, setSurname, setVehicleInfo, setToken } =
     useContext(UserInfoContext);
 
   const onSuccess = (res) => {
+    localStorage.setItem("token", res.data);
     setEmail(res.email);
     setName(res.name);
     setSurname(res.surname);
     setVehicleInfo(res.vehicleInfo);
+    setToken(res.data);
     navigate("/", {
       replace: true,
     });
