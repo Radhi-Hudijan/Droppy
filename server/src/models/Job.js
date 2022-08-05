@@ -1,0 +1,54 @@
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import Joi from "joi";
+const joiPhoneNumber = Joi.extend(require("joi-phone-number"));
+
+const jobSchema = new mongoose.Schema({
+  sender: { type: String, required: true },
+  deliverer: { type: String },
+  item: { type: String, required: true },
+  description: { type: String, required: true },
+  fromPostCode: { type: String, required: true },
+  toPostCode: { type: String, required: true },
+  width: { type: Number, min: 1, required: true },
+  height: { type: Number, min: 1, required: true },
+  length: { type: Number, min: 1, required: true },
+  date: { type: Date, required: true },
+  phoneNo: { type: String, required: true },
+});
+
+jobSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
+    expiresIn: "7d",
+  });
+  return token;
+};
+
+const Job = mongoose.model("jobs", jobSchema);
+
+export const validateJob = (data) => {
+  const schema = Joi.object({
+    item: Joi.string().min(1).required().label("item"),
+    description: Joi.any().description().required().label("description"),
+    fromPostCode: Joi.string()
+      .pattern(/^(?:NL-)?(\d{4})\s*([A-Z]{2})$/i)
+      .required()
+      .label("fromPostCode"),
+    toPostCode: Joi.string()
+      .pattern(/^(?:NL-)?(\d{4})\s*([A-Z]{2})$/i)
+      .required()
+      .label("toPostCode"),
+    width: Joi.number().integer().min(1).required().label("width"),
+    height: Joi.number().integer().min(1).required().label("height"),
+    length: Joi.number().integer().min(1).required().label("length"),
+    date: Joi.date().greater("now").required().label("date"),
+    phoneNo: joiPhoneNumber
+      .string()
+      .phoneNumber({ defaultCountry: "NL", format: "national" })
+      .required()
+      .label("phoneNo"),
+  });
+  return schema.validate(data);
+};
+
+export default Job;
