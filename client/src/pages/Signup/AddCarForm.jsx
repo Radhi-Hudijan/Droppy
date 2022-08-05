@@ -1,34 +1,56 @@
-import React, { useRef, useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import UserInfoContext from "../../context/UserInfoContext";
+
+// Component
 import Button from "../../components/Button";
+
+// Styles
 import style from "./NewUserForm.module.css";
+import appStyle from "../../App.module.css";
+import NotifierContext from "../../context/NotifierContext";
 
 export default function AddCarForm(props) {
   const { email } = useContext(UserInfoContext);
+  const { notifier } = useContext(NotifierContext);
 
-  const contactInfoInputRef = useRef();
-  const plateInputRef = useRef();
-  const widthInputRef = useRef();
-  const heightInputRef = useRef();
-  const lengthInputRef = useRef();
+  const [allInputs, setAllInputs] = useState({
+    contact: "",
+    plate: "",
+    width: "",
+    height: "",
+    length: "",
+  });
+
+  const [allFilled, setAllFilled] = useState(false);
+
+  useEffect(() => {
+    if (
+      allInputs.contact &&
+      allInputs.plate &&
+      allInputs.width &&
+      allInputs.height &&
+      allInputs.length
+    ) {
+      setAllFilled(true);
+    } else {
+      setAllFilled(false);
+    }
+  }, [allInputs]);
+
+  const isCar = () => {
+    notifier("Success! Drive safe.");
+  };
+  const isNotCar = () => {
+    notifier("Success! Good luck with your first request.");
+  };
 
   function submitHandler(e) {
     e.preventDefault();
 
-    const enteredContactInfo = contactInfoInputRef.current.value;
-    const enteredPlate = plateInputRef.current.value;
-    const enteredWidth = widthInputRef.current.value;
-    const enteredHeight = heightInputRef.current.value;
-    const enteredLength = lengthInputRef.current.value;
-
     const vehicleInfo = {
       email,
-      contact: enteredContactInfo,
-      plate: enteredPlate,
-      width: enteredWidth,
-      height: enteredHeight,
-      length: enteredLength,
+      ...allInputs,
     };
 
     props.onAddCar(vehicleInfo);
@@ -36,64 +58,99 @@ export default function AddCarForm(props) {
 
   return (
     <div>
+      <p className={appStyle.boldBodyDesktop}>
+        *To register your car fill all the fields*
+      </p>
       <form onSubmit={submitHandler}>
         <div>
           <input
             type="text"
-            required
+            onChange={(e) =>
+              setAllInputs({ ...allInputs, contact: e.target.value })
+            }
             id="contact"
-            ref={contactInfoInputRef}
             aria-label="contact info"
-            placeholder="Preferred contact info (email/phone number)"
+            placeholder="Preferred contact info (email/number)*"
             className={style.signupInput}
+            value={allInputs.contact}
           />
         </div>
         <div>
           <input
             type="text"
-            required
+            onChange={(e) =>
+              setAllInputs({ ...allInputs, plate: e.target.value })
+            }
             id="plate"
-            ref={plateInputRef}
             aria-label="plate number"
-            placeholder="Plate Number"
+            placeholder="Plate Number*"
             className={style.signupInput}
+            value={allInputs.plate}
           />
         </div>
         <div>
-          <h3>Available Car Space for Items (W x H x L)</h3>
+          <h3 className={appStyle.bodyDesktop}>
+            Available Car Space for Items (W x H x L)
+          </h3>
           <input
             type="number"
-            required
+            min="0"
+            onChange={(e) =>
+              setAllInputs({ ...allInputs, width: e.target.value })
+            }
             id="width"
-            ref={widthInputRef}
             aria-label="width"
-            placeholder="00cm"
+            placeholder="00cm*"
             className={style.sizeInput}
+            value={allInputs.width}
           />
           <input
             type="number"
-            required
+            min="0"
+            onChange={(e) =>
+              setAllInputs({ ...allInputs, height: e.target.value })
+            }
             id="height"
-            ref={heightInputRef}
             aria-label="height"
-            placeholder="00cm"
+            placeholder="00cm*"
             className={style.sizeInput}
+            value={allInputs.height}
           />
           <input
             type="number"
-            required
+            min="0"
+            onChange={(e) =>
+              setAllInputs({ ...allInputs, length: e.target.value })
+            }
             id="length"
-            ref={lengthInputRef}
             aria-label="length"
-            placeholder="00cm"
+            placeholder="00cm*"
             className={style.sizeInput}
+            value={allInputs.length}
           />
         </div>
-        <div>
-          <Button type="submit" path="/user">
-            Sign up
-          </Button>
-        </div>
+        {allFilled === true ? (
+          <div>
+            <p className={appStyle.bodyDesktop}>Let&apos; add your car!</p>
+            <Button type="submit" class="buttonBorder" buttonHandler={isCar}>
+              Register car and sign up
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <p className={appStyle.bodyDesktop}>
+              Don&apos;t want to be a driver? No problem.
+            </p>
+            <Button
+              path="/user"
+              type="button"
+              class="button"
+              buttonHandler={isNotCar}
+            >
+              Sign up without car
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

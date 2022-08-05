@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   surname: { type: String, required: true },
   vehicleInfo: {
     contact: { type: String },
-    plateNum: { type: String },
+    plate: { type: String },
     width: { type: Number, min: 1 },
     height: { type: Number, min: 1 },
     length: { type: Number, min: 1 },

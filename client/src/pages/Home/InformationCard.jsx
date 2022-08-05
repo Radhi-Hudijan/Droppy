@@ -12,6 +12,6 @@ export default function InformationCard(props) {
 }
 
 InformationCard.propTypes = {
-  src: PropTypes.object.isRequired,
+  src: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
 };

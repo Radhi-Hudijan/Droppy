@@ -30,6 +30,10 @@
   max-width: 40%;
 }
 
+.invisible {
+  color: transparent;
+}
+
 @media screen and (max-width: 740px) {
   .signupInput {
     width: 350px;
