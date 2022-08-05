@@ -16,6 +16,7 @@ export const getJobs = async (req, res) => {
 export const createJob = async (req, res) => {
   try {
     const { job } = req.body;
+
     if (typeof job !== "object") {
       res.status(400).json({
         success: false,
@@ -37,6 +38,6 @@ export const createJob = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .send({ message: "internal server error while creating user" });
+      .send({ message: "internal server error while creating job" });
   }
 };

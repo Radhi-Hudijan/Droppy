@@ -13,7 +13,7 @@ import {
   faRuler,
 } from "@fortawesome/free-solid-svg-icons";
 
-const JobView = ({ setJobData }) => {
+const JobView = ({ setJobData, jobHandler }) => {
   const [inputs, setInputs] = React.useState({});
   const form = React.useRef();
 
@@ -29,6 +29,7 @@ const JobView = ({ setJobData }) => {
     form.current.reportValidity();
     e.preventDefault();
     setJobData(inputs);
+    jobHandler();
   };
 
   return (
@@ -133,6 +134,7 @@ const JobView = ({ setJobData }) => {
 
 JobView.propTypes = {
   setJobData: PropTypes.func.isRequired,
+  jobHandler: PropTypes.func.isRequired,
 };
 
 export default JobView;

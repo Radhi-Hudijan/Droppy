@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
+
 import Joi from "joi";
-const joiPhoneNumber = Joi.extend(require("joi-phone-number"));
+import joiPhoneNumber1 from "joi-phone-number";
+const joiPhoneNumber = Joi.extend(joiPhoneNumber1);
 
 const jobSchema = new mongoose.Schema({
   sender: { type: String, required: true },
@@ -16,13 +17,6 @@ const jobSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   phoneNo: { type: String, required: true },
 });
-
-jobSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-    expiresIn: "7d",
-  });
-  return token;
-};
 
 const Job = mongoose.model("jobs", jobSchema);
 
