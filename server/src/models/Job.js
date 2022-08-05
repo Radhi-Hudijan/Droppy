@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-
 import Joi from "joi";
 import joiPhoneNumber1 from "joi-phone-number";
 const joiPhoneNumber = Joi.extend(joiPhoneNumber1);
 
 const jobSchema = new mongoose.Schema({
-  sender: { type: String, required: true },
+  // sender: { type: String, required: true },
+  sender: { type: String },
   deliverer: { type: String },
   item: { type: String, required: true },
   description: { type: String, required: true },
@@ -22,8 +22,9 @@ const Job = mongoose.model("jobs", jobSchema);
 
 export const validateJob = (data) => {
   const schema = Joi.object({
+    // sender: Joi.string().email().required().label("sender"),
     item: Joi.string().min(1).required().label("item"),
-    description: Joi.any().description().required().label("description"),
+    description: Joi.string().min(1).required().label("description"),
     fromPostCode: Joi.string()
       .pattern(/^(?:NL-)?(\d{4})\s*([A-Z]{2})$/i)
       .required()

@@ -16,7 +16,6 @@ export const getJobs = async (req, res) => {
 export const createJob = async (req, res) => {
   try {
     const { job } = req.body;
-
     if (typeof job !== "object") {
       res.status(400).json({
         success: false,
@@ -25,12 +24,10 @@ export const createJob = async (req, res) => {
         )}`,
       });
     }
-
     const { error } = validateJob(job);
     if (error) {
       return res.status(400).send({ message: error.details[0].message });
     }
-
     await new Job({ ...job }).save();
     res
       .status(201)

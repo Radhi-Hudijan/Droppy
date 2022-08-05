@@ -1,26 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import JobView from "./JobView";
-import UserInfoContext from "../../context/UserInfoContext";
 
 const CreateJobController = () => {
   const navigate = useNavigate();
-
-  const [jobData, setJobData] = useState({});
-  const { email } = useContext(UserInfoContext);
-  const {
-    item,
-    description,
-    fromPostCode,
-    toPostCode,
-    width,
-    height,
-    length,
-    date,
-    phoneNo,
-  } = jobData;
 
   const onSuccess = () => {
     navigate("/", {
@@ -37,25 +22,14 @@ const CreateJobController = () => {
     return cancelFetch;
   }, []);
 
-  const jobHandler = () => {
+  const jobHandler = (inputs) => {
     performFetch({
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        job: {
-          sender: email,
-          item,
-          description,
-          fromPostCode,
-          toPostCode,
-          width,
-          height,
-          length,
-          date,
-          phoneNo,
-        },
+        job: inputs,
       }),
     });
   };
@@ -70,7 +44,7 @@ const CreateJobController = () => {
 
   return (
     <div>
-      <JobView setJobData={setJobData} jobHandler={jobHandler} />
+      <JobView jobHandler={jobHandler} />
     </div>
   );
 };

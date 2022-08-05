@@ -13,7 +13,7 @@ import {
   faRuler,
 } from "@fortawesome/free-solid-svg-icons";
 
-const JobView = ({ setJobData, jobHandler }) => {
+const JobView = ({ jobHandler }) => {
   const [inputs, setInputs] = React.useState({});
   const form = React.useRef();
 
@@ -28,8 +28,7 @@ const JobView = ({ setJobData, jobHandler }) => {
     form.current.checkValidity();
     form.current.reportValidity();
     e.preventDefault();
-    setJobData(inputs);
-    jobHandler();
+    jobHandler(inputs);
   };
 
   return (
@@ -37,7 +36,7 @@ const JobView = ({ setJobData, jobHandler }) => {
       <h2 className={appStyles.h1Desktop}>Create a new drop request</h2>
       <div className={styles.jobView}>
         <InputStyled
-          name="Item"
+          name="item"
           icon={<FontAwesomeIcon icon={faBox} />}
           placeholder="Your item name"
           required
@@ -47,7 +46,7 @@ const JobView = ({ setJobData, jobHandler }) => {
         ></InputStyled>
         <div className={styles.sizes}>
           <InputStyled
-            name="Width"
+            name="width"
             icon={<FontAwesomeIcon icon={faRuler} />}
             placeholder="23cm"
             required
@@ -56,7 +55,7 @@ const JobView = ({ setJobData, jobHandler }) => {
             onChange={changeHandler}
           ></InputStyled>
           <InputStyled
-            name="Height"
+            name="height"
             icon={<FontAwesomeIcon icon={faRuler} />}
             placeholder="23cm"
             required
@@ -65,7 +64,7 @@ const JobView = ({ setJobData, jobHandler }) => {
             onChange={changeHandler}
           ></InputStyled>
           <InputStyled
-            name="Length"
+            name="length"
             icon={<FontAwesomeIcon icon={faRuler} />}
             placeholder="23cm"
             required
@@ -76,7 +75,7 @@ const JobView = ({ setJobData, jobHandler }) => {
         </div>
         <div className={styles.sizes}>
           <InputStyled
-            name="From"
+            name="fromPostCode"
             icon={<FontAwesomeIcon icon={faLocationPin} />}
             placeholder="1523DE"
             required
@@ -85,7 +84,7 @@ const JobView = ({ setJobData, jobHandler }) => {
             onChange={changeHandler}
           ></InputStyled>
           <InputStyled
-            name="To"
+            name="toPostCode"
             icon={<FontAwesomeIcon icon={faLocationPin} />}
             placeholder="1523DE"
             required
@@ -95,13 +94,13 @@ const JobView = ({ setJobData, jobHandler }) => {
           ></InputStyled>
         </div>
         <InputStyled
-          name="Date of Delivery"
+          name="date"
           type="date"
           required
           onChange={changeHandler}
         ></InputStyled>
         <InputStyled
-          name="Contact Details"
+          name="phoneNo"
           icon={<FontAwesomeIcon icon={faContactBook} />}
           placeholder="Phone number"
           type="tel"
@@ -111,7 +110,7 @@ const JobView = ({ setJobData, jobHandler }) => {
           onChange={changeHandler}
         ></InputStyled>
         <InputStyled
-          name="Description"
+          name="description"
           icon={<FontAwesomeIcon icon={faNoteSticky} />}
           placeholder="Description of request"
           multiline
@@ -133,7 +132,6 @@ const JobView = ({ setJobData, jobHandler }) => {
 };
 
 JobView.propTypes = {
-  setJobData: PropTypes.func.isRequired,
   jobHandler: PropTypes.func.isRequired,
 };
 
