@@ -8,6 +8,14 @@ import style from "./Button.module.css";
 export default function Button(props) {
   let buttonClass;
 
+  switch (props.buttonClass) {
+    case "outline":
+      buttonClass = style.buttonOutline;
+      break;
+    default:
+      buttonClass = style.button;
+  }
+
   if (props.class === "buttonBorder") {
     buttonClass = style.buttonBorder;
   } else {
@@ -18,7 +26,11 @@ export default function Button(props) {
     return (
       <div>
         <Link to={props.path} className={style.buttonLink}>
-          <button className={buttonClass} onClick={props.buttonHandler}>
+          <button
+            className={buttonClass}
+            onClick={props.buttonHandler}
+            {...props.rest}
+          >
             {props.children}
           </button>
         </Link>
@@ -27,7 +39,11 @@ export default function Button(props) {
   } else {
     return (
       <div>
-        <button className={buttonClass} onClick={props.buttonHandler}>
+        <button
+          className={buttonClass}
+          onClick={props.buttonHandler}
+          {...props.rest}
+        >
           {props.children}
         </button>
       </div>
@@ -38,6 +54,10 @@ export default function Button(props) {
 Button.propTypes = {
   path: PropTypes.string,
   buttonHandler: PropTypes.func,
+
+  buttonClass: PropTypes.string,
+  rest: PropTypes.object,
+
   children: PropTypes.node.isRequired,
   class: PropTypes.string,
 };

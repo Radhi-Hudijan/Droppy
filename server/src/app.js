@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/authentication.js";
+import jobRouter from "./routes/job.js";
 
 // Create an express server
 const app = express();
@@ -18,5 +19,6 @@ app.use(cors());
  */
 app.use("/api/user", userRouter);
 app.use("/api/authentication", authRouter);
+app.use("/api/job", jobRouter);
 
 export default app;
