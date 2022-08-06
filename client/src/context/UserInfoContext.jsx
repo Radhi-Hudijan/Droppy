@@ -12,6 +12,8 @@ const UserInfoContext = createContext({
   setJobsOfUser: () => {},
   vehicleInfo: {},
   setVehicleInfo: () => {},
+  token: "",
+  setToken: () => {},
 });
 
 export function UserInfoContextProvider(props) {
@@ -20,6 +22,7 @@ export function UserInfoContextProvider(props) {
   const [surname, setSurname] = useState("");
   const [jobsOfUser, setJobsOfUser] = useState({});
   const [vehicleInfo, setVehicleInfo] = useState({});
+  const [token, setToken] = useState("");
 
   const context = {
     email,
@@ -32,6 +35,8 @@ export function UserInfoContextProvider(props) {
     setJobsOfUser,
     vehicleInfo,
     setVehicleInfo,
+    token,
+    setToken,
   };
 
   return (
