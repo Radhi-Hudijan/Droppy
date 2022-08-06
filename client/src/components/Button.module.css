@@ -14,6 +14,10 @@
   box-shadow: 4px 4px 14px #f391c1;
 }
 
+.button:hover {
+  border: 2px solid var(--white);
+}
+
 .button:active {
   background: var(--background);
   color: var(--highlight);
@@ -45,6 +49,26 @@
 .buttonLink {
   color: inherit;
   text-decoration: none;
+}
+
+.buttonBorder {
+  background: transparent;
+  width: 450px;
+  height: 54px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0px 30px;
+  font-size: 26px;
+  color: var(--highlight);
+  border: 2px solid var(--highlight);
+  outline: inherit;
+  transition: 0.4s;
+}
+
+.buttonBorder:hover {
+  color: var(--white);
+  border: 2px solid var(--highlight);
+  background: var(--highlight);
 }
 
 @media screen and (max-width: 740px) {
