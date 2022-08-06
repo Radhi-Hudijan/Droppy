@@ -14,28 +14,23 @@ export default function Button(props) {
       break;
     default:
       buttonClass = style.button;
-
+  }
 
   if (props.class === "buttonBorder") {
     buttonClass = style.buttonBorder;
   } else {
     buttonClass = style.button;
-
   }
 
   if (props.path) {
     return (
       <div>
         <Link to={props.path} className={style.buttonLink}>
-
           <button
             className={buttonClass}
             onClick={props.buttonHandler}
             {...props.rest}
           >
-
-          <button className={buttonClass} onClick={props.buttonHandler}>
-
             {props.children}
           </button>
         </Link>
@@ -44,15 +39,11 @@ export default function Button(props) {
   } else {
     return (
       <div>
-
         <button
           className={buttonClass}
           onClick={props.buttonHandler}
           {...props.rest}
         >
-
-        <button className={buttonClass} onClick={props.buttonHandler}>
-
           {props.children}
         </button>
       </div>
@@ -66,9 +57,7 @@ Button.propTypes = {
 
   buttonClass: PropTypes.string,
   rest: PropTypes.object,
-  children: PropTypes.elementType.isRequired,
 
   children: PropTypes.node.isRequired,
   class: PropTypes.string,
-
 };

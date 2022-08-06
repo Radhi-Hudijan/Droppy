@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home";
 import AddCar from "./pages/Signup/AddCar";
 import Signup from "./pages/Signup/Signup";
 
-import UserList from "./pages/User/UserList";
+// import UserList from "./pages/User/UserList";
 
 import { motion } from "framer-motion";
 import styles from "./App.module.css";
@@ -14,7 +14,6 @@ import Footer from "./components/Footer/Footer";
 
 import CreateJobController from "./pages/job/CreateJobController";
 import Notifier from "./components/Notifier";
-
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
