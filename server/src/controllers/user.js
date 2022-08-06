@@ -44,6 +44,17 @@ export const createUser = async (req, res) => {
     res
       .status(201)
       .send({ message: "User created successfully", success: true });
+    // send these on successful sign up
+    // const token = user.generateAuthToken();
+    // return res.status(200).send({
+    //   data: token,
+    //   email: req.body.email,
+    //   name: user.name,
+    //   surname: user.surname,
+    //   vehicleInfo: user.vehicleInfo,
+    //   success: true,
+    //   message: "Logged In",
+    // });
   } catch (error) {
     res
       .status(500)
