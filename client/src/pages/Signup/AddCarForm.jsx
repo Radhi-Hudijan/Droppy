@@ -142,7 +142,7 @@ export default function AddCarForm(props) {
               Don&apos;t want to be a driver? No problem.
             </p>
             <Button
-              path="/user"
+              path="/"
               type="button"
               class="button"
               buttonHandler={isNotCar}
