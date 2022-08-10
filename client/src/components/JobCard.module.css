@@ -8,13 +8,13 @@
   margin: 5px;
   border-radius: 5px;
   padding: 15px;
-  box-shadow: 4px 4px 14px #f391c1;
   transition: 0.4s;
-
 }
 
 .job-card:hover {
-  border: 2px solid var(--white);
+  border: 2px solid var(--highlight);
+  box-shadow: 4px 4px 14px #f391c1;
+  transform: scale(1.02);
 }
 
 .from-to,
