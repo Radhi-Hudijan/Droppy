@@ -8,7 +8,7 @@ const CreateJobController = () => {
   const navigate = useNavigate();
 
   const onSuccess = () => {
-    navigate("/dashboard-deliverer", {
+    navigate("/dashboard", {
       replace: true,
     });
   };
