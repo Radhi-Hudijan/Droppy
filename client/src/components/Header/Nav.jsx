@@ -68,6 +68,7 @@ const Nav = ({ opened }) => {
           onClick={() => {
             if (token) {
               localStorage.removeItem("token");
+              localStorage.removeItem("isDriver");
               window.location.reload();
             }
             if (isMdScreen) return;

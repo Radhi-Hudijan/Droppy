@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import JobCard from "../../components/JobCard";
+import useFetch from "../../hooks/useFetch";
 
 function Dashboard() {
   const [isDriver, setIsDriver] = useState(false);
+  const [availableJobs, setAvailableJobs] = useState([]);
 
   useEffect(() => {
     setIsDriver(localStorage.getItem("isDriver"));
@@ -11,26 +13,61 @@ function Dashboard() {
   // fetch all jobs and pagination
   // two tabs: available and active
 
-  const job = {
-    item: "Couch",
-    fromPostCode: "1234 DT",
-    toPostCode: "4321TD",
-    date: "12-12-2022",
-    width: 23,
-    height: 21,
-    length: 54,
+  // jobslari cagir
+  const onSuccess = (onReceived) => {
+    setAvailableJobs(onReceived);
+    console.log(onReceived);
   };
+
+  const { isLoading, error, performFetch, cancelFetch } = useFetch(
+    "/job",
+    onSuccess
+  );
+
+  useEffect(() => {
+    return cancelFetch;
+  }, []);
+
+  function getAvailableJobsHandler() {
+    performFetch({
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+  }
+
   return (
     <>
-      {isDriver === "true" ? (
+      {/* <div>
         <div>
-          <JobCard job={job} />
+          <button>Available</button>
         </div>
-      ) : (
         <div>
-          <JobCard job={job} />
+          <button>Active</button>
         </div>
-      )}
+      </div> */}
+
+      <div>
+        {isDriver === "true" ? (
+          <div>
+            <button onClick={getAvailableJobsHandler}>Available Jobs</button>
+            <ul>
+              {availableJobs.result ? (
+                availableJobs.result.map((job, index) => (
+                  <li>
+                    <JobCard key={index} job={job} />
+                  </li>
+                ))
+              ) : (
+                <p> There is no available job</p>
+              )}
+            </ul>
+          </div>
+        ) : (
+          <div>{/* <JobCard job={job} /> */}</div>
+        )}
+      </div>
     </>
   );
 }

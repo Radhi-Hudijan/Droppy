@@ -1,7 +1,19 @@
 import Job, { validateJob } from "../models/Job.js";
 import { logError } from "../util/logging.js";
 
-export const getJobs = async (req, res) => {
+export const getAllJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find();
+    res.status(200).json({ success: true, result: jobs });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get jobs, try again later" });
+  }
+};
+
+export const getMyAvailableJobs = async (req, res) => {
   try {
     const jobs = await Job.find();
     res.status(200).json({ success: true, result: jobs });

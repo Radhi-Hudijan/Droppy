@@ -1,9 +1,15 @@
 import express from "express";
-import { createJob, getJobs } from "../controllers/job.js";
+import {
+  createJob,
+  getAllJobs,
+  getMyAvailableJobs,
+} from "../controllers/job.js";
 
 const jobRouter = express.Router();
 
-jobRouter.get("/", getJobs);
+jobRouter.get("/", getAllJobs);
+
+jobRouter.get("/myAvailableJobs", getMyAvailableJobs);
 
 jobRouter.post("/create", createJob);
 

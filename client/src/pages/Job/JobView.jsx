@@ -21,7 +21,7 @@ const JobView = ({ jobHandler }) => {
     const el = e.target;
     const name = el.name;
     const value = el.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    setInputs((values) => ({ ...values, [name]: value.toUpperCase() }));
   };
 
   const submitHandler = (e) => {

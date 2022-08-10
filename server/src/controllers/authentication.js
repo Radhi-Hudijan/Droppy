@@ -11,6 +11,7 @@ export const authenticate = async (req, res) => {
     }
 
     const user = await User.findOne({ email: req.body.email });
+    console.log(user);
     if (!user) {
       return res.status(401).send({ message: "Invalid email or Password" });
     }
@@ -26,6 +27,7 @@ export const authenticate = async (req, res) => {
 
     const token = user.generateAuthToken();
     return res.status(200).send({
+      id: user._id,
       data: token,
       email: req.body.email,
       name: user.name,

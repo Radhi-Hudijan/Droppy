@@ -22,7 +22,6 @@ const Job = mongoose.model("jobs", jobSchema);
 
 export const validateJob = (data) => {
   const schema = Joi.object({
-    // sender: Joi.string().email().required().label("sender"),
     item: Joi.string().min(1).required().label("item"),
     description: Joi.string().min(1).required().label("description"),
     fromPostCode: Joi.string()
