@@ -15,8 +15,9 @@ function Login() {
 
   const onSuccess = (res) => {
     localStorage.setItem("token", res.data);
-    const isDriver = res.vehicleInfo !== {} ? true : false;
+    const isDriver = res.vehicleInfo.plate ? true : false;
     localStorage.setItem("isDriver", `${isDriver}`);
+    localStorage.setItem("userID", res.id)
     setEmail(res.email);
     setName(res.name);
     setSurname(res.surname);
