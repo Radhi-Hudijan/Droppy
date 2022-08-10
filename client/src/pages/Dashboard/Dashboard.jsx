@@ -16,13 +16,9 @@ function Dashboard() {
   // jobslari cagir
   const onSuccess = (onReceived) => {
     setAvailableJobs(onReceived);
-    console.log(onReceived);
+    // console.log(onReceived);
   };
-
-  const { isLoading, error, performFetch, cancelFetch } = useFetch(
-    "/job",
-    onSuccess
-  );
+  const { performFetch, cancelFetch } = useFetch("/job", onSuccess);
 
   useEffect(() => {
     return cancelFetch;
@@ -53,10 +49,10 @@ function Dashboard() {
           <div>
             <button onClick={getAvailableJobsHandler}>Available Jobs</button>
             <ul>
-              {availableJobs.result ? (
-                availableJobs.result.map((job, index) => (
-                  <li>
-                    <JobCard key={index} job={job} />
+              {availableJobs ? (
+                availableJobs.result?.map((job, index) => (
+                  <li key={index}>
+                    <JobCard job={job} />
                   </li>
                 ))
               ) : (
