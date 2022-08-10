@@ -19,6 +19,8 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const user = localStorage.getItem("token");
+
   const openHandler = () => {
     setIsOpen(!isOpen);
   };
@@ -29,12 +31,12 @@ const App = () => {
       <Nav opened={openHandler} />
       <Notifier />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/user/create" element={<Signup />}></Route>
+        {!user && <Route path="/" element={<Home />} />}
+        {!user && <Route path="/user/create" element={<Signup />}></Route>}
         <Route path="/user/create/add-car" element={<AddCar />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/job/create" element={<CreateJobController />} />
-        <Route path="/dashboard-deliverer" element={<Dashboard />} />
+        {!user && <Route path="/login" element={<Login />} />}
+        {user && <Route path="/job/create" element={<CreateJobController />} />}
+        {user && <Route path="/dashboard" element={<Dashboard />} />}
       </Routes>
       <Footer />
     </motion.div>
