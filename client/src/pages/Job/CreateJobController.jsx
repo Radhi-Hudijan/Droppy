@@ -8,7 +8,7 @@ const CreateJobController = () => {
   const navigate = useNavigate();
 
   const onSuccess = () => {
-    navigate("/", {
+    navigate("/dashboard-deliverer", {
       replace: true,
     });
   };
@@ -29,7 +29,7 @@ const CreateJobController = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        job: inputs,
+        job: { id: localStorage.getItem("id"), ...inputs },
       }),
     });
   };

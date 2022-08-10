@@ -3,11 +3,18 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  border: 1px solid var(--highlight);
+  border: 2px solid var(--highlight);
   width: 40%;
   margin: 5px;
   border-radius: 5px;
   padding: 15px;
+  box-shadow: 4px 4px 14px #f391c1;
+  transition: 0.4s;
+
+}
+
+.job-card:hover {
+  border: 2px solid var(--white);
 }
 
 .from-to,
