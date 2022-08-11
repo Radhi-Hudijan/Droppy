@@ -45,7 +45,9 @@ const App = () => {
             element={<Login setIsLoggedin={setIsLoggedin} />}
           />
         )}
-        {user && <Route path="/job/create" element={<CreateJobController />} />}
+        {user && (
+          <Route path="/jobs/create" element={<CreateJobController />} />
+        )}
         {user && <Route path="/dashboard" element={<Dashboard />} />}
       </Routes>
       <Footer />

@@ -14,7 +14,7 @@ const CreateJobController = () => {
   };
 
   const { isLoading, error, performFetch, cancelFetch } = useFetch(
-    "/job/create",
+    "/jobs/create",
     onSuccess
   );
 

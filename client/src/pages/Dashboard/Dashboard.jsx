@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import JobCard from "../../components/JobCard";
 import useFetch from "../../hooks/useFetch";
 import style from "./Dashboard.module.css";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [isDriver, setIsDriver] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [isClickedToAvailable, setIsClickedToAvailable] = useState(true);
@@ -18,7 +19,7 @@ function Dashboard() {
   };
   const { performFetch, cancelFetch } = useFetch("/jobs", onSuccess);
 
-  function getDelivererAvailableJobsHandler() {
+  function getAvailableJobsHandler() {
     setIsClickedToAvailable(true);
     performFetch({
       method: "GET",
@@ -28,7 +29,11 @@ function Dashboard() {
     });
   }
   useEffect(() => {
-    getDelivererAvailableJobsHandler();
+    if (localStorage.getItem("isDriver") === "true") {
+      getAvailableJobsHandler();
+    } else {
+      getActiveJobsHandler();
+    }
     return cancelFetch;
   }, []);
 
@@ -46,7 +51,7 @@ function Dashboard() {
   }
 
   function createJobHandler() {
-    Navigate("/job/create", {
+    navigate("/jobs/create", {
       replace: true,
     });
   }
@@ -64,7 +69,7 @@ function Dashboard() {
                       ? `${style.button} ${style.buttonOutline}`
                       : `${style.button}`
                   }
-                  onClick={getDelivererAvailableJobsHandler}
+                  onClick={getAvailableJobsHandler}
                 >
                   Available
                 </button>
@@ -106,7 +111,7 @@ function Dashboard() {
                       ? `${style.button} ${style.buttonOutline}`
                       : `${style.button}`
                   }
-                  onClick={getDelivererAvailableJobsHandler}
+                  onClick={getActiveJobsHandler}
                 >
                   Active
                 </button>
