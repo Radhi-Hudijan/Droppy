@@ -13,10 +13,10 @@ function Dashboard() {
     setIsDriver(localStorage.getItem("isDriver"));
   }, []);
 
-  const onSuccessAvailable = (onReceived) => {
+  const onSuccess = (onReceived) => {
     setJobs(onReceived);
   };
-  const { performFetch, cancelFetch } = useFetch("/jobs", onSuccessAvailable);
+  const { performFetch, cancelFetch } = useFetch("/jobs", onSuccess);
 
   function getDelivererAvailableJobsHandler() {
     performFetch({

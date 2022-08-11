@@ -5,7 +5,7 @@ const joiPhoneNumber = Joi.extend(joiPhoneNumber1);
 
 const jobSchema = new mongoose.Schema({
   senderID: { type: String },
-  delivererID: { type: String },
+  delivererIDs: [{ type: String }],
   item: { type: String, required: true },
   description: { type: String, required: true },
   fromPostCode: { type: String, required: true },
