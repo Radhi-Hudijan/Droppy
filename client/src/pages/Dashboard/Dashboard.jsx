@@ -101,7 +101,11 @@ function Dashboard() {
             <div className={style.buttonsDiv}>
               <div className={style.buttonDiv}>
                 <button
-                  className={`${style.button} ${style.buttonOutline}`}
+                  className={
+                    isClickedToAvailable
+                      ? `${style.button} ${style.buttonOutline}`
+                      : `${style.button}`
+                  }
                   onClick={getDelivererAvailableJobsHandler}
                 >
                   Active
@@ -109,7 +113,11 @@ function Dashboard() {
               </div>
               <div className={style.buttonDiv}>
                 <button
-                  className={`${style.button}`}
+                  className={
+                    isClickedToAvailable
+                      ? `${style.button}`
+                      : `${style.button} ${style.buttonOutline}`
+                  }
                   onClick={createJobHandler}
                 >
                   New
