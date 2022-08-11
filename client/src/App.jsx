@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
 import CreateJobController from "./pages/job/CreateJobController";
 import Notifier from "./components/Notifier";
+import JobDetails from "./pages/Job/JobDetails";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/user/create/add-car" element={<AddCar />} />
         <Route path="/login" element={<Login />} />
         <Route path="/job/create" element={<CreateJobController />} />
+        <Route path="/job/view/:id" element={<JobDetails />} />
       </Routes>
       <Footer />
     </motion.div>
