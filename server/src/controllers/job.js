@@ -16,7 +16,7 @@ export const getAllJobs = async (req, res) => {
 export const getActiveJobs = async (req, res) => {
   try {
     const activeJobs = await Job.find({
-      $or: [{ delivererID: req.body.userID }, { senderID: req.body.userID }],
+      $or: [{ delivererIDs: req.body.userID }, { senderID: req.body.userID }],
     });
     res.status(200).json({ success: true, result: activeJobs });
   } catch (error) {
