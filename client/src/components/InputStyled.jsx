@@ -53,7 +53,7 @@ const InputStyled = ({
 
 InputStyled.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   icon: PropTypes.element,
   multiline: PropTypes.bool,
