@@ -5,6 +5,7 @@ import style from "./Login.module.css";
 import UserInfoContext from "../../context/UserInfoContext";
 import { Link, useNavigate } from "react-router-dom";
 import appStyles from "../../App.module.css";
+import Error from "../../components/Error/Error";
 
 function Login() {
   const navigate = useNavigate();
@@ -48,11 +49,8 @@ function Login() {
   }
 
   let statusComponent = null;
-  if (error != null) {
-    statusComponent = (
-      <div>Error while trying to log in: {error.toString()}</div>
-    );
-  } else if (isLoading) {
+
+  if (isLoading) {
     statusComponent = <div>Logging in....</div>;
   }
 
@@ -90,6 +88,7 @@ function Login() {
         Do not have an account? <Link to="/user/create">Sign up here</Link>
       </div>
       {statusComponent}
+      {error != null && <Error error={error} />}
     </div>
   );
 }
