@@ -15,11 +15,16 @@ import Login from "./pages/Login/Login";
 import CreateJobController from "./pages/job/CreateJobController";
 import Notifier from "./components/Notifier";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import { useEffect } from "react";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState("");
+  const [isLoggedin, setIsLoggedin] = useState(false);
 
-  const user = localStorage.getItem("token");
+  useEffect(() => {
+    setUser(localStorage.getItem("token"));
+  }, [isLoggedin]);
 
   const openHandler = () => {
     setIsOpen(!isOpen);
@@ -34,7 +39,12 @@ const App = () => {
         {!user && <Route path="/" element={<Home />} />}
         {!user && <Route path="/user/create" element={<Signup />}></Route>}
         <Route path="/user/create/add-car" element={<AddCar />} />
-        {!user && <Route path="/login" element={<Login />} />}
+        {!user && (
+          <Route
+            path="/login"
+            element={<Login setIsLoggedin={setIsLoggedin} />}
+          />
+        )}
         {user && <Route path="/job/create" element={<CreateJobController />} />}
         {user && <Route path="/dashboard" element={<Dashboard />} />}
       </Routes>
