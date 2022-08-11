@@ -55,7 +55,6 @@ export const getActiveJobs = async (req, res) => {
     const count = activeJobs.length;
 
     const pageCount = Math.ceil(count / ITEMS_PER_PAGE);
-    console.log(pageCount, count);
 
     res.status(200).json({
       success: true,

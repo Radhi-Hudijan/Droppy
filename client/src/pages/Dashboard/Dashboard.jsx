@@ -9,6 +9,8 @@ function Dashboard() {
   const [isDriver, setIsDriver] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [isClickedToAvailable, setIsClickedToAvailable] = useState(true);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     setIsDriver(localStorage.getItem("isDriver"));
@@ -16,8 +18,14 @@ function Dashboard() {
 
   const onSuccess = (onReceived) => {
     setJobs(onReceived);
+    setPageCount(jobs.result?.pagination.pageCount);
+    // console.log(jobs.result?.pagination.pageCount, page)
   };
-  const { performFetch, cancelFetch } = useFetch("/jobs", onSuccess);
+
+  const { performFetch, cancelFetch } = useFetch(
+    `/jobs?page=${page}`,
+    onSuccess
+  );
 
   function getAvailableJobsHandler() {
     setIsClickedToAvailable(true);
@@ -35,7 +43,7 @@ function Dashboard() {
       getActiveJobsHandler();
     }
     return cancelFetch;
-  }, []);
+  }, [page]);
 
   const userID = localStorage.getItem("userID");
 
@@ -54,6 +62,16 @@ function Dashboard() {
     navigate("/jobs/create", {
       replace: true,
     });
+  }
+
+  function handlePrevious() {
+    if (page === 1) return page;
+    setPage((page) => page - 1);
+  }
+
+  function handleNext() {
+    if (page <= pageCount) return page;
+    setPage((page) => page + 1);
   }
 
   return (
@@ -90,7 +108,7 @@ function Dashboard() {
             <div className={style.cardsDiv}>
               <ul>
                 {jobs ? (
-                  jobs.result?.map((job, index) => (
+                  jobs.result?.jobs?.map((job, index) => (
                     <li key={index}>
                       <JobCard job={job} />
                     </li>
@@ -132,7 +150,7 @@ function Dashboard() {
             <div className={style.cardsDiv}>
               <ul>
                 {jobs ? (
-                  jobs.result?.map((job, index) => (
+                  jobs.result?.activeJobs?.map((job, index) => (
                     <li key={index}>
                       <JobCard job={job} />
                     </li>
@@ -144,6 +162,30 @@ function Dashboard() {
             </div>
           </div>
         )}
+        <div className={style.pagination}>
+          <button disabled={page === 1} onClick={handlePrevious}>
+            Previous
+          </button>
+
+          <select
+            value={page}
+            onChange={(e) => {
+              setPage(e.target.value);
+            }}
+          >
+            {Array(pageCount)
+              .fill(null)
+              .map((_, index) => {
+                return <option key={index}>{index + 1}</option>;
+              })}
+          </select>
+          <button
+            disabled={page === pageCount || pageCount === 1}
+            onClick={handleNext}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </>
   );
