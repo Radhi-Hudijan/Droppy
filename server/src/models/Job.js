@@ -4,9 +4,8 @@ import joiPhoneNumber1 from "joi-phone-number";
 const joiPhoneNumber = Joi.extend(joiPhoneNumber1);
 
 const jobSchema = new mongoose.Schema({
-  // sender: { type: String, required: true },
-  sender: { type: String },
-  deliverer: { type: String },
+  senderID: { type: String },
+  delivererID: { type: String },
   item: { type: String, required: true },
   description: { type: String, required: true },
   fromPostCode: { type: String, required: true },
@@ -22,6 +21,7 @@ const Job = mongoose.model("jobs", jobSchema);
 
 export const validateJob = (data) => {
   const schema = Joi.object({
+    senderID: Joi.string().min(1).required().label("senderID"),
     item: Joi.string().min(1).required().label("item"),
     description: Joi.string().min(1).required().label("description"),
     fromPostCode: Joi.string()

@@ -9,18 +9,25 @@ function JobCard({ job }) {
 
   function toDetail(e) {
     e.preventDefault();
+    localStorage.setItem("job", JSON.stringify(job));
     navigate("/detail");
   }
 
   return (
     <div className={style["job-card"]} onClick={toDetail}>
-      <h3>{item}</h3>
-      <div className={style["from-to"]}>
-        <h5>From: {fromPostCode}</h5>
-        <h5>To: {toPostCode}</h5>
+      <div className={style.jobCardUpperDiv}>
+        <div className={style.itemDiv}>
+          <h3>{item}</h3>
+        </div>
+        <div className={style.fromToDiv}>
+          <h5>From: {fromPostCode}</h5>
+          <h5>To: {toPostCode}</h5>
+        </div>
+        <div className={style.dateDiv}>
+          <h5>Date: {date}</h5>
+        </div>
       </div>
-      <h5>Date: {date}</h5>
-      <div className={style["size"]}>
+      <div className={style.jobCardBelowDiv}>
         <h5>Width: {width}cm</h5>
         <h5>Height: {height}cm</h5>
         <h5>Length: {length}cm</h5>

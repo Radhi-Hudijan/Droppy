@@ -3,6 +3,7 @@ import { logError } from "../util/logging.js";
 
 export const getAllJobs = async (req, res) => {
   try {
+    // await Job.deleteMany();
     const jobs = await Job.find();
     res.status(200).json({ success: true, result: jobs });
   } catch (error) {
@@ -12,10 +13,32 @@ export const getAllJobs = async (req, res) => {
       .json({ success: false, msg: "Unable to get jobs, try again later" });
   }
 };
-
-export const getMyAvailableJobs = async (req, res) => {
+export const getDelivererAvailableJobs = async (req, res) => {
   try {
-    const jobs = await Job.find();
+    const allAvailableJobs = await Job.find({ delivererID: null });
+    res.status(200).json({ success: true, result: allAvailableJobs });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get jobs, try again later" });
+  }
+};
+
+export const getUserAvailableJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({ senderID: req.body.senderID });
+    res.status(200).json({ success: true, result: jobs });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get jobs, try again later" });
+  }
+};
+export const getUserActiveJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({ senderID: req.body.senderID });
     res.status(200).json({ success: true, result: jobs });
   } catch (error) {
     logError(error);

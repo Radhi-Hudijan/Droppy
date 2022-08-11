@@ -1,15 +1,15 @@
 import express from "express";
 import {
   createJob,
+  getDelivererAvailableJobs,
   getAllJobs,
-  getMyAvailableJobs,
 } from "../controllers/job.js";
 
 const jobRouter = express.Router();
 
 jobRouter.get("/", getAllJobs);
 
-jobRouter.get("/myAvailableJobs", getMyAvailableJobs);
+jobRouter.get("/available-jobs-for-deliverer", getDelivererAvailableJobs);
 
 jobRouter.post("/create", createJob);
 

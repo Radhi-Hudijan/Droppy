@@ -29,7 +29,7 @@ const CreateJobController = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        job: { id: localStorage.getItem("id"), ...inputs },
+        job: { senderID: localStorage.getItem("userID"), ...inputs },
       }),
     });
   };
