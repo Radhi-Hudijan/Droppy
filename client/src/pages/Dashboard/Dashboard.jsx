@@ -29,7 +29,11 @@ function Dashboard() {
     });
   }
   useEffect(() => {
-    getAvailableJobsHandler();
+    if (localStorage.getItem("isDriver") === "true") {
+      getAvailableJobsHandler();
+    } else {
+      getActiveJobsHandler();
+    }
     return cancelFetch;
   }, []);
 
@@ -47,7 +51,7 @@ function Dashboard() {
   }
 
   function createJobHandler() {
-    navigate("/job/create", {
+    navigate("/jobs/create", {
       replace: true,
     });
   }
@@ -107,7 +111,7 @@ function Dashboard() {
                       ? `${style.button} ${style.buttonOutline}`
                       : `${style.button}`
                   }
-                  onClick={getAvailableJobsHandler}
+                  onClick={getActiveJobsHandler}
                 >
                   Active
                 </button>

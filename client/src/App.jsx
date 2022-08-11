@@ -35,7 +35,9 @@ const App = () => {
         {!user && <Route path="/user/create" element={<Signup />}></Route>}
         <Route path="/user/create/add-car" element={<AddCar />} />
         {!user && <Route path="/login" element={<Login />} />}
-        {user && <Route path="/job/create" element={<CreateJobController />} />}
+        {user && (
+          <Route path="/jobs/create" element={<CreateJobController />} />
+        )}
         {user && <Route path="/dashboard" element={<Dashboard />} />}
       </Routes>
       <Footer />
