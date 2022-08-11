@@ -9,25 +9,25 @@ function JobCard({ job }) {
 
   function toDetail(e) {
     e.preventDefault();
-    localStorage.setItem("job", JSON.stringify(job));
+    localStorage.setItem("job", job._id);
     navigate("/detail");
   }
 
+  const formattedDate = date.split("T")[0].split("-").reverse().join("-");
+
   return (
     <div className={style["job-card"]} onClick={toDetail}>
-      <div className={style.jobCardUpperDiv}>
-        <div className={style.itemDiv}>
-          <h3>{item}</h3>
-        </div>
-        <div className={style.fromToDiv}>
-          <h5>From: {fromPostCode}</h5>
-          <h5>To: {toPostCode}</h5>
-        </div>
-        <div className={style.dateDiv}>
-          <h5>Date: {date}</h5>
-        </div>
+      <div className={style.itemDiv}>
+        <h3>{item}</h3>
       </div>
-      <div className={style.jobCardBelowDiv}>
+      <div className={style.fromToDiv}>
+        <h5>From: {fromPostCode}</h5>
+        <h5>To: {toPostCode}</h5>
+      </div>
+      <div className={style.dateDiv}>
+        <h5>Date: {formattedDate}</h5>
+      </div>
+      <div className={style.size}>
         <h5>Width: {width}cm</h5>
         <h5>Height: {height}cm</h5>
         <h5>Length: {length}cm</h5>
