@@ -2,25 +2,21 @@ import React, { useEffect, useState } from "react";
 import JobCard from "../../components/JobCard";
 import useFetch from "../../hooks/useFetch";
 import style from "./Dashboard.module.css";
-import appStyle from "../../App.module.css";
 import { Navigate } from "react-router-dom";
 
 function Dashboard() {
   const [isDriver, setIsDriver] = useState(false);
-  const [availableJobs, setAvailableJobs] = useState([]);
-  const [activeJobs, setActiveJobs] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  // const [activeJobs, setActiveJobs] = useState([]);
 
   useEffect(() => {
     setIsDriver(localStorage.getItem("isDriver"));
   }, []);
 
   const onSuccessAvailable = (onReceived) => {
-    setAvailableJobs(onReceived);
+    setJobs(onReceived);
   };
-  const { performFetch, cancelFetch } = useFetch(
-    "/job/available-jobs-for-deliverer",
-    onSuccessAvailable
-  );
+  const { performFetch, cancelFetch } = useFetch("/jobs", onSuccessAvailable);
 
   function getDelivererAvailableJobsHandler() {
     performFetch({
@@ -61,7 +57,7 @@ function Dashboard() {
             <div className={style.buttonsDiv}>
               <div className={style.buttonDiv}>
                 <button
-                  className={`${style.button} ${style.buttonOutline}`}
+                  className={`${style.button}`}
                   onClick={getDelivererAvailableJobsHandler}
                 >
                   Available
@@ -69,7 +65,7 @@ function Dashboard() {
               </div>
               <div className={style.buttonDiv}>
                 <button
-                  className={`${style.button}`}
+                  className={`${style.button} ${style.buttonOutline}`}
                   onClick={getActiveJobsHandler}
                 >
                   Active
@@ -78,8 +74,8 @@ function Dashboard() {
             </div>
             <div className={style.cardsDiv}>
               <ul>
-                {availableJobs ? (
-                  availableJobs.result?.map((job, index) => (
+                {jobs ? (
+                  jobs.result?.map((job, index) => (
                     <li key={index}>
                       <JobCard job={job} />
                     </li>
@@ -112,8 +108,8 @@ function Dashboard() {
             </div>
             <div className={style.cardsDiv}>
               <ul>
-                {availableJobs ? (
-                  availableJobs.result?.map((job, index) => (
+                {jobs ? (
+                  jobs.result?.map((job, index) => (
                     <li key={index}>
                       <JobCard job={job} />
                     </li>

@@ -13,10 +13,10 @@ export const getAllJobs = async (req, res) => {
       .json({ success: false, msg: "Unable to get jobs, try again later" });
   }
 };
-export const getDelivererAvailableJobs = async (req, res) => {
+export const getActiveJobs = async (req, res) => {
   try {
-    const allAvailableJobs = await Job.find({ delivererID: null });
-    res.status(200).json({ success: true, result: allAvailableJobs });
+    const activeJobs = await Job.find({ delivererID: req.body.userID });
+    res.status(200).json({ success: true, result: activeJobs });
   } catch (error) {
     logError(error);
     res
@@ -25,17 +25,18 @@ export const getDelivererAvailableJobs = async (req, res) => {
   }
 };
 
-export const getUserAvailableJobs = async (req, res) => {
-  try {
-    const jobs = await Job.find({ senderID: req.body.senderID });
-    res.status(200).json({ success: true, result: jobs });
-  } catch (error) {
-    logError(error);
-    res
-      .status(500)
-      .json({ success: false, msg: "Unable to get jobs, try again later" });
-  }
-};
+// export const getUserAvailableJobs = async (req, res) => {
+//   try {
+//     const jobs = await Job.find({ senderID: req.body.senderID });
+//     res.status(200).json({ success: true, result: jobs });
+//   } catch (error) {
+//     logError(error);
+//     res
+//       .status(500)
+//       .json({ success: false, msg: "Unable to get jobs, try again later" });
+//   }
+// };
+
 export const getUserActiveJobs = async (req, res) => {
   try {
     const jobs = await Job.find({ senderID: req.body.senderID });
