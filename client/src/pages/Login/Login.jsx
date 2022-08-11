@@ -5,8 +5,9 @@ import style from "./Login.module.css";
 import UserInfoContext from "../../context/UserInfoContext";
 import { Link, useNavigate } from "react-router-dom";
 import appStyles from "../../App.module.css";
+import PropTypes from "prop-types";
 
-function Login() {
+function Login({ setIsLoggedin }) {
   const navigate = useNavigate();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -14,6 +15,7 @@ function Login() {
     useContext(UserInfoContext);
 
   const onSuccess = (res) => {
+    setIsLoggedin(true);
     localStorage.setItem("token", res.data);
     const isDriver = res.vehicleInfo.plate ? true : false;
     localStorage.setItem("isDriver", `${isDriver}`);
@@ -23,7 +25,7 @@ function Login() {
     setSurname(res.surname);
     setVehicleInfo(res.vehicleInfo);
     setToken(res.data);
-    navigate("/", {
+    navigate("/dashboard", {
       replace: true,
     });
   };
@@ -98,3 +100,7 @@ function Login() {
 }
 
 export default Login;
+
+Login.propTypes = {
+  setIsLoggedin: PropTypes.func.isRequired,
+};
