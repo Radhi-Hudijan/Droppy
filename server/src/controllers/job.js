@@ -2,10 +2,25 @@ import Job, { validateJob } from "../models/Job.js";
 import { logError } from "../util/logging.js";
 
 export const getAllJobs = async (req, res) => {
+  const ITEMS_PER_PAGE = 20;
+  const page = req.query.page || 1;
+
+  // Put all your query params in here
+  const query = {};
+
   try {
+    const skip = (page - 1) * ITEMS_PER_PAGE;
+
+    const count = await Job.estimatedDocumentCount(query);
+
     // await Job.deleteMany();
-    const jobs = await Job.find();
-    res.status(200).json({ success: true, result: jobs });
+    const jobs = await Job.find(query).limit(ITEMS_PER_PAGE).skip(skip);
+
+    const pageCount = count / ITEMS_PER_PAGE;
+
+    res
+      .status(200)
+      .json({ success: true, result: jobs, pagination: { count, pageCount } });
   } catch (error) {
     logError(error);
     res
