@@ -1,4 +1,5 @@
 import Job, { validateJob } from "../models/Job.js";
+import User from '../models/User.js'
 import { logError } from "../util/logging.js";
 
 export const getAllJobs = async (req, res) => {
@@ -15,10 +16,18 @@ export const getAllJobs = async (req, res) => {
 };
 export const getActiveJobs = async (req, res) => {
   try {
-    // check isDriver and then filter jobs
-    const activeJobs = await Job.find({
-      $or: [{ delivererIDs: req.body.userID }, { senderID: req.body.userID }],
-    });
+    let activeJobs;
+    const user = await User.find({ _id: req.body.userID });
+    if (!user.vehicleInfo) {
+      activeJobs = await Job.find({
+        senderID: req.body.userID,
+      });
+    } else {
+      activeJobs = await Job.find({
+        delivererIDs: req.body.userID,
+      });
+    }
+
     res.status(200).json({ success: true, result: activeJobs });
   } catch (error) {
     logError(error);
