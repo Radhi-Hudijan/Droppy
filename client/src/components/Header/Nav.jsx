@@ -16,7 +16,7 @@ import burger from "../../assets/icons/burger-icon.svg";
 import UserInfoContext from "../../context/UserInfoContext";
 
 const NAV_CONTENT = [
-  { link: "/", id: TEST_ID.linkToHome, value: "Home" },
+  // { link: "/", id: TEST_ID.linkToHome, value: "Home" },
   { link: "/about", id: TEST_ID.linkToAbout, value: "About" },
   // { link: "/login", id: TEST_ID.linkToLogin, value: "Login" },
 ];
@@ -38,6 +38,27 @@ const Nav = ({ opened }) => {
 
     return (
       <ul>
+        <Link
+          key="1"
+          to="/dashboard"
+          data-testid="linkToHome"
+          onClick={() => {
+            if (isMdScreen) return;
+            setIsOpen(false);
+            opened();
+          }}
+        >
+          <li className={appStyle.h2Desktop}>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              style={{ flexDirection: "row" }}
+            >
+              <span>{localStorage.getItem("token") ? "Home" : ""}</span>
+              {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
+            </motion.div>
+          </li>
+        </Link>
         {NAV_CONTENT.map((x, idx) => (
           <Link
             key={idx}
