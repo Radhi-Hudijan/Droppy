@@ -1,7 +1,10 @@
 .job-card {
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 1rem;
+  align-items: center;
   border: 2px solid var(--highlight);
   width: 100%;
   margin: 5px;
@@ -20,24 +23,30 @@
   align-items: center;
   margin-bottom: 1rem;
 }
-.jobCardBelowDiv {
+.size {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 30%;
 }
+
 .jobCardBelowDiv h5 {
   padding-right: 30px;
 }
 
 .itemDiv {
   width: 30%;
+  margin: auto;
 }
+
 .fromToDiv {
-  width: 20%;
+  width: 30%;
   display: flex;
   flex-direction: column;
+  margin: auto;
 }
+
 .dateDiv {
-  width: 40%;
+  width: 30%;
 }
