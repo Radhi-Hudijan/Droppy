@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 function Dashboard() {
   const [isDriver, setIsDriver] = useState(false);
   const [jobs, setJobs] = useState([]);
-  // const [activeJobs, setActiveJobs] = useState([]);
+  const [isClickedToAvailable, setIsClickedToAvailable] = useState(true);
 
   useEffect(() => {
     setIsDriver(localStorage.getItem("isDriver"));
@@ -19,6 +19,7 @@ function Dashboard() {
   const { performFetch, cancelFetch } = useFetch("/jobs", onSuccess);
 
   function getDelivererAvailableJobsHandler() {
+    setIsClickedToAvailable(true);
     performFetch({
       method: "GET",
       headers: {
@@ -34,6 +35,7 @@ function Dashboard() {
   const userID = localStorage.getItem("userID");
 
   function getActiveJobsHandler() {
+    setIsClickedToAvailable(false);
     performFetch({
       method: "POST",
       headers: {
@@ -57,7 +59,11 @@ function Dashboard() {
             <div className={style.buttonsDiv}>
               <div className={style.buttonDiv}>
                 <button
-                  className={`${style.button}`}
+                  className={
+                    isClickedToAvailable
+                      ? `${style.button} ${style.buttonOutline}`
+                      : `${style.button}`
+                  }
                   onClick={getDelivererAvailableJobsHandler}
                 >
                   Available
@@ -65,7 +71,11 @@ function Dashboard() {
               </div>
               <div className={style.buttonDiv}>
                 <button
-                  className={`${style.button} ${style.buttonOutline}`}
+                  className={
+                    isClickedToAvailable
+                      ? `${style.button}`
+                      : `${style.button} ${style.buttonOutline}`
+                  }
                   onClick={getActiveJobsHandler}
                 >
                   Active
