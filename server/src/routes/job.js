@@ -5,6 +5,7 @@ import {
   updateJob,
   getActiveJobs,
   getAllJobs,
+  getOneJob,
 } from "../controllers/job.js";
 
 const jobRouter = express.Router();
@@ -13,9 +14,13 @@ jobRouter.get("/", getAllJobs);
 
 jobRouter.post("/", getActiveJobs);
 
-jobRouter.delete("/", deleteJob);
+jobRouter.get("/:id", getOneJob);
 
-jobRouter.put("/", updateJob);
+jobRouter.delete("/:id", deleteJob);
+
+// jobRouter.put("/:id", updateJob);
+
+jobRouter.patch("/:id", updateJob);
 
 jobRouter.post("/create", createJob);
 
