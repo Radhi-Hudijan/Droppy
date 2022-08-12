@@ -9,8 +9,7 @@ function JobCard({ job }) {
 
   function toDetail(e) {
     e.preventDefault();
-    localStorage.setItem("job", job._id);
-    navigate("/detail");
+    navigate(`/job/view/${job._id}`);
   }
 
   const formattedDate = date.split("T")[0].split("-").reverse().join("-");
