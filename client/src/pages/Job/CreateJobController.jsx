@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import JobView from "./JobView";
+import Error from "../../components/Error/Error";
 
 const CreateJobController = () => {
   const navigate = useNavigate();
@@ -38,13 +39,14 @@ const CreateJobController = () => {
     return <Loading />;
   }
 
-  if (error) {
-    return <div>There is an error as following:{error}</div>;
-  }
+  // if (error) {
+  //   return <div>There is an error as following:{error}</div>;
+  // }
 
   return (
     <div>
       <JobView jobHandler={jobHandler} />
+      {error != null && <Error error={error} />}
     </div>
   );
 };

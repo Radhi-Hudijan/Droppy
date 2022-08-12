@@ -5,6 +5,7 @@ import useFetch from "../../hooks/useFetch";
 import UserInfoContext from "../../context/UserInfoContext";
 import style from "./Signup.module.css";
 import appStyles from "../../App.module.css";
+import Error from "../../components/Error/Error";
 
 function Signup() {
   const navigate = useNavigate();
@@ -47,11 +48,8 @@ function Signup() {
   }
 
   let statusComponent = null;
-  if (error != null) {
-    statusComponent = (
-      <div>Error while trying to create user: {error.toString()}</div>
-    );
-  } else if (isLoading) {
+
+  if (isLoading) {
     statusComponent = <div>Creating user....</div>;
   }
 
@@ -63,6 +61,7 @@ function Signup() {
         Already have an account? <Link to="/login">Log in here</Link>
       </div>
       {statusComponent}
+      {error != null && <Error error={error} />}
     </section>
   );
 }
