@@ -37,6 +37,7 @@ const JobView = ({ jobHandler }) => {
       <div className={styles.jobView}>
         <InputStyled
           name="item"
+          disabled={true}
           icon={<FontAwesomeIcon icon={faBox} />}
           placeholder="Your item name"
           required

@@ -9,6 +9,7 @@ const InputStyled = ({
   onChange,
   multiline = false,
   icon = null,
+  disabled,
   ...rest
 }) => {
   const [focused, setFocused] = useState();
@@ -28,6 +29,7 @@ const InputStyled = ({
 
   const inputProps = {
     className: styles.genericInput,
+    disabled,
     name: name,
     value: value,
     onFocus: () => setFocused(true),
@@ -55,6 +57,7 @@ InputStyled.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
   icon: PropTypes.element,
   multiline: PropTypes.bool,
 };

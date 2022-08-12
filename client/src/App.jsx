@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
 import CreateJobController from "./pages/job/CreateJobController";
 import Notifier from "./components/Notifier";
+import JobDetails from "./pages/Job/JobDetails";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { useEffect } from "react";
 
@@ -39,6 +40,9 @@ const App = () => {
         {!user && <Route path="/" element={<Home />} />}
         {!user && <Route path="/user/create" element={<Signup />}></Route>}
         <Route path="/user/create/add-car" element={<AddCar />} />
+        <Route path="/login" element={<Login />} />
+        {user && <Route path="/job/create" element={<CreateJobController />} />}
+        {user && <Route path="/job/view/:id" element={<JobDetails />} />}
         {!user && (
           <Route
             path="/login"
