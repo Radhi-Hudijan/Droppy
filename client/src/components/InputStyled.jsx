@@ -55,7 +55,7 @@ const InputStyled = ({
 
 InputStyled.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   icon: PropTypes.element,

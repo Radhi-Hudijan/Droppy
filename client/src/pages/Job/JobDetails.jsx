@@ -5,6 +5,8 @@ import InputStyled from "../../components/InputStyled";
 import styles from "./JobDetails.module.css";
 import appStyles from "../../App.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useFetch from "../../hooks/useFetch";
+
 import {
   faBox,
   faContactBook,
@@ -16,46 +18,45 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const JobDetails = ({ sendPutRequest }) => {
-  const [inputs, setInputs] = React.useState({});
-  const [isDriver, setIsDriver] = useState(true);
+  const [isDriver, setIsDriver] = useState(false);
   const [isLocked, setIsLocked] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
   const [jobDetails, setJobDetails] = useState({
-    item: "",
-    description: "",
-    from: "",
-    to: "",
-    width: "",
-    height: "",
-    length: "",
-    date: "",
-    phone: "",
+    item: "efherufihiuh",
+    description: "erferf",
+    fromPostCode: "1231hf",
+    toPostCode: "2222 dh",
+    width: 2,
+    height: 2,
+    length: 2,
+    date: "2000-12-20",
+    phoneNo: "0612312312",
   });
   const form = React.useRef();
 
-  let currentJob;
+  const onSuccess = (job) => {
+    setJobDetails(job);
+  };
+
+  const { performFetch, cancelFetch } = useFetch("/jobs", onSuccess);
+
   useEffect(() => {
     if (localStorage.getItem("isDriver") !== true) {
       setIsDriver(false);
     } else {
       setIsDriver(true);
     }
-
     if (localStorage.getItem("job") === true) {
-      currentJob = JSON.parse(localStorage.getItem("job"));
-      setJobDetails({
-        item: currentJob.item,
-        description: currentJob.description,
-        from: currentJob.fromPostCode,
-        to: currentJob.toPostCode,
-        width: currentJob.width,
-        height: currentJob.height,
-        length: currentJob.length,
-        date: currentJob.date,
-        phone: currentJob.phoneNo,
+      const currentJobId = localStorage.getItem("job");
+      performFetch({
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: { jobID: currentJobId },
       });
-      return;
     }
+    return cancelFetch;
   }, []);
 
   const editHandler = () => {
@@ -70,14 +71,14 @@ const JobDetails = ({ sendPutRequest }) => {
     form.current.checkValidity();
     form.current.reportValidity();
     e.preventDefault();
-    sendPutRequest(inputs);
+    sendPutRequest(jobDetails);
   };
 
   const changeHandler = (e) => {
     const el = e.target;
     const name = el.name;
     const value = el.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    if (value !== "") setJobDetails((values) => ({ ...values, [name]: value }));
   };
 
   return (
@@ -94,29 +95,28 @@ const JobDetails = ({ sendPutRequest }) => {
               name="item"
               disabled={isLocked}
               icon={<FontAwesomeIcon icon={faBox} />}
-              placeholder={jobDetails.item}
-              required
+              placeholder={JSON.stringify(jobDetails.item)}
               data-err="Please enter a proper item name at least 3 characters"
               pattern="^[a-zA-Z0-9\s,-]{3,}"
               onChange={changeHandler}
             ></InputStyled>
+
             <div className={styles.sizes}>
               <InputStyled
                 name="width"
                 disabled={isLocked}
                 icon={<FontAwesomeIcon icon={faRuler} />}
-                placeholder={jobDetails.width}
-                required
+                placeholder={JSON.stringify(jobDetails.width)}
                 data-err="Please enter a number of centimeters"
                 pattern="^[0-9]{1,}"
                 onChange={changeHandler}
               ></InputStyled>
+
               <InputStyled
                 name="height"
                 disabled={isLocked}
                 icon={<FontAwesomeIcon icon={faRuler} />}
-                placeholder={jobDetails.height}
-                required
+                placeholder={JSON.stringify(jobDetails.height)}
                 data-err="Please enter a number of centimeters"
                 pattern="^[0-9]{1,}"
                 onChange={changeHandler}
@@ -125,8 +125,7 @@ const JobDetails = ({ sendPutRequest }) => {
                 name="length"
                 disabled={isLocked}
                 icon={<FontAwesomeIcon icon={faRuler} />}
-                placeholder={jobDetails.length}
-                required
+                placeholder={JSON.stringify(jobDetails.length)}
                 data-err="Please enter a number of centimeters"
                 pattern="^[0-9]{1,}"
                 onChange={changeHandler}
@@ -137,18 +136,17 @@ const JobDetails = ({ sendPutRequest }) => {
                 name="fromPostCode"
                 disabled={isLocked}
                 icon={<FontAwesomeIcon icon={faLocationPin} />}
-                placeholder={jobDetails.from}
-                required
+                placeholder={JSON.stringify(jobDetails.fromPostCode)}
                 data-err="Please enter the correct format of Dutch zip-code"
                 pattern="^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$"
                 onChange={changeHandler}
               ></InputStyled>
+
               <InputStyled
                 name="toPostCode"
                 disabled={isLocked}
                 icon={<FontAwesomeIcon icon={faLocationPin} />}
-                placeholder={jobDetails.to}
-                required
+                placeholder={JSON.stringify(jobDetails.toPostCode)}
                 data-err="Please enter the correct format of Dutch zip-code"
                 pattern="^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$"
                 onChange={changeHandler}
@@ -157,27 +155,27 @@ const JobDetails = ({ sendPutRequest }) => {
             <InputStyled
               name="date"
               disabled={isLocked}
-              placeholder={jobDetails.date}
-              type="date"
               required
+              placeholder={JSON.stringify(jobDetails.date)}
+              type={isLocked ? "" : "date"}
               onChange={changeHandler}
             ></InputStyled>
+
             <InputStyled
               name="phoneNo"
               disabled={isLocked}
               icon={<FontAwesomeIcon icon={faContactBook} />}
-              placeholder={jobDetails.phone}
+              placeholder={JSON.stringify(jobDetails.phoneNo)}
               type="tel"
               data-err="Please enter a phone number like 0612345678"
               pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
-              required
               onChange={changeHandler}
             ></InputStyled>
             <InputStyled
               name="description"
               disabled={isLocked}
               icon={<FontAwesomeIcon icon={faNoteSticky} />}
-              placeholder={jobDetails.description}
+              placeholder={JSON.stringify(jobDetails.description)}
               multiline
               onChange={changeHandler}
             ></InputStyled>
@@ -227,6 +225,6 @@ const JobDetails = ({ sendPutRequest }) => {
 };
 
 JobDetails.propTypes = {
-  sendPutRequest: PropTypes.func.isRequired,
+  sendPutRequest: PropTypes.func,
 };
 export default JobDetails;
