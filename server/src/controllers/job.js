@@ -30,6 +30,25 @@ export const getAllJobs = async (req, res) => {
       .json({ success: false, msg: "Unable to get jobs, try again later" });
   }
 };
+
+export const getOneJob = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const job = await Job.find({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      result: job,
+    });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get jobs, try again later" });
+  }
+};
+
 export const getActiveJobs = async (req, res) => {
   const page = req.query.page || 1;
 
@@ -69,7 +88,7 @@ export const getActiveJobs = async (req, res) => {
 };
 export const deleteJob = async (req, res) => {
   try {
-    await Job.deleteOne({ _id: req.body.jobID });
+    await Job.deleteOne({ _id: req.params.id });
     res.status(200).json({ success: true, msg: "Job is removed successfully" });
   } catch (error) {
     logError(error);
@@ -80,19 +99,27 @@ export const deleteJob = async (req, res) => {
 };
 export const updateJob = async (req, res) => {
   try {
-    let job = await Job.find({ _id: req.body.jobID });
-    job.item = req.body.job.item;
-    job.description = req.body.job.description;
-    job.fromPostCode = req.body.job.fromPostCode;
-    job.toPostCode = req.body.job.toPostCode;
-    job.width = req.body.job.width;
-    job.height = req.body.job.height;
-    job.length = req.body.job.length;
-    job.date = req.body.job.date;
-    job.length = req.body.job.length;
-    job.phoneNo = req.body.job.phoneNo;
+    let job = await Job.find({ _id: req.params.id });
+    job = {
+      ...job,
+      ...req.body.job,
+      delivererIDs: req.body.delivererIDs
+        ? req.body.delivererIDs.concat(job.delivererIDs)
+        : job.delivererIDs,
+    };
+    // job.item = req.body.job.item;
+    // job.description = req.body.job.description;
+    // job.fromPostCode = req.body.job.fromPostCode;
+    // job.toPostCode = req.body.job.toPostCode;
+    // job.width = req.body.job.width;
+    // job.height = req.body.job.height;
+    // job.date = req.body.job.date;
+    // job["length"] = req.body.job["length"];
+    // job.phoneNo = req.body.job.phoneNo;
+    // job.senderID = req.body.job.senderID;
 
     await job.save();
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.status(200).json({ success: true, msg: "Job is updated successfully" });
   } catch (error) {
     logError(error);
