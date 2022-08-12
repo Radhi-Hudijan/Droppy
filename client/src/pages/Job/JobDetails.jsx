@@ -6,6 +6,7 @@ import styles from "./JobDetails.module.css";
 import appStyles from "../../App.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFetch from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
 
 import {
   faBox,
@@ -16,46 +17,47 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useState } from "react";
+import Loading from "../../components/Loading/Loading";
 
-const JobDetails = ({ sendPutRequest }) => {
-  const [isDriver, setIsDriver] = useState(false);
+const JobDetails = () => {
+  const [isDriver, setIsDriver] = useState(true);
   const [isLocked, setIsLocked] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
   const [jobDetails, setJobDetails] = useState({
-    item: "efherufihiuh",
-    description: "erferf",
-    fromPostCode: "1231hf",
-    toPostCode: "2222 dh",
-    width: 2,
-    height: 2,
-    length: 2,
-    date: "2000-12-20",
-    phoneNo: "0612312312",
+    item: "",
+    description: "",
+    fromPostCode: "",
+    toPostCode: "",
+    width: "",
+    height: "",
+    length: "",
+    date: "",
+    phoneNo: "",
   });
   const form = React.useRef();
+  const { id } = useParams();
 
-  const onSuccess = (job) => {
-    setJobDetails(job);
+  const onSuccess = (onReceived) => {
+    setJobDetails(onReceived.result[0]);
   };
 
-  const { performFetch, cancelFetch } = useFetch("/jobs", onSuccess);
+  const { error, isLoading, performFetch, cancelFetch } = useFetch(
+    `/jobs/${id}`,
+    onSuccess
+  );
 
   useEffect(() => {
-    if (localStorage.getItem("isDriver") !== true) {
+    if (localStorage.getItem("isDriver") !== "true") {
       setIsDriver(false);
     } else {
       setIsDriver(true);
     }
-    if (localStorage.getItem("job") === true) {
-      const currentJobId = localStorage.getItem("job");
-      performFetch({
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: { jobID: currentJobId },
-      });
-    }
+    performFetch({
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
     return cancelFetch;
   }, []);
 
@@ -65,13 +67,28 @@ const JobDetails = ({ sendPutRequest }) => {
 
   const acceptHandler = () => {
     isAccepted ? setIsAccepted(false) : setIsAccepted(true);
+    performFetch({
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: {
+        delivererIDs: [localStorage.getItem("userID")],
+      },
+    });
   };
 
   const saveHandler = (e) => {
-    form.current.checkValidity();
-    form.current.reportValidity();
     e.preventDefault();
-    sendPutRequest(jobDetails);
+    performFetch({
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: {
+        job: jobDetails,
+      },
+    });
   };
 
   const changeHandler = (e) => {
@@ -81,13 +98,32 @@ const JobDetails = ({ sendPutRequest }) => {
     if (value !== "") setJobDetails((values) => ({ ...values, [name]: value }));
   };
 
+  function deleteHandler() {
+    performFetch({
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+  }
+
+  if (error) {
+    return (
+      <h2 className={appStyles.h1Desktop}>
+        {error} : This job does not exist, please return to the home page.
+      </h2>
+    );
+  } else if (isLoading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
+
   return (
     <div>
-      <h2 className={appStyles.h1Desktop}>
-        {jobDetails.item
-          ? "Job details"
-          : "This job does not exist, please return to the home page."}
-      </h2>
+      <h2 className={appStyles.h1Desktop}>Job Details</h2>
       {jobDetails.item && (
         <form className={styles.formClass} name="dropRequest" ref={form}>
           <div className={styles.jobView}>
@@ -212,7 +248,11 @@ const JobDetails = ({ sendPutRequest }) => {
                   {isLocked ? "Edit" : "Save"}
                 </Button>
 
-                <Button buttonClass="outline" path="/dashboard">
+                <Button
+                  buttonClass="outline"
+                  path="/dashboard"
+                  buttonHandler={deleteHandler}
+                >
                   Delete
                 </Button>
               </div>
