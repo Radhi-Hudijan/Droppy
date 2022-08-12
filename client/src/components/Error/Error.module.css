@@ -9,6 +9,8 @@
   color: red;
   border-radius: 0.313rem;
   margin-top: 1rem;
+  max-width: 60%;
+  margin: 1rem auto;
 }
 .title {
   padding: 0;
