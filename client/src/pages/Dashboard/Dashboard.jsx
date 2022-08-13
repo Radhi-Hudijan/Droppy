@@ -18,8 +18,7 @@ function Dashboard() {
 
   const onSuccess = (onReceived) => {
     setJobs(onReceived);
-    setPageCount(jobs.result?.pagination.pageCount);
-    // console.log(jobs.result?.pagination.pageCount, page)
+    setPageCount(onReceived?.result?.pagination.pageCount);
   };
 
   const { performFetch, cancelFetch } = useFetch(
@@ -36,6 +35,7 @@ function Dashboard() {
       },
     });
   }
+
   useEffect(() => {
     if (localStorage.getItem("isDriver") === "true") {
       getAvailableJobsHandler();
@@ -70,7 +70,7 @@ function Dashboard() {
   }
 
   function handleNext() {
-    if (page <= pageCount) return page;
+    if (page === pageCount) return page;
     setPage((page) => page + 1);
   }
 
@@ -163,14 +163,17 @@ function Dashboard() {
           </div>
         )}
         <div className={style.pagination}>
-          <button disabled={page === 1} onClick={handlePrevious}>
+          <button
+            disabled={page === 1 || pageCount === 0}
+            onClick={handlePrevious}
+          >
             Previous
           </button>
 
           <select
             value={page}
             onChange={(e) => {
-              setPage(e.target.value);
+              setPage(Number(e.target.value));
             }}
           >
             {Array(pageCount)
@@ -180,7 +183,7 @@ function Dashboard() {
               })}
           </select>
           <button
-            disabled={page === pageCount || pageCount === 1}
+            disabled={page === pageCount || pageCount === 0}
             onClick={handleNext}
           >
             Next
