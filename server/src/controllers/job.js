@@ -77,7 +77,7 @@ export const getActiveJobs = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      result: { activeJobs, pagination: { count, pageCount } },
+      result: { jobs: activeJobs, pagination: { count, pageCount } },
     });
   } catch (error) {
     logError(error);

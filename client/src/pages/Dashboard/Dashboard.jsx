@@ -77,91 +77,54 @@ function Dashboard() {
   return (
     <>
       <div className={style.container}>
-        {isDriver === "true" ? (
-          <div className={style.buttonsAndCardsDiv}>
-            <div className={style.buttonsDiv}>
-              <div className={style.buttonDiv}>
-                <button
-                  className={
-                    isClickedToAvailable
-                      ? `${style.button} ${style.buttonOutline}`
-                      : `${style.button}`
-                  }
-                  onClick={getAvailableJobsHandler}
-                >
-                  Available
-                </button>
-              </div>
-              <div className={style.buttonDiv}>
-                <button
-                  className={
-                    isClickedToAvailable
-                      ? `${style.button}`
-                      : `${style.button} ${style.buttonOutline}`
-                  }
-                  onClick={getActiveJobsHandler}
-                >
-                  Active
-                </button>
-              </div>
+        <div className={style.buttonsAndCardsDiv}>
+          <div className={style.buttonsDiv}>
+            <div className={style.buttonDiv}>
+              <button
+                className={
+                  isClickedToAvailable
+                    ? `${style.button} ${style.buttonOutline}`
+                    : `${style.button}`
+                }
+                onClick={
+                  isDriver === "true"
+                    ? getAvailableJobsHandler
+                    : getActiveJobsHandler
+                }
+              >
+                {isDriver === "true" ? "Available" : "Active"}
+              </button>
             </div>
-            <div className={style.cardsDiv}>
-              <ul>
-                {jobs ? (
-                  jobs.result?.jobs?.map((job, index) => (
-                    <li key={index}>
-                      <JobCard job={job} />
-                    </li>
-                  ))
-                ) : (
-                  <p> There is no available job</p>
-                )}
-              </ul>
+            <div className={style.buttonDiv}>
+              <button
+                className={
+                  isClickedToAvailable
+                    ? `${style.button}`
+                    : `${style.button} ${style.buttonOutline}`
+                }
+                onClick={
+                  isDriver === "true" ? getActiveJobsHandler : createJobHandler
+                }
+              >
+                {isDriver === "true" ? "Active" : "New"}
+              </button>
             </div>
           </div>
-        ) : (
-          <div className={style.buttonsAndCardsDiv}>
-            <div className={style.buttonsDiv}>
-              <div className={style.buttonDiv}>
-                <button
-                  className={
-                    isClickedToAvailable
-                      ? `${style.button} ${style.buttonOutline}`
-                      : `${style.button}`
-                  }
-                  onClick={getActiveJobsHandler}
-                >
-                  Active
-                </button>
-              </div>
-              <div className={style.buttonDiv}>
-                <button
-                  className={
-                    isClickedToAvailable
-                      ? `${style.button}`
-                      : `${style.button} ${style.buttonOutline}`
-                  }
-                  onClick={createJobHandler}
-                >
-                  New
-                </button>
-              </div>
-            </div>
-            <div className={style.cardsDiv}>
-              <ul>
-                {jobs ? (
-                  jobs.result?.activeJobs?.map((job, index) => (
-                    <li key={index}>
-                      <JobCard job={job} />
-                    </li>
-                  ))
-                ) : (
-                  <p> There is no available job</p>
-                )}
-              </ul>
-            </div>
+          <div className={style.cardsDiv}>
+            <ul>
+              {jobs ? (
+                jobs.result?.jobs?.map((job, index) => (
+                  <li key={index}>
+                    <JobCard job={job} />
+                  </li>
+                ))
+              ) : (
+                <p> There is no available job</p>
+              )}
+            </ul>
           </div>
-        )}
+        </div>
+
         <div className={style.pagination}>
           <button
             disabled={page === 1 || pageCount === 0}
