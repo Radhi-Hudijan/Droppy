@@ -2,7 +2,7 @@ import Job, { validateJob } from "../models/Job.js";
 import User from "../models/User.js";
 import { logError } from "../util/logging.js";
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 5;
 
 export const getAllJobs = async (req, res) => {
   const page = req.query.page || 1;
