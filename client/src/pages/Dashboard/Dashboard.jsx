@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import JobCard from "../../components/JobCard";
+import JobCard from "./JobCard";
 import useFetch from "../../hooks/useFetch";
 import style from "./Dashboard.module.css";
 import { useNavigate } from "react-router-dom";
