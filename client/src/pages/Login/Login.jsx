@@ -6,6 +6,7 @@ import UserInfoContext from "../../context/UserInfoContext";
 import { Link } from "react-router-dom";
 import appStyles from "../../App.module.css";
 import Error from "../../components/Error/Error";
+import Loading from "../../components/Loading/Loading";
 
 function Login() {
   const emailInputRef = useRef();
@@ -48,12 +49,6 @@ function Login() {
     });
   }
 
-  let statusComponent = null;
-
-  if (isLoading) {
-    statusComponent = <div>Logging in....</div>;
-  }
-
   return (
     <div className={style.login}>
       <h1 className={appStyles.h1Desktop}>Log in</h1>
@@ -87,7 +82,7 @@ function Login() {
       <div>
         Do not have an account? <Link to="/user/create">Sign up here</Link>
       </div>
-      {statusComponent}
+      {isLoading && <Loading />}
       {error != null && <Error error={error} />}
     </div>
   );

@@ -35,17 +35,10 @@ const CreateJobController = () => {
     });
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  // if (error) {
-  //   return <div>There is an error as following:{error}</div>;
-  // }
-
   return (
     <div>
       <JobView jobHandler={jobHandler} />
+      {isLoading && <Loading />}
       {error != null && <Error error={error} />}
     </div>
   );
