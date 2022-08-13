@@ -3,20 +3,17 @@ import Button from "../../components/Button";
 import useFetch from "../../hooks/useFetch";
 import style from "./Login.module.css";
 import UserInfoContext from "../../context/UserInfoContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import appStyles from "../../App.module.css";
 import Error from "../../components/Error/Error";
-import PropTypes from "prop-types";
 
-function Login({ setIsLoggedin }) {
-  const navigate = useNavigate();
+function Login() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const { setEmail, setName, setSurname, setVehicleInfo, setToken } =
     useContext(UserInfoContext);
 
   const onSuccess = (res) => {
-    setIsLoggedin(true);
     localStorage.setItem("token", res.data);
     const isDriver = res.vehicleInfo.plate ? true : false;
     localStorage.setItem("isDriver", `${isDriver}`);
@@ -26,9 +23,7 @@ function Login({ setIsLoggedin }) {
     setSurname(res.surname);
     setVehicleInfo(res.vehicleInfo);
     setToken(res.data);
-    navigate("/dashboard", {
-      replace: true,
-    });
+    window.location = "/dashboard";
   };
 
   const { isLoading, error, performFetch, cancelFetch } = useFetch(
@@ -99,7 +94,3 @@ function Login({ setIsLoggedin }) {
 }
 
 export default Login;
-
-Login.propTypes = {
-  setIsLoggedin: PropTypes.func.isRequired,
-};

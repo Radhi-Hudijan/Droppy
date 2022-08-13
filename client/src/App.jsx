@@ -21,11 +21,10 @@ import { useEffect } from "react";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState("");
-  const [isLoggedin, setIsLoggedin] = useState(false);
 
   useEffect(() => {
     setUser(localStorage.getItem("token"));
-  }, [isLoggedin]);
+  }, []);
 
   const openHandler = () => {
     setIsOpen(!isOpen);
@@ -43,12 +42,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         {user && <Route path="/job/create" element={<CreateJobController />} />}
         {user && <Route path="/job/view/:id" element={<JobDetails />} />}
-        {!user && (
-          <Route
-            path="/login"
-            element={<Login setIsLoggedin={setIsLoggedin} />}
-          />
-        )}
+        {!user && <Route path="/login" element={<Login />} />}
         {user && (
           <Route path="/jobs/create" element={<CreateJobController />} />
         )}
