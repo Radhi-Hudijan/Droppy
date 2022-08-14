@@ -21,9 +21,13 @@ import { useEffect } from "react";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState("");
+  const [isDriver, setIsDriver] = useState(null);
 
   useEffect(() => {
     setUser(localStorage.getItem("token"));
+    localStorage.getItem("isDriver") === "true"
+      ? setIsDriver(true)
+      : setIsDriver(false);
   }, []);
 
   const openHandler = () => {
@@ -40,10 +44,9 @@ const App = () => {
         {!user && <Route path="/user/create" element={<Signup />}></Route>}
         <Route path="/user/create/add-car" element={<AddCar />} />
         <Route path="/login" element={<Login />} />
-        {user && <Route path="/job/create" element={<CreateJobController />} />}
         {user && <Route path="/job/view/:id" element={<JobDetails />} />}
         {!user && <Route path="/login" element={<Login />} />}
-        {user && (
+        {user && !isDriver && (
           <Route path="/jobs/create" element={<CreateJobController />} />
         )}
         {user && <Route path="/dashboard" element={<Dashboard />} />}
