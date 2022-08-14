@@ -16,8 +16,9 @@ import {
   faRuler,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Loading from "../../components/Loading/Loading";
+import NotifierContext from "../../context/NotifierContext";
 
 const JobDetails = () => {
   const [isDriver, setIsDriver] = useState(true);
@@ -36,9 +37,13 @@ const JobDetails = () => {
   });
   const form = React.useRef();
   const { id } = useParams();
+  const { notifier } = useContext(NotifierContext);
 
   const onSuccess = (onReceived) => {
     setJobDetails(onReceived.result);
+    if (!isLocked) {
+      notifier(onReceived.message);
+    }
   };
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
@@ -112,7 +117,8 @@ const JobDetails = () => {
   if (error) {
     return (
       <h2 className={appStyles.h1Desktop}>
-        {error} : This job does not exist, please return to the home page.
+        {error.message} : This job does not exist, please return to the home
+        page.
       </h2>
     );
   } else if (isLoading) {
