@@ -43,7 +43,6 @@ export default function AddCarForm(props) {
   };
   const isNotCar = () => {
     notifier("Success! Good luck with your first request.");
-    window.location = "/dashboard";
   };
 
   function submitHandler(e) {
@@ -143,8 +142,8 @@ export default function AddCarForm(props) {
               Don&apos;t want to be a driver? No problem.
             </p>
             <Button
-              path="/"
-              type="button"
+              path="/dashboard"
+              type="submit"
               class="button"
               buttonHandler={isNotCar}
             >
