@@ -2,7 +2,7 @@ import express from "express";
 import {
   createJob,
   deleteJob,
-  // updateJob,
+  updateJob,
   getActiveJobs,
   getAllJobs,
   getOneJob,
@@ -18,9 +18,7 @@ jobRouter.get("/:id", getOneJob);
 
 jobRouter.delete("/:id", deleteJob);
 
-// jobRouter.put("/:id", updateJob);
-
-// jobRouter.patch("/:id", updateJob);
+jobRouter.patch("/:id", updateJob);
 
 jobRouter.post("/create", createJob);
 

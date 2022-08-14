@@ -22,12 +22,13 @@ export const getAllJobs = async (req, res) => {
     res.status(200).json({
       success: true,
       result: { jobs, pagination: { count, pageCount } },
+      message: "The job is brought successfully",
     });
   } catch (error) {
     logError(error);
     res
       .status(500)
-      .json({ success: false, msg: "Unable to get jobs, try again later" });
+      .json({ success: false, message: "Unable to get jobs, try again later" });
   }
 };
 
@@ -35,17 +36,18 @@ export const getOneJob = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const job = await Job.find({ _id: id });
+    const job = await Job.findOne({ _id: id });
 
     res.status(200).json({
       success: true,
       result: job,
+      message: "The job is brought successfully",
     });
   } catch (error) {
     logError(error);
     res
       .status(500)
-      .json({ success: false, msg: "Unable to get jobs, try again later" });
+      .json({ success: false, message: "Unable to get jobs, try again later" });
   }
 };
 
@@ -56,10 +58,11 @@ export const getActiveJobs = async (req, res) => {
 
   try {
     let activeJobs;
-    const user = await User.find({ _id: req.body.userID });
+    const user = await User.findOne({ _id: req.body.userID });
+    console.log(user);
     if (!user.vehicleInfo) {
       activeJobs = await Job.find({
-        senderID: req.body.userID,
+        senderID: user._id,
       })
         .limit(ITEMS_PER_PAGE)
         .skip(skip);
@@ -70,63 +73,88 @@ export const getActiveJobs = async (req, res) => {
         .limit(ITEMS_PER_PAGE)
         .skip(skip);
     }
-
+    console.log(activeJobs);
     const count = activeJobs.length;
 
     const pageCount = Math.ceil(count / ITEMS_PER_PAGE);
 
     res.status(200).json({
       success: true,
-      result: { jobs: activeJobs, pagination: { count, pageCount } },
+      message: "Active jobs are brought successfully",
+      result: {
+        jobs: activeJobs,
+        pagination: { count, pageCount },
+      },
     });
   } catch (error) {
     logError(error);
     res
       .status(500)
-      .json({ success: false, msg: "Unable to get jobs, try again later" });
+      .json({ success: false, message: "Unable to get jobs, try again later" });
   }
 };
 export const deleteJob = async (req, res) => {
   try {
     await Job.deleteOne({ _id: req.params.id });
-    res.status(200).json({ success: true, msg: "Job is removed successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "Job is removed successfully" });
   } catch (error) {
     logError(error);
     res
       .status(500)
-      .json({ success: false, msg: "Unable to get jobs, try again later" });
+      .json({ success: false, message: "Unable to get jobs, try again later" });
   }
 };
-//  will fix here
+
 export const updateJob = async (req, res) => {
   try {
-    let job = await Job.find({ _id: req.params.id });
-    job = {
-      ...job,
-      ...req.body.job,
-      delivererIDs: req.body.delivererIDs
-        ? req.body.delivererIDs.concat(job.delivererIDs)
-        : job.delivererIDs,
-    };
-    // job.item = req.body.job.item;
-    // job.description = req.body.job.description;
-    // job.fromPostCode = req.body.job.fromPostCode;
-    // job.toPostCode = req.body.job.toPostCode;
-    // job.width = req.body.job.width;
-    // job.height = req.body.job.height;
-    // job.date = req.body.job.date;
-    // job["length"] = req.body.job["length"];
-    // job.phoneNo = req.body.job.phoneNo;
-    // job.senderID = req.body.job.senderID;
+    let job = await Job.findOne({ _id: req.params.id });
+    if (!job) {
+      res.status(404).json({
+        success: false,
+        message: "The job is not found",
+      });
+    }
+    // job = {
+    //   ...job,
+    //   ...req.body.job,
+    // };
+
+    job.item = req.body.job.item ? req.body.job.item.toUpperCase() : job.item;
+    job.description = req.body.job.description
+      ? req.body.job.description.toUpperCase()
+      : job.description;
+    job.fromPostCode = req.body.job.fromPostCode
+      ? req.body.job.fromPostCode.toUpperCase()
+      : job.fromPostCode;
+    job.toPostCode = req.body.job.toPostCode
+      ? req.body.job.toPostCode.toUpperCase()
+      : job.toPostCode;
+    job.width = req.body.job.width ? req.body.job.width : job.width;
+    job.height = req.body.job.height ? req.body.job.height : job.height;
+    job.date = req.body.job.date ? req.body.job.date : job.date;
+    job["length"] = req.body.job["length"]
+      ? req.body.job["length"]
+      : job["length"];
+    job.phoneNo = req.body.job.phoneNo ? req.body.job.phoneNo : job.phoneNo;
+    job.senderID = req.body.job.senderID ? req.body.job.senderID : job.senderID;
+    job.delivererIDs = req.body.job.delivererIDs
+      ? req.body.job.delivererIDs.concat(job.delivererIDs)
+      : job.delivererIDs;
 
     await job.save();
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.status(200).json({ success: true, msg: "Job is updated successfully" });
+    res.status(200).json({
+      success: true,
+      result: job,
+      message: "Job is updated successfully",
+    });
   } catch (error) {
     logError(error);
-    res
-      .status(500)
-      .json({ success: false, msg: "Unable to get jobs, try again later" });
+    res.status(500).json({
+      success: false,
+      message: "Unable to get the job, try again later",
+    });
   }
 };
 
@@ -136,7 +164,7 @@ export const createJob = async (req, res) => {
     if (typeof job !== "object") {
       res.status(400).json({
         success: false,
-        msg: `You need to provide a 'job' object. Received: ${JSON.stringify(
+        message: `You need to provide a 'job' object. Received: ${JSON.stringify(
           job
         )}`,
       });

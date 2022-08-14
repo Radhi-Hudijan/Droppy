@@ -38,7 +38,7 @@ const JobDetails = () => {
   const { id } = useParams();
 
   const onSuccess = (onReceived) => {
-    setJobDetails(onReceived.result[0]);
+    setJobDetails(onReceived.result);
   };
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
@@ -72,9 +72,11 @@ const JobDetails = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: {
-        delivererIDs: [localStorage.getItem("userID")],
-      },
+      body: JSON.stringify({
+        job: {
+          delivererIDs: [localStorage.getItem("userID")],
+        },
+      }),
     });
   };
 
@@ -85,9 +87,9 @@ const JobDetails = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: {
+      body: JSON.stringify({
         job: jobDetails,
-      },
+      }),
     });
   };
 
