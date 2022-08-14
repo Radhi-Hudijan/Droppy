@@ -120,6 +120,7 @@
 
 .pagination button:disabled {
   color: var(--font-light);
+  cursor: auto;
 }
 
 .pagination select {
