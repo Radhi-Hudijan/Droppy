@@ -54,7 +54,7 @@ function Dashboard() {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ userID }),
+      body: JSON.stringify({ userID, isDriver }),
     });
   }
 

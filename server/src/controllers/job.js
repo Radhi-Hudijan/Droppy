@@ -1,5 +1,5 @@
 import Job, { validateJob } from "../models/Job.js";
-import User from "../models/User.js";
+// import User from "../models/User.js";
 import { logError } from "../util/logging.js";
 
 const ITEMS_PER_PAGE = 5;
@@ -58,11 +58,10 @@ export const getActiveJobs = async (req, res) => {
 
   try {
     let activeJobs;
-    const user = await User.findOne({ _id: req.body.userID });
-    console.log(user);
-    if (!user.vehicleInfo) {
+    // const user = await User.findOne({ _id: req.body.userID });
+    if (req.body.isDriver !== "true") {
       activeJobs = await Job.find({
-        senderID: user._id,
+        senderID: req.body.userID,
       })
         .limit(ITEMS_PER_PAGE)
         .skip(skip);
@@ -73,7 +72,6 @@ export const getActiveJobs = async (req, res) => {
         .limit(ITEMS_PER_PAGE)
         .skip(skip);
     }
-    console.log(activeJobs);
     const count = activeJobs.length;
 
     const pageCount = Math.ceil(count / ITEMS_PER_PAGE);
