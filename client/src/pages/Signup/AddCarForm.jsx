@@ -43,6 +43,7 @@ export default function AddCarForm(props) {
   };
   const isNotCar = () => {
     notifier("Success! Good luck with your first request.");
+    window.location = "/dashboard";
   };
 
   function submitHandler(e) {

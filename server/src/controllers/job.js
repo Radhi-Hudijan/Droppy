@@ -97,6 +97,7 @@ export const deleteJob = async (req, res) => {
       .json({ success: false, msg: "Unable to get jobs, try again later" });
   }
 };
+//  will fix here
 export const updateJob = async (req, res) => {
   try {
     let job = await Job.find({ _id: req.params.id });
