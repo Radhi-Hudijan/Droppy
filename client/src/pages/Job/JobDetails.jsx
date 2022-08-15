@@ -66,7 +66,8 @@ const JobDetails = () => {
     return cancelFetch;
   }, []);
 
-  const editHandler = () => {
+  const editHandler = (e) => {
+    e.preventDefault();
     isLocked ? setIsLocked(false) : setIsLocked(true);
   };
 
@@ -96,6 +97,7 @@ const JobDetails = () => {
         job: jobDetails,
       }),
     });
+    setIsLocked(true);
   };
 
   const changeHandler = (e) => {
@@ -129,6 +131,29 @@ const JobDetails = () => {
     );
   }
 
+  // const dateFormat = (date) => {
+  //   const d = new Date(date);
+  //   const fullDate =
+  //     ("0" + d.getDate()).slice(-2) +
+  //     "-" +
+  //     ("0" + (d.getMonth() + 1)).slice(-2) +
+  //     "-" +
+  //     d.getFullYear();
+
+  //   return fullDate;
+  // };
+
+  const dateInverter = (date) => {
+    const d = new Date(date);
+    const invertedDate =
+      d.getFullYear() +
+      "-" +
+      ("0" + (d.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + d.getDate()).slice(-2);
+    return invertedDate;
+  };
+
   return (
     <div>
       <h2 className={appStyles.h1Desktop}>Job Details</h2>
@@ -137,9 +162,12 @@ const JobDetails = () => {
           <div className={styles.jobView}>
             <InputStyled
               name="item"
+              required
               disabled={isLocked}
               icon={<FontAwesomeIcon icon={faBox} />}
-              placeholder={JSON.stringify(jobDetails.item)}
+              // placeholder={JSON.stringify(jobDetails.item)
+              defaultValue={jobDetails.item}
+              placeholder="Dining chair"
               data-err="Please enter a proper item name at least 3 characters"
               pattern="^[a-zA-Z0-9\s,-]{3,}"
               onChange={changeHandler}
@@ -148,9 +176,11 @@ const JobDetails = () => {
             <div className={styles.sizes}>
               <InputStyled
                 name="width"
+                required
                 disabled={isLocked}
                 icon={<FontAwesomeIcon icon={faRuler} />}
-                placeholder={JSON.stringify(jobDetails.width)}
+                placeholder="23"
+                defaultValue={jobDetails.width}
                 data-err="Please enter a number of centimeters"
                 pattern="^[0-9]{1,}"
                 onChange={changeHandler}
@@ -159,17 +189,21 @@ const JobDetails = () => {
               <InputStyled
                 name="height"
                 disabled={isLocked}
+                required
                 icon={<FontAwesomeIcon icon={faRuler} />}
-                placeholder={JSON.stringify(jobDetails.height)}
+                placeholder="23"
+                defaultValue={jobDetails.height}
                 data-err="Please enter a number of centimeters"
                 pattern="^[0-9]{1,}"
                 onChange={changeHandler}
               ></InputStyled>
               <InputStyled
                 name="length"
+                required
                 disabled={isLocked}
                 icon={<FontAwesomeIcon icon={faRuler} />}
-                placeholder={JSON.stringify(jobDetails.length)}
+                placeholder="23"
+                defaultValue={jobDetails.length}
                 data-err="Please enter a number of centimeters"
                 pattern="^[0-9]{1,}"
                 onChange={changeHandler}
@@ -179,8 +213,10 @@ const JobDetails = () => {
               <InputStyled
                 name="fromPostCode"
                 disabled={isLocked}
+                required
                 icon={<FontAwesomeIcon icon={faLocationPin} />}
-                placeholder={JSON.stringify(jobDetails.fromPostCode)}
+                placeholder="1234AB"
+                defaultValue={jobDetails.fromPostCode}
                 data-err="Please enter the correct format of Dutch zip-code"
                 pattern="^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$"
                 onChange={changeHandler}
@@ -189,8 +225,10 @@ const JobDetails = () => {
               <InputStyled
                 name="toPostCode"
                 disabled={isLocked}
+                required
                 icon={<FontAwesomeIcon icon={faLocationPin} />}
-                placeholder={JSON.stringify(jobDetails.toPostCode)}
+                placeholder="4567BC"
+                defaultValue={jobDetails.toPostCode}
                 data-err="Please enter the correct format of Dutch zip-code"
                 pattern="^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$"
                 onChange={changeHandler}
@@ -200,16 +238,19 @@ const JobDetails = () => {
               name="date"
               disabled={isLocked}
               required
-              placeholder={JSON.stringify(jobDetails.date)}
+              defaultValue={dateInverter(jobDetails.date)}
+              // value={dateInverter(jobDetails.date)}
               type={isLocked ? "" : "date"}
               onChange={changeHandler}
             ></InputStyled>
 
             <InputStyled
               name="phoneNo"
+              required
               disabled={isLocked}
               icon={<FontAwesomeIcon icon={faContactBook} />}
-              placeholder={JSON.stringify(jobDetails.phoneNo)}
+              placeholder="0612345678"
+              defaultValue={jobDetails.phoneNo}
               type="tel"
               data-err="Please enter a phone number like 0612345678"
               pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
@@ -218,8 +259,10 @@ const JobDetails = () => {
             <InputStyled
               name="description"
               disabled={isLocked}
+              required
               icon={<FontAwesomeIcon icon={faNoteSticky} />}
-              placeholder={JSON.stringify(jobDetails.description)}
+              placeholder="Describe your item here"
+              defaultValue={jobDetails.description}
               multiline
               onChange={changeHandler}
             ></InputStyled>
@@ -251,7 +294,8 @@ const JobDetails = () => {
                 <Button
                   class="buttonBorder"
                   buttonHandler={isLocked ? editHandler : saveHandler}
-                  // rest={{ form: "dropRequest" }}
+                  // type={!isLocked ? "submit" : undefined}
+                  type="button"
                 >
                   {isLocked ? "Edit" : "Save"}
                 </Button>
