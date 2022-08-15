@@ -12,7 +12,7 @@ export const getAllJobs = async (req, res) => {
 
   const skip = (page - 1) * ITEMS_PER_PAGE;
   try {
-    const count = await Job.estimatedDocumentCount(query);
+    const count = await Job.countDocuments(query);
 
     // await Job.deleteMany();
     const jobs = await Job.find(query).limit(ITEMS_PER_PAGE).skip(skip);
@@ -57,22 +57,20 @@ export const getActiveJobs = async (req, res) => {
   const skip = (page - 1) * ITEMS_PER_PAGE;
 
   try {
-    let activeJobs;
-    // const user = await User.findOne({ _id: req.body.userID });
+    let query;
+
     if (req.body.isDriver !== "true") {
-      activeJobs = await Job.find({
+      query = {
         senderID: req.body.userID,
-      })
-        .limit(ITEMS_PER_PAGE)
-        .skip(skip);
+      };
     } else {
-      activeJobs = await Job.find({
+      query = {
         delivererIDs: req.body.userID,
-      })
-        .limit(ITEMS_PER_PAGE)
-        .skip(skip);
+      };
     }
-    const count = activeJobs.length;
+    const activeJobs = await Job.find(query).limit(ITEMS_PER_PAGE).skip(skip);
+
+    const count = await Job.countDocuments(query);
 
     const pageCount = Math.ceil(count / ITEMS_PER_PAGE);
 
@@ -91,6 +89,7 @@ export const getActiveJobs = async (req, res) => {
       .json({ success: false, message: "Unable to get jobs, try again later" });
   }
 };
+
 export const deleteJob = async (req, res) => {
   try {
     await Job.deleteOne({ _id: req.params.id });
