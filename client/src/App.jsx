@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Header/Nav";
 import Home from "./pages/Home/Home";
@@ -16,19 +16,20 @@ import CreateJobController from "./pages/job/CreateJobController";
 import Notifier from "./components/Notifier";
 import JobDetails from "./pages/Job/JobDetails";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import { useEffect } from "react";
+import UserInfoContext from "./context/UserInfoContext";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState("");
   const [isDriver, setIsDriver] = useState(null);
+  const { token } = useContext(UserInfoContext);
 
   useEffect(() => {
     setUser(localStorage.getItem("token"));
     localStorage.getItem("isDriver") === "true"
       ? setIsDriver(true)
       : setIsDriver(false);
-  }, []);
+  }, [token]);
 
   const openHandler = () => {
     setIsOpen(!isOpen);

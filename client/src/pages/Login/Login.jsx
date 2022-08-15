@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import useFetch from "../../hooks/useFetch";
 import style from "./Login.module.css";
 import UserInfoContext from "../../context/UserInfoContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import appStyles from "../../App.module.css";
 import Error from "../../components/Error/Error";
 import Loading from "../../components/Loading/Loading";
@@ -13,6 +13,7 @@ function Login() {
   const passwordInputRef = useRef();
   const { setEmail, setName, setSurname, setVehicleInfo, setToken } =
     useContext(UserInfoContext);
+  const navigate = useNavigate();
 
   const onSuccess = (res) => {
     localStorage.setItem("token", res.data);
@@ -24,7 +25,9 @@ function Login() {
     setSurname(res.surname);
     setVehicleInfo(res.vehicleInfo);
     setToken(res.data);
-    window.location = "/dashboard";
+    navigate("/dashboard", {
+      replace: true,
+    });
   };
 
   const { isLoading, error, performFetch, cancelFetch } = useFetch(
