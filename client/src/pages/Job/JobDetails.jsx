@@ -44,6 +44,9 @@ const JobDetails = () => {
     if (!isLocked) {
       notifier(onReceived.message);
     }
+    onReceived.result.delivererIDs?.includes(localStorage.getItem("userID"))
+      ? setIsAccepted(true)
+      : setIsAccepted(false);
   };
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
