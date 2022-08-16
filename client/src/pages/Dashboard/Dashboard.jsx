@@ -8,6 +8,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [isDriver, setIsDriver] = useState(false);
   const [isClickedToAvailable, setIsClickedToAvailable] = useState(true);
+  const [pageToShow, setPageToShow] = useState(null);
 
   useEffect(() => {
     setIsDriver(localStorage.getItem("isDriver"));
@@ -20,10 +21,12 @@ function Dashboard() {
 
   function getAvailableJobsHandler() {
     setIsClickedToAvailable(true);
+    setPageToShow(<DashboardAvailable />);
   }
 
   function getActiveJobsHandler() {
     setIsClickedToAvailable(false);
+    setPageToShow(<DashboardActive />);
   }
 
   function createJobHandler() {
@@ -68,7 +71,7 @@ function Dashboard() {
               </button>
             </div>
           </div>
-          {isClickedToAvailable ? <DashboardAvailable /> : <DashboardActive />}
+          {pageToShow}
         </div>
       </div>
     </>
