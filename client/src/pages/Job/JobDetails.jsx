@@ -26,6 +26,7 @@ const JobDetails = () => {
   const [isLocked, setIsLocked] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [isSaveClicked, setIsSaveClicked] = useState(false);
   const [jobDetails, setJobDetails] = useState({
     item: "",
     description: "",
@@ -51,6 +52,10 @@ const JobDetails = () => {
       : setIsAccepted(false);
     if (isSaved) setIsLocked(true);
   };
+
+  useEffect(() => {
+    setIsSaved(true);
+  }, [isSaveClicked]);
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
     `/jobs/${id}`,
@@ -94,7 +99,7 @@ const JobDetails = () => {
 
   const saveHandler = (e) => {
     e.preventDefault();
-    setIsSaved(true);
+    setIsSaveClicked(true);
     performFetch({
       method: "PATCH",
       headers: {
