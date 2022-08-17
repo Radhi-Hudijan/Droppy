@@ -22,7 +22,7 @@ const Job = mongoose.model("jobs", jobSchema);
 export const validateJob = (data) => {
   const schema = Joi.object({
     senderID: Joi.string().min(1).required().label("senderID"),
-    item: Joi.string().min(1).required().label("item"),
+    item: Joi.string().min(1).max(50).required().label("item"),
     description: Joi.string().min(1).required().label("description"),
     fromPostCode: Joi.string()
       .pattern(/^(?:NL-)?(\d{4})\s*([A-Z]{2})$/i)
