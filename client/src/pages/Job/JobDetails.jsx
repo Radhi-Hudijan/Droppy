@@ -7,6 +7,7 @@ import appStyles from "../../App.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import Error from "../../components/Error/Error";
 
 import {
   faBox,
@@ -24,6 +25,7 @@ const JobDetails = () => {
   const [isDriver, setIsDriver] = useState(true);
   const [isLocked, setIsLocked] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [jobDetails, setJobDetails] = useState({
     item: "",
     description: "",
@@ -47,6 +49,7 @@ const JobDetails = () => {
     onReceived.result.delivererIDs?.includes(localStorage.getItem("userID"))
       ? setIsAccepted(true)
       : setIsAccepted(false);
+    if (isSaved) setIsLocked(true);
   };
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
@@ -91,6 +94,7 @@ const JobDetails = () => {
 
   const saveHandler = (e) => {
     e.preventDefault();
+    setIsSaved(true);
     performFetch({
       method: "PATCH",
       headers: {
@@ -100,7 +104,6 @@ const JobDetails = () => {
         job: jobDetails,
       }),
     });
-    setIsLocked(true);
   };
 
   const changeHandler = (e) => {
@@ -119,15 +122,11 @@ const JobDetails = () => {
     });
   }
 
+  let statusbar;
   if (error) {
-    return (
-      <h2 className={appStyles.h1Desktop}>
-        {error.message} : This job does not exist, please return to the home
-        page.
-      </h2>
-    );
+    statusbar = <Error error={error} />;
   } else if (isLoading) {
-    return (
+    statusbar = (
       <>
         <Loading />
       </>
@@ -315,6 +314,7 @@ const JobDetails = () => {
           </div>
         </form>
       )}
+      {statusbar}
     </div>
   );
 };
