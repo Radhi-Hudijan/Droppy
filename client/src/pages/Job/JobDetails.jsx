@@ -133,18 +133,6 @@ const JobDetails = () => {
     );
   }
 
-  // const dateFormat = (date) => {
-  //   const d = new Date(date);
-  //   const fullDate =
-  //     ("0" + d.getDate()).slice(-2) +
-  //     "-" +
-  //     ("0" + (d.getMonth() + 1)).slice(-2) +
-  //     "-" +
-  //     d.getFullYear();
-
-  //   return fullDate;
-  // };
-
   const dateInverter = (date) => {
     const d = new Date(date);
     const invertedDate =
@@ -167,7 +155,6 @@ const JobDetails = () => {
               required
               disabled={isLocked}
               icon={<FontAwesomeIcon icon={faBox} />}
-              // placeholder={JSON.stringify(jobDetails.item)
               defaultValue={jobDetails.item}
               placeholder="Dining chair"
               data-err="Please enter a proper item name at least 3 characters"
@@ -241,8 +228,7 @@ const JobDetails = () => {
               disabled={isLocked}
               required
               defaultValue={dateInverter(jobDetails.date)}
-              // value={dateInverter(jobDetails.date)}
-              type={isLocked ? "" : "date"}
+              type="date"
               onChange={changeHandler}
             ></InputStyled>
 
@@ -272,11 +258,7 @@ const JobDetails = () => {
             {isDriver ? (
               <div className={styles.buttonDiv}>
                 {isAccepted && (
-                  <Button
-                    class="buttonBorder"
-                    buttonHandler={acceptHandler}
-                    // rest={{ form: "dropRequest" }}
-                  >
+                  <Button class="buttonBorder" buttonHandler={acceptHandler}>
                     Cancel
                   </Button>
                 )}
@@ -296,7 +278,6 @@ const JobDetails = () => {
                 <Button
                   class="buttonBorder"
                   buttonHandler={isLocked ? editHandler : saveHandler}
-                  // type={!isLocked ? "submit" : undefined}
                   type="button"
                 >
                   {isLocked ? "Edit" : "Save"}
