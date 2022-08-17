@@ -113,14 +113,12 @@ export const updateJob = async (req, res) => {
         message: "The job is not found",
       });
     }
-    // job = {
-    //   ...job,
-    //   ...req.body.job,
-    // };
 
-    job.item = req.body.job.item ? req.body.job.item.toUpperCase() : job.item;
+    job.item = req.body.job.item
+      ? makeFirstLetterUpper(req.body.job.item)
+      : job.item;
     job.description = req.body.job.description
-      ? req.body.job.description.toUpperCase()
+      ? makeFirstLetterUpper(req.body.job.description)
       : job.description;
     job.fromPostCode = req.body.job.fromPostCode
       ? req.body.job.fromPostCode.toUpperCase()
@@ -140,6 +138,24 @@ export const updateJob = async (req, res) => {
       ? req.body.job.delivererIDs.concat(job.delivererIDs)
       : job.delivererIDs;
 
+    const jobToValidate = {
+      item: job.item,
+      description: job.description,
+      fromPostCode: job.fromPostCode,
+      toPostCode: job.toPostCode,
+      width: job.width,
+      height: job.height,
+      length: job["length"],
+      date: job.date,
+      phoneNo: job.phoneNo,
+      senderID: job.senderID,
+    };
+    const { error } = validateJob(jobToValidate);
+    if (error) {
+      return res.status(400).send({
+        message: `${error.details[0].path} field fails to match the required pattern`,
+      });
+    }
     await job.save();
     res.status(200).json({
       success: true,
@@ -158,6 +174,7 @@ export const updateJob = async (req, res) => {
 export const createJob = async (req, res) => {
   try {
     const { job } = req.body;
+
     if (typeof job !== "object") {
       res.status(400).json({
         success: false,
@@ -170,6 +187,10 @@ export const createJob = async (req, res) => {
     if (error) {
       return res.status(400).send({ message: error.details[0].message });
     }
+
+    job.item = makeFirstLetterUpper(job.item);
+    job.description = makeFirstLetterUpper(job.description);
+
     await new Job({ ...job }).save();
     res
       .status(201)
@@ -180,3 +201,6 @@ export const createJob = async (req, res) => {
       .send({ message: "internal server error while creating job" });
   }
 };
+function makeFirstLetterUpper(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
