@@ -12,7 +12,7 @@ import styles from "./App.module.css";
 import { useState } from "react";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
-import CreateJobController from "./pages/job/CreateJobController";
+import CreateJobController from "./pages/Job/CreateJobController";
 import Notifier from "./components/Notifier";
 import JobDetails from "./pages/Job/JobDetails";
 import Dashboard from "./pages/Dashboard/Dashboard";
