@@ -269,10 +269,7 @@ const JobDetails = () => {
                 )}
 
                 {!isAccepted && (
-                  <Button
-                    buttonClass="outline"
-                    buttonHandler={acceptHandler}
-                  >
+                  <Button buttonClass="outline" buttonHandler={acceptHandler}>
                     Accept
                   </Button>
                 )}
