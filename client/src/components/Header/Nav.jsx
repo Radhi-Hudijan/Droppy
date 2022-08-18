@@ -38,27 +38,29 @@ const Nav = ({ opened }) => {
 
     return (
       <ul>
-        <Link
-          key="1"
-          to="/dashboard"
-          data-testid="linkToHome"
-          onClick={() => {
-            if (isMdScreen) return;
-            setIsOpen(false);
-            opened();
-          }}
-        >
-          <li className={appStyle.h2Desktop}>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              style={{ flexDirection: "row" }}
-            >
-              <span>{localStorage.getItem("token") ? "Home" : ""}</span>
-              {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
-            </motion.div>
-          </li>
-        </Link>
+        {localStorage.getItem("token") && (
+          <Link
+            key="1"
+            to="/dashboard"
+            data-testid="linkToHome"
+            onClick={() => {
+              if (isMdScreen) return;
+              setIsOpen(false);
+              opened();
+            }}
+          >
+            <li className={appStyle.h2Desktop}>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                style={{ flexDirection: "row" }}
+              >
+                <span>Home</span>
+                {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
+              </motion.div>
+            </li>
+          </Link>
+        )}
         {NAV_CONTENT.map((x, idx) => (
           <Link
             key={idx}
@@ -125,7 +127,10 @@ const Nav = ({ opened }) => {
         </motion.div>
       )}
       <div className={styles.drawer}>
-        <Logo />
+        <div className={styles.logoDiv}>
+          <Logo />
+        </div>
+
         {!isMdScreen && <Divider />}
         {getNavLinks()}
       </div>

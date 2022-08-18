@@ -16,7 +16,7 @@
 .buttonDiv {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .cardsDiv {
@@ -45,11 +45,14 @@
   border: 2px solid var(--highlight);
   outline: inherit;
   transition: 0.4s;
-  box-shadow: 4px 4px 14px #f391c1;
+  box-shadow: 1px 1px 3px var(--highlight-light);
 }
 
 .button:hover {
-  border: 2px solid var(--white);
+  border: 2px solid var(--highlight-light);
+  box-shadow: 3px 3px 7px var(--highlight-light);
+  background: var(--highlight-light);
+  scale: 1.01;
 }
 
 .button:active {
@@ -72,32 +75,21 @@
   border: 2px solid var(--highlight);
   outline: inherit;
   transition: 0.4s;
+  box-shadow: 1px 1px 3px var(--highlight-light);
+}
+
+.buttonOutline:hover {
+  border: 2px solid var(--white);
+  box-shadow: 3px 3px 7px var(--highlight-light);
+  color: var(--font-light);
+  background: var(--highlight);
+  scale: 1.01;
 }
 
 .buttonOutline:active {
   background: var(--highlight);
   color: var(--white);
   transition: 0.1s;
-}
-
-.buttonBorder {
-  background: transparent;
-  width: 450px;
-  height: 54px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 20px 0px 30px;
-  font-size: 26px;
-  color: var(--highlight);
-  border: 2px solid var(--highlight);
-  outline: inherit;
-  transition: 0.4s;
-}
-
-.buttonBorder:hover {
-  color: var(--white);
-  border: 2px solid var(--highlight);
-  background: var(--highlight);
 }
 
 .pagination {
@@ -126,4 +118,25 @@
 .pagination select {
   padding: 0.7rem;
   cursor: pointer;
+}
+
+@media screen and (max-width: 740px) {
+  .container {
+    width: 100%;
+  }
+
+  .buttonsDiv {
+    width: 98.5%;
+  }
+  /* 
+  .button {
+    margin: 10px;
+  } */
+  .button {
+    margin-right: 5px;
+  }
+
+  .buttonOutline {
+    margin-left: 5px;
+  }
 }

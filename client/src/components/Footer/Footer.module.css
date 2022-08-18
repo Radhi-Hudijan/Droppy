@@ -22,7 +22,7 @@
 }
 
 .ctaIcon {
-  color: var(--background);
+  color: var(--white);
   font-size: 30px;
   float: left;
   margin-top: 8px;
@@ -124,6 +124,7 @@
 }
 .footerLogo svg {
   width: 100%;
+  color: var(--white);
 }
 .footerText p {
   margin-bottom: 14px;

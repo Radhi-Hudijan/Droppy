@@ -1,51 +1,15 @@
-.container {
-  background-color: var(--background);
-  box-shadow: -10px 0px 10px 1px rgba(0, 0, 0, 0.24);
-  background-image: url("assets/images/van.jpg");
-  background-color: var(--background-opacity);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-}
-
-/* Style from public/style.css */
-html {
-  background-image: url("assets/images/van.jpg");
-  background-color: var(--background-opacity);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-}
-
-#root {
-  background-color: var(--background-opacity);
-  overflow-x: hidden;
-}
-
 :root {
   --nav-height: 80px;
-  --horizontal-shadow: drop-shadow(0px 5px 13px rgba(0, 0, 0, 0.43));
-  --font-dark: #041b15;
-  --font-light: #d9d9d9;
-  --shadow: #084233;
-  --highlight: #8a365e;
-  --highlight-light: #f391c1;
+  /* --horizontal-shadow: drop-shadow(0px 5px 13px rgba(0, 0, 0, 0.43)); */
+  --font-dark: #022b3a;
+  --font-light: #ffffff;
+  --shadow: #022b3a;
+  --highlight: #022b3a;
+  --highlight-light: #1f7a8c;
   /* --background: #caafb3; */
-  --background-opacity: rgba(255, 239, 239, 0.851);
-  --beige: #beb7a4;
-  --white: #fff;
-}
-
-.darkTheme {
-  --font-dark: #041b15;
-  --font-light: #caafb3;
-  --shadow: #084233;
-  --highlight: #8a365e;
-  --background: #041b15;
-  --background-opacity: rgba(4, 27, 21, 0.8);
-  --beige: #beb7a4;
+  --background-opacity: rgba(255, 255, 255, 0.337);
+  --beige: #e1e5f2;
+  --white: #ffffff;
 }
 
 .h1Desktop {
@@ -89,6 +53,33 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
+
+.container {
+  /* background-color: var(--background); */
+  /* box-shadow: -10px 0px 10px 1px rgba(0, 0, 0, 0.24); */
+  background-image: url("assets/images/van.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-color: var(--white);
+}
+
+/* Style from public/style.css */
+html {
+  background-image: url("assets/images/van.jpg");
+  /* background-color: var(--background-opacity); */
+  background-color: var(--highlight);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+/* #root {
+  overflow-x: hidden;
+  background-color: aqua !important;
+} */
 
 @media screen and (max-width: 450px) {
   .h1Desktop {

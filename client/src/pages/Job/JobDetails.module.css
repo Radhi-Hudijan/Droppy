@@ -34,12 +34,12 @@
   max-width: 40%;
 }
 
-.buttonDiv {
+/* .buttonDiv {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column: 1/-1;
   gap: 20px;
-}
+} */
 
 @media screen and (min-width: 740px) {
   .jobView {
@@ -50,9 +50,15 @@
   .buttonDiv {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-column: 1/-1;
+    gap: 20px;
   }
 
   .formClass > * {
     grid-column: 2/-2;
+  }
+
+  .formClass {
+    width: 100vw;
   }
 }

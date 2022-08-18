@@ -70,7 +70,7 @@ export default function AddCarForm(props) {
             }
             id="contact"
             aria-label="contact info"
-            placeholder="Preferred contact info (email/number)*"
+            placeholder="Phone number*"
             className={style.signupInput}
             value={allInputs.contact}
           />
@@ -92,42 +92,44 @@ export default function AddCarForm(props) {
           <h3 className={appStyle.bodyDesktop}>
             Available Car Space for Items (W x H x L)
           </h3>
-          <input
-            type="number"
-            min="0"
-            onChange={(e) =>
-              setAllInputs({ ...allInputs, width: e.target.value })
-            }
-            id="width"
-            aria-label="width"
-            placeholder="00cm*"
-            className={style.sizeInput}
-            value={allInputs.width}
-          />
-          <input
-            type="number"
-            min="0"
-            onChange={(e) =>
-              setAllInputs({ ...allInputs, height: e.target.value })
-            }
-            id="height"
-            aria-label="height"
-            placeholder="00cm*"
-            className={style.sizeInput}
-            value={allInputs.height}
-          />
-          <input
-            type="number"
-            min="0"
-            onChange={(e) =>
-              setAllInputs({ ...allInputs, length: e.target.value })
-            }
-            id="length"
-            aria-label="length"
-            placeholder="00cm*"
-            className={style.sizeInput}
-            value={allInputs.length}
-          />
+          <div className={style.dimensionsContainer}>
+            <input
+              type="number"
+              min="0"
+              onChange={(e) =>
+                setAllInputs({ ...allInputs, width: e.target.value })
+              }
+              id="width"
+              aria-label="width"
+              placeholder="00cm*"
+              className={style.sizeInput}
+              value={allInputs.width}
+            />
+            <input
+              type="number"
+              min="0"
+              onChange={(e) =>
+                setAllInputs({ ...allInputs, height: e.target.value })
+              }
+              id="height"
+              aria-label="height"
+              placeholder="00cm*"
+              className={style.sizeInput}
+              value={allInputs.height}
+            />
+            <input
+              type="number"
+              min="0"
+              onChange={(e) =>
+                setAllInputs({ ...allInputs, length: e.target.value })
+              }
+              id="length"
+              aria-label="length"
+              placeholder="00cm*"
+              className={style.sizeInput}
+              value={allInputs.length}
+            />
+          </div>
         </div>
         {allFilled === true ? (
           <div>

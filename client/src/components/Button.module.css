@@ -1,7 +1,13 @@
 /* Button style */
+/* .linkContainer {
+  width: 100%;
+  margin: 0 auto;
+} */
+
 .button {
   background: var(--highlight);
   width: 100%;
+  max-width: 450px;
   height: 54px;
   border-radius: 5px;
   cursor: pointer;
@@ -11,11 +17,14 @@
   border: 2px solid var(--highlight);
   outline: inherit;
   transition: 0.4s;
-  box-shadow: 4px 4px 14px #f391c1;
+  box-shadow: 2px 2px 5px var(--highlight-light);
 }
 
 .button:hover {
-  border: 2px solid var(--white);
+  border: 2px solid var(--highlight-light);
+  box-shadow: 3px 3px 7px var(--highlight-light);
+  background: var(--highlight-light);
+  scale: 1.01;
 }
 
 .button:active {
@@ -26,9 +35,10 @@
   box-shadow: 2px 2px 15px var(--highlight-light);
 }
 
-.buttonOutline {
+.buttonBorder {
   background: var(--background);
   width: 100%;
+  max-width: 450px;
   height: 54px;
   border-radius: 5px;
   cursor: pointer;
@@ -38,9 +48,18 @@
   border: 2px solid var(--highlight);
   outline: inherit;
   transition: 0.4s;
+  box-shadow: 1px 1px 3px var(--highlight-light);
 }
 
-.buttonOutline:active {
+.buttonBorder:hover {
+  border: 2px solid var(--white);
+  box-shadow: 3px 3px 7px var(--highlight-light);
+  color: var(--font-light);
+  background: var(--highlight);
+  scale: 1.01;
+}
+
+.buttonBorder:active {
   background: var(--highlight);
   color: var(--white);
   transition: 0.1s;
@@ -51,25 +70,11 @@
   text-decoration: none;
 }
 
-.buttonBorder {
-  background: transparent;
-  width: 100%;
-  height: 54px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 20px 0px 30px;
-  font-size: 26px;
-  color: var(--highlight);
-  border: 2px solid var(--highlight);
-  outline: inherit;
-  transition: 0.4s;
-}
-
-.buttonBorder:hover {
-  color: var(--white);
-  border: 2px solid var(--highlight);
-  background: var(--highlight);
-}
-
 @media screen and (max-width: 740px) {
+  .button,
+  .buttonBorder {
+    max-width: 330px;
+    min-width: 330px;
+    margin: 0px auto 20px;
+  }
 }

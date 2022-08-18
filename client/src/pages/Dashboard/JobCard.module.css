@@ -15,7 +15,7 @@
 }
 .job-card:hover {
   border: 2px solid var(--highlight);
-  box-shadow: 4px 4px 14px #f391c1;
+  box-shadow: 3px 3px 10px var(--highlight-light);
   transform: scale(1.02);
 }
 .jobCardUpperDiv {
@@ -49,4 +49,12 @@
 
 .dateDiv {
   width: 30%;
+}
+
+@media screen and (max-width: 740px) {
+  .job-card {
+    width: 95%;
+    margin: 0px auto 5px;
+    height: 110px;
+  }
 }

@@ -30,18 +30,34 @@
   max-width: 40%;
 }
 
+.dimensionsContainer input {
+  width: 135px;
+}
+
 .invisible {
   color: transparent;
 }
 
 @media screen and (max-width: 740px) {
   .signupInput {
-    width: 350px;
+    width: 330px;
     margin: 10px 0px 20px;
     font-size: 20px;
   }
 
   .sizeInput {
     width: 100px;
+  }
+
+  .dimensionsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 330px;
+    margin: 0 auto;
+  }
+
+  .dimensionsContainer input {
+    width: 96px;
   }
 }

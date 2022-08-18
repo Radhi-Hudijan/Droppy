@@ -17,7 +17,7 @@
 }
 
 .pagination button:disabled {
-  color: var(--font-light);
+  color: var(--beige);
   cursor: auto;
 }
 

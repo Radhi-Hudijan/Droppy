@@ -265,7 +265,7 @@ const JobDetails = () => {
 
                 {!isAccepted && (
                   <Button
-                    buttonClass="outline"
+                    buttonClass="buttonBorder"
                     path="/dashboard"
                     buttonHandler={acceptHandler}
                   >
@@ -284,7 +284,7 @@ const JobDetails = () => {
                 </Button>
 
                 <Button
-                  buttonClass="outline"
+                  buttonClass="buttonBorder"
                   path="/dashboard"
                   buttonHandler={deleteHandler}
                 >
