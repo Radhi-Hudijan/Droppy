@@ -26,6 +26,7 @@ const JobDetails = () => {
   const [isLocked, setIsLocked] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [isSaveClicked, setIsSaveClicked] = useState(false);
   const [jobDetails, setJobDetails] = useState({
     item: "",
     description: "",
@@ -51,6 +52,10 @@ const JobDetails = () => {
       : setIsAccepted(false);
     if (isSaved) setIsLocked(true);
   };
+
+  useEffect(() => {
+    setIsSaved(true);
+  }, [isSaveClicked]);
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
     `/jobs/${id}`,
@@ -80,13 +85,13 @@ const JobDetails = () => {
   const acceptHandler = () => {
     isAccepted ? setIsAccepted(false) : setIsAccepted(true);
     performFetch({
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
         job: {
-          delivererIDs: [localStorage.getItem("userID")],
+          delivererID: localStorage.getItem("userID"),
         },
       }),
     });
@@ -94,7 +99,7 @@ const JobDetails = () => {
 
   const saveHandler = (e) => {
     e.preventDefault();
-    setIsSaved(true);
+    setIsSaveClicked(true);
     performFetch({
       method: "PATCH",
       headers: {
@@ -264,11 +269,7 @@ const JobDetails = () => {
                 )}
 
                 {!isAccepted && (
-                  <Button
-                    buttonClass="buttonBorder"
-                    path="/dashboard"
-                    buttonHandler={acceptHandler}
-                  >
+                  <Button class="outline" buttonHandler={acceptHandler}>
                     Accept
                   </Button>
                 )}

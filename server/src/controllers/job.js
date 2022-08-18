@@ -134,9 +134,6 @@ export const updateJob = async (req, res) => {
       : job["length"];
     job.phoneNo = req.body.job.phoneNo ? req.body.job.phoneNo : job.phoneNo;
     job.senderID = req.body.job.senderID ? req.body.job.senderID : job.senderID;
-    job.delivererIDs = req.body.job.delivererIDs
-      ? req.body.job.delivererIDs.concat(job.delivererIDs)
-      : job.delivererIDs;
 
     const jobToValidate = {
       item: job.item,
@@ -156,6 +153,38 @@ export const updateJob = async (req, res) => {
         message: `${error.details[0].path} field fails to match the required pattern`,
       });
     }
+    await job.save();
+    res.status(200).json({
+      success: true,
+      result: job,
+      message: "Job is updated successfully",
+    });
+  } catch (error) {
+    logError(error);
+    res.status(500).json({
+      success: false,
+      message: "Unable to get the job, try again later",
+    });
+  }
+};
+
+export const acceptCancelJob = async (req, res) => {
+  try {
+    let job = await Job.findOne({ _id: req.params.id });
+    if (!job) {
+      res.status(404).json({
+        success: false,
+        message: "The job is not found",
+      });
+    }
+    if (job.delivererIDs.includes(req.body.job.delivererID)) {
+      job.delivererIDs = job.delivererIDs.filter(
+        (id) => id !== req.body.job.delivererID
+      );
+    } else {
+      job.delivererIDs.push(req.body.job.delivererID);
+    }
+
     await job.save();
     res.status(200).json({
       success: true,

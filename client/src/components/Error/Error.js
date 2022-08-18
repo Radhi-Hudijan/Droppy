@@ -18,6 +18,6 @@ const Error = ({ error }) => {
 };
 
 Error.propTypes = {
-  error: PropTypes.isRequired,
+  error: PropTypes.string.isRequired,
 };
 export default Error;
