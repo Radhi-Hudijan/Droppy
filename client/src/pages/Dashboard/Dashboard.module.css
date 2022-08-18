@@ -22,16 +22,18 @@
 .cardsDiv {
   width: 100%;
   display: flex;
+  /* margin-left: 5px; */
   flex-direction: column;
 }
 .cardsDiv ul {
-  width: 100%;
+  width: 99%;
   display: flex;
+  margin: auto;
   flex-direction: column;
   list-style: none;
 }
 .cardsDiv ul li {
-  width: 100%;
+  width: 99%;
 }
 .button {
   background: var(--highlight);
