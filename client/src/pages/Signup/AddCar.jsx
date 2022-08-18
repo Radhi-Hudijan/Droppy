@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import AddCarForm from "./AddCarForm";
 import useFetch from "../../hooks/useFetch";
 import UserInfoContext from "../../context/UserInfoContext";
@@ -7,15 +6,12 @@ import style from "./Signup.module.css";
 import appStyles from "../../App.module.css";
 
 function AddCar() {
-  const navigate = useNavigate();
   const { setVehicleInfo } = useContext(UserInfoContext);
 
   let vehicleInfoOnSuccess;
   const onSuccess = () => {
     setVehicleInfo(vehicleInfoOnSuccess);
-    navigate("/", {
-      replace: true,
-    });
+    window.location = "/dashboard";
   };
 
   const { isLoading, error, performFetch, cancelFetch } = useFetch(

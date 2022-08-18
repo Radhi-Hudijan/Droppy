@@ -16,7 +16,7 @@ import burger from "../../assets/icons/burger-icon.svg";
 import UserInfoContext from "../../context/UserInfoContext";
 
 const NAV_CONTENT = [
-  { link: "/", id: TEST_ID.linkToHome, value: "Home" },
+  // { link: "/", id: TEST_ID.linkToHome, value: "Home" },
   { link: "/about", id: TEST_ID.linkToAbout, value: "About" },
   // { link: "/login", id: TEST_ID.linkToLogin, value: "Login" },
 ];
@@ -38,6 +38,29 @@ const Nav = ({ opened }) => {
 
     return (
       <ul>
+        {localStorage.getItem("token") && (
+          <Link
+            key="1"
+            to="/dashboard"
+            data-testid="linkToHome"
+            onClick={() => {
+              if (isMdScreen) return;
+              setIsOpen(false);
+              opened();
+            }}
+          >
+            <li className={appStyle.h2Desktop}>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                style={{ flexDirection: "row" }}
+              >
+                <span>Home</span>
+                {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
+              </motion.div>
+            </li>
+          </Link>
+        )}
         {NAV_CONTENT.map((x, idx) => (
           <Link
             key={idx}
@@ -68,7 +91,9 @@ const Nav = ({ opened }) => {
           onClick={() => {
             if (token) {
               localStorage.removeItem("token");
-              window.location.reload();
+              localStorage.removeItem("isDriver");
+              localStorage.removeItem("userID");
+              window.reload();
             }
             if (isMdScreen) return;
             setIsOpen(false);
@@ -102,7 +127,10 @@ const Nav = ({ opened }) => {
         </motion.div>
       )}
       <div className={styles.drawer}>
-        <Logo />
+        <div className={styles.logoDiv}>
+          <Logo />
+        </div>
+
         {!isMdScreen && <Divider />}
         {getNavLinks()}
       </div>

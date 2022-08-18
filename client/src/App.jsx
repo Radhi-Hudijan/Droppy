@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Header/Nav";
 import Home from "./pages/Home/Home";
@@ -14,9 +14,22 @@ import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
 import CreateJobController from "./pages/job/CreateJobController";
 import Notifier from "./components/Notifier";
+import JobDetails from "./pages/Job/JobDetails";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import UserInfoContext from "./context/UserInfoContext";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState("");
+  const [isDriver, setIsDriver] = useState(null);
+  const { token } = useContext(UserInfoContext);
+
+  useEffect(() => {
+    setUser(localStorage.getItem("token"));
+    localStorage.getItem("isDriver") === "true"
+      ? setIsDriver(true)
+      : setIsDriver(false);
+  }, [token]);
 
   const openHandler = () => {
     setIsOpen(!isOpen);
@@ -28,11 +41,16 @@ const App = () => {
       <Nav opened={openHandler} />
       <Notifier />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/user/create" element={<Signup />}></Route>
+        {!user && <Route path="/" element={<Home />} />}
+        {!user && <Route path="/user/create" element={<Signup />}></Route>}
         <Route path="/user/create/add-car" element={<AddCar />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/job/create" element={<CreateJobController />} />
+        {user && <Route path="/job/view/:id" element={<JobDetails />} />}
+        {!user && <Route path="/login" element={<Login />} />}
+        {user && !isDriver && (
+          <Route path="/jobs/create" element={<CreateJobController />} />
+        )}
+        {user && <Route path="/dashboard" element={<Dashboard />} />}
       </Routes>
       <Footer />
     </motion.div>

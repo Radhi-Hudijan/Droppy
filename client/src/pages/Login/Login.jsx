@@ -5,22 +5,27 @@ import style from "./Login.module.css";
 import UserInfoContext from "../../context/UserInfoContext";
 import { Link, useNavigate } from "react-router-dom";
 import appStyles from "../../App.module.css";
+import Error from "../../components/Error/Error";
+import Loading from "../../components/Loading/Loading";
 
 function Login() {
-  const navigate = useNavigate();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const { setEmail, setName, setSurname, setVehicleInfo, setToken } =
     useContext(UserInfoContext);
+  const navigate = useNavigate();
 
   const onSuccess = (res) => {
     localStorage.setItem("token", res.data);
+    const isDriver = res.vehicleInfo.plate ? true : false;
+    localStorage.setItem("isDriver", `${isDriver}`);
+    localStorage.setItem("userID", res.id);
     setEmail(res.email);
     setName(res.name);
     setSurname(res.surname);
     setVehicleInfo(res.vehicleInfo);
     setToken(res.data);
-    navigate("/", {
+    navigate("/dashboard", {
       replace: true,
     });
   };
@@ -45,15 +50,6 @@ function Login() {
       },
       body: JSON.stringify({ email, password }),
     });
-  }
-
-  let statusComponent = null;
-  if (error != null) {
-    statusComponent = (
-      <div>Error while trying to log in: {error.toString()}</div>
-    );
-  } else if (isLoading) {
-    statusComponent = <div>Logging in....</div>;
   }
 
   return (
@@ -89,7 +85,8 @@ function Login() {
       <div>
         Do not have an account? <Link to="/user/create">Sign up here</Link>
       </div>
-      {statusComponent}
+      {isLoading && <Loading />}
+      {error != null && <Error error={error} />}
     </div>
   );
 }

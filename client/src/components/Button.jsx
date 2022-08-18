@@ -8,14 +8,6 @@ import style from "./Button.module.css";
 export default function Button(props) {
   let buttonClass;
 
-  switch (props.buttonClass) {
-    case "outline":
-      buttonClass = style.buttonOutline;
-      break;
-    default:
-      buttonClass = style.button;
-  }
-
   if (props.class === "buttonBorder") {
     buttonClass = style.buttonBorder;
   } else {
@@ -24,7 +16,7 @@ export default function Button(props) {
 
   if (props.path) {
     return (
-      <div>
+      <div className={style.linkContainer}>
         <Link to={props.path} className={style.buttonLink}>
           <button
             className={buttonClass}
@@ -38,7 +30,7 @@ export default function Button(props) {
     );
   } else {
     return (
-      <div>
+      <div className={style.linkContainer}>
         <button
           className={buttonClass}
           onClick={props.buttonHandler}

@@ -19,6 +19,6 @@ app.use(cors());
  */
 app.use("/api/user", userRouter);
 app.use("/api/authentication", authRouter);
-app.use("/api/job", jobRouter);
+app.use("/api/jobs", jobRouter);
 
 export default app;

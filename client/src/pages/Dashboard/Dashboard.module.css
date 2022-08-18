@@ -1,0 +1,144 @@
+.container {
+  margin: 0px auto;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.buttonsAndCardsDiv {
+  display: flex;
+  flex-direction: column;
+}
+.buttonsDiv {
+  display: flex;
+  width: 100%;
+}
+.buttonDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardsDiv {
+  width: 100%;
+  display: flex;
+  /* margin-left: 5px; */
+  flex-direction: column;
+}
+.cardsDiv ul {
+  width: 99%;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  list-style: none;
+}
+.cardsDiv ul li {
+  width: 99%;
+}
+.button {
+  background: var(--highlight);
+  width: 100%;
+  height: 54px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 10px;
+  font-size: 26px;
+  color: var(--white);
+  border: 2px solid var(--highlight);
+  outline: inherit;
+  transition: 0.4s;
+  box-shadow: 1px 1px 3px var(--highlight-light);
+}
+
+.button:hover {
+  border: 2px solid var(--highlight-light);
+  box-shadow: 3px 3px 7px var(--highlight-light);
+  background: var(--highlight-light);
+  scale: 1.01;
+}
+
+.button:active {
+  background: var(--background);
+  color: var(--highlight);
+  border: 2px solid var(--highlight);
+  transition: 0.1s;
+  box-shadow: 2px 2px 15px var(--highlight-light);
+}
+
+.buttonOutline {
+  background: var(--background);
+  width: 100%;
+  height: 54px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 10px;
+  font-size: 26px;
+  color: var(--highlight);
+  border: 2px solid var(--highlight);
+  outline: inherit;
+  transition: 0.4s;
+  box-shadow: 1px 1px 3px var(--highlight-light);
+}
+
+.buttonOutline:hover {
+  border: 2px solid var(--white);
+  box-shadow: 3px 3px 7px var(--highlight-light);
+  color: var(--font-light);
+  background: var(--highlight);
+  scale: 1.01;
+}
+
+.buttonOutline:active {
+  background: var(--highlight);
+  color: var(--white);
+  transition: 0.1s;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.pagination button {
+  padding: 0.7rem;
+  background-color: white;
+  border: 2px solid var(--highlight);
+  border-radius: 3px;
+  color: var(--highlight);
+  cursor: pointer;
+  width: 5rem;
+}
+
+.pagination button:disabled {
+  color: var(--font-light);
+  cursor: auto;
+}
+
+.pagination select {
+  padding: 0.7rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 740px) {
+  .container {
+    width: 100%;
+  }
+
+  .buttonsDiv {
+    width: 98.5%;
+  }
+  /* 
+  .button {
+    margin: 10px;
+  } */
+  .button {
+    margin-right: 5px;
+  }
+
+  .buttonOutline {
+    margin-left: 5px;
+  }
+}

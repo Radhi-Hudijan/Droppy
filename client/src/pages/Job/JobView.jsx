@@ -21,7 +21,7 @@ const JobView = ({ jobHandler }) => {
     const el = e.target;
     const name = el.name;
     const value = el.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    setInputs((values) => ({ ...values, [name]: value.toUpperCase() }));
   };
 
   const submitHandler = (e) => {
@@ -40,8 +40,8 @@ const JobView = ({ jobHandler }) => {
           icon={<FontAwesomeIcon icon={faBox} />}
           placeholder="Your item name"
           required
-          data-err="Please enter a proper item name at least 3 characters"
-          pattern="^[a-zA-Z0-9\s,-]{3,}"
+          data-err="Please enter an item name between 3 and 50 characters"
+          pattern="^[a-zA-Z0-9\s,-]{3,50}"
           onChange={changeHandler}
         ></InputStyled>
         <div className={styles.sizes}>

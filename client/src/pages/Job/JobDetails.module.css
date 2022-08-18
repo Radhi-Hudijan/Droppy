@@ -1,0 +1,64 @@
+.formClass {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.formClass > * {
+  grid-column: 1/-1;
+}
+
+.jobView {
+  margin: auto;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sizes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  gap: 10px;
+}
+
+.sizes div {
+  flex: 1;
+  width: 100px;
+}
+
+.buttonCancel {
+  background-color: red;
+  max-width: 40%;
+}
+
+/* .buttonDiv {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column: 1/-1;
+  gap: 20px;
+} */
+
+@media screen and (min-width: 740px) {
+  .jobView {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .buttonDiv {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 1/-1;
+    gap: 20px;
+  }
+
+  .formClass > * {
+    grid-column: 2/-2;
+  }
+
+  .formClass {
+    width: 100vw;
+  }
+}

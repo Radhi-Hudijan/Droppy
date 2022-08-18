@@ -19,7 +19,7 @@ h2 {
   border-top-right-radius: 5px;
   z-index: 2;
   padding: 2px 5px;
-  box-shadow: -1px -1px 6px var(--highlight-light);
+  box-shadow: 0px 0px 2px var(--highlight-light);
   display: flex;
   align-items: center;
   gap: 5px;

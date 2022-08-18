@@ -3,18 +3,19 @@ import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import JobView from "./JobView";
+import Error from "../../components/Error/Error";
 
 const CreateJobController = () => {
   const navigate = useNavigate();
 
   const onSuccess = () => {
-    navigate("/", {
+    navigate("/dashboard", {
       replace: true,
     });
   };
 
   const { isLoading, error, performFetch, cancelFetch } = useFetch(
-    "/job/create",
+    "/jobs/create",
     onSuccess
   );
 
@@ -29,22 +30,16 @@ const CreateJobController = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        job: inputs,
+        job: { senderID: localStorage.getItem("userID"), ...inputs },
       }),
     });
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <div>There is an error as following:{error}</div>;
-  }
-
   return (
     <div>
       <JobView jobHandler={jobHandler} />
+      {isLoading && <Loading />}
+      {error != null && <Error error={error} />}
     </div>
   );
 };
