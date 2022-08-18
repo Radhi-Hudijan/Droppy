@@ -85,13 +85,13 @@ const JobDetails = () => {
   const acceptHandler = () => {
     isAccepted ? setIsAccepted(false) : setIsAccepted(true);
     performFetch({
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
         job: {
-          delivererIDs: [localStorage.getItem("userID")],
+          delivererID: localStorage.getItem("userID"),
         },
       }),
     });
@@ -271,7 +271,6 @@ const JobDetails = () => {
                 {!isAccepted && (
                   <Button
                     buttonClass="outline"
-                    path="/dashboard"
                     buttonHandler={acceptHandler}
                   >
                     Accept
