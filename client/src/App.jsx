@@ -17,6 +17,7 @@ import Notifier from "./components/Notifier";
 import JobDetails from "./pages/Job/JobDetails";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import UserInfoContext from "./context/UserInfoContext";
+import ProfilePage from "./pages/Profile/ProfilePage";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/jobs/create" element={<CreateJobController />} />
         )}
         {user && <Route path="/dashboard" element={<Dashboard />} />}
+        {user && <Route path="/profile/:id" element={<ProfilePage />} />}
       </Routes>
       <Footer />
     </motion.div>

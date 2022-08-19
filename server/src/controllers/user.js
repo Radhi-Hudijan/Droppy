@@ -14,6 +14,36 @@ export const getUsers = async (req, res) => {
   }
 };
 
+// Find One user
+export const getUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findOne({ _id: id });
+    res.status(200).json({
+      success: true,
+      result: {
+        firstName: user.name,
+        lastName: user.surname,
+        email: user.email,
+        vehicleInfo: {
+          phoneNo: user.vehicleInfo.contact,
+          plateNo: user.vehicleInfo.plate,
+          width: user.vehicleInfo.width,
+          length: user.vehicleInfo.length,
+          height: user.vehicleInfo.height,
+        },
+      },
+    });
+    console.log(user.result);
+    console.log("this was logged");
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get user, try again later" });
+  }
+};
+
 export const createUser = async (req, res) => {
   try {
     const { user } = req.body;
