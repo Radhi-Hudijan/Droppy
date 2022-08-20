@@ -34,8 +34,6 @@ export const getUser = async (req, res) => {
         },
       },
     });
-    console.log(user.result);
-    console.log("this was logged");
   } catch (error) {
     logError(error);
     res
