@@ -26,6 +26,11 @@
   width: 450px;
 }
 
+.DriverInfoDiv {
+  height: 200px;
+  margin-bottom: 50px;
+}
+
 .details {
   margin: auto;
   margin-top: 0;
@@ -82,6 +87,7 @@
   justify-content: center;
   align-items: center;
   margin: 20px auto;
+  margin-top: 0px;
 }
 
 .toggle p {
@@ -93,6 +99,7 @@
   justify-content: space-between;
   width: 300px;
   margin: 20px auto;
+  margin-bottom: 0px;
 }
 
 .singleButton {
@@ -101,6 +108,13 @@
 
 .singleButton svg {
   width: 17px;
+}
+
+.notYourProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
 }
 
 @media screen and (max-width: 740px) {
@@ -132,6 +146,7 @@
 
   .buttonDiv {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 200px;
     margin: 20px auto;
