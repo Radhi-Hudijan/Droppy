@@ -56,30 +56,26 @@ function Dashboard() {
               <button
                 className={
                   isClickedToAvailable
-                    ? `${style.button} ${style.buttonOutline}`
-                    : `${style.button}`
+                    ? `${style.button}`
+                    : `${style.button} ${style.buttonOutline}`
                 }
                 onClick={
-                  isDriver === "true"
-                    ? getAvailableJobsHandler
-                    : getActiveJobsHandler
+                  isDriver ? getAvailableJobsHandler : getActiveJobsHandler
                 }
               >
-                {isDriver === "true" ? "Available" : "Active"}
+                {isDriver ? "Available" : "Active"}
               </button>
             </div>
             <div className={style.buttonDiv}>
               <button
                 className={
                   isClickedToAvailable
-                    ? `${style.button}`
-                    : `${style.button} ${style.buttonOutline}`
+                    ? `${style.button} ${style.buttonOutline}`
+                    : `${style.button}`
                 }
-                onClick={
-                  isDriver === "true" ? getActiveJobsHandler : createJobHandler
-                }
+                onClick={isDriver ? getActiveJobsHandler : createJobHandler}
               >
-                {isDriver === "true" ? "Active" : "New"}
+                {isDriver ? "Active" : "New"}
               </button>
             </div>
           </div>

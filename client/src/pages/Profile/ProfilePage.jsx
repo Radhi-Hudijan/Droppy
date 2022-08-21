@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 // Icons
@@ -24,6 +24,7 @@ import Loading from "../../components/Loading/Loading";
 import DefaultProfilePhoto from "../../components/DefaultProfilePhoto";
 // Hook
 import useFetch from "../../hooks/useFetch";
+import NotifierContext from "../../context/NotifierContext";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState({
@@ -41,7 +42,9 @@ const ProfilePage = () => {
 
   const [isDriver, setIsDriver] = useState();
   const [isChecked, setIsChecked] = useState();
+  const [deleteHelper, setDeleteHelper] = useState(false);
   const { id } = useParams();
+  const { notifier } = useContext(NotifierContext);
 
   // Check if the user's ID matches the profile
   if (id !== localStorage.getItem("userID")) {
@@ -56,6 +59,7 @@ const ProfilePage = () => {
 
   const onSuccess = (onReceived) => {
     setUserDetails(onReceived.result);
+    notifier(onReceived.message);
   };
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
@@ -67,14 +71,15 @@ const ProfilePage = () => {
     localStorage.getItem("isDriver") === "true"
       ? setIsDriver(true)
       : setIsDriver(false);
-
-    performFetch({
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    return cancelFetch;
+    if (id === localStorage.getItem("userID")) {
+      performFetch({
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      return cancelFetch;
+    }
   }, [isChecked]);
 
   useEffect(() => {
@@ -105,6 +110,44 @@ const ProfilePage = () => {
     }
   };
 
+  let deletePrompt = (
+    <div className={style.deletePrompt}>
+      <p className={appStyle.h1Desktop}>
+        Are you sure you would like to delete your profile?
+      </p>
+      <div className={style.red}>
+        <p className={appStyle.bodyDesktop}>This action cannot be undone</p>
+      </div>
+
+      <div className={style.buttonDiv}>
+        <div className={style.singleButton}>
+          <Button path="/" buttonHandler={() => deleteProfile()}>
+            Delete
+          </Button>
+        </div>
+        <div className={style.singleButton}>
+          <Button buttonHandler={() => setDeleteHelper(false)}>Cancel</Button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const deleteHandler = () => {
+    setDeleteHelper(true);
+  };
+
+  const deleteProfile = () => {
+    performFetch({
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+
+    localStorage.clear();
+    window.reload();
+  };
+
   return (
     <div>
       <div className={style.ProfilePage}>
@@ -120,11 +163,12 @@ const ProfilePage = () => {
             </Button>
           </div>
           <div className={style.singleButton}>
-            <Button class="buttonBorder">
+            <Button class="buttonBorder" buttonHandler={deleteHandler}>
               <FontAwesomeIcon icon={faTrashCan} /> Delete
             </Button>
           </div>
         </div>
+        {deleteHelper ? deletePrompt : ""}
         <div className={style.toggle}>
           <p className={appStyle.boldBodyDesktop}>Driver mode</p>
           <Toggle isChecked={isChecked} handleToggle={handleToggle} />

@@ -53,8 +53,8 @@ function Signup() {
       <h1 className={appStyles.h1Desktop}>Sign up</h1>
       <NewUserForm onAddUser={addUserHandler} />
       {isLoading && <Loading />}
-      <div>
-        Already have an account? <Link to="/login">Log in here</Link>
+      <div className={appStyles.bodyDesktop}>
+        Already have an account? <Link to="/login">Log in</Link>
       </div>
 
       {error != null && <Error error={error} />}

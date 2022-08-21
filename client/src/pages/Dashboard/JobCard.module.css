@@ -53,8 +53,8 @@
 
 @media screen and (max-width: 740px) {
   .job-card {
-    width: 95%;
-    margin: 0px auto 5px;
+    width: 100%;
+    margin: 5px 0px;
     height: 110px;
   }
 }

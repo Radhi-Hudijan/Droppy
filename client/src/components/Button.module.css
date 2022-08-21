@@ -6,7 +6,7 @@
 
 .button {
   background: var(--highlight);
-  width: 100%;
+  min-width: 100%;
   max-width: 450px;
   height: 54px;
   border-radius: 5px;
@@ -74,7 +74,7 @@
   .button,
   .buttonBorder {
     max-width: 330px;
-    min-width: 330px;
+    /* min-width: 330px; */
     margin: 0px auto 20px;
   }
 }

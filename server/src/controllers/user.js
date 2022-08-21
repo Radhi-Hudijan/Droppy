@@ -42,6 +42,22 @@ export const getUser = async (req, res) => {
   }
 };
 
+// Delete One User
+export const deleteUser = async (req, res) => {
+  try {
+    await User.deleteOne({ _id: req.params.id });
+    res
+      .status(200)
+      .json({ success: true, message: "Profile was successfully deleted" });
+  } catch (error) {
+    logError(error);
+    res.status(500).json({
+      success: false,
+      message: "Unable to delete profile, try again later",
+    });
+  }
+};
+
 export const createUser = async (req, res) => {
   try {
     const { user } = req.body;

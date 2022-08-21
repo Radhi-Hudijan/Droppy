@@ -38,7 +38,7 @@ function DashboardActive() {
         <ul>
           {jobs ? (
             jobs.result?.jobs?.map((job, index) => (
-              <li key={index}>
+              <li className={style.jobCardContainer} key={index}>
                 <JobCard job={job} />
               </li>
             ))
