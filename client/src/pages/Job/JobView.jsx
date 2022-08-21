@@ -34,6 +34,16 @@ const JobView = ({ jobHandler }) => {
   return (
     <form className={styles.formClass} name="dropRequest" ref={form}>
       <h2 className={appStyles.h1Desktop}>Create a new drop request</h2>
+
+      <div className={styles.select}>
+        <select name="category" id="cars" onChange={changeHandler} required>
+          <option value="">--Please choose a Category--</option>
+          <option value="furniture">furniture</option>
+          <option value="electronics">Electronics</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
       <div className={styles.jobView}>
         <InputStyled
           name="item"
@@ -116,16 +126,19 @@ const JobView = ({ jobHandler }) => {
           multiline
           onChange={changeHandler}
         ></InputStyled>
-        <Button buttonClass="outline" path="/dashboard">
-          Cancel
-        </Button>
-        <Button
-          type="submit"
-          buttonHandler={submitHandler}
-          rest={{ form: "dropRequest" }}
-        >
-          Submit
-        </Button>
+
+        <div className={styles.sizes}>
+          <Button buttonClass="outline" path="/dashboard">
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            buttonHandler={submitHandler}
+            rest={{ form: "dropRequest" }}
+          >
+            Submit
+          </Button>
+        </div>
       </div>
     </form>
   );

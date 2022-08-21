@@ -40,6 +40,23 @@
   margin: auto;
 }
 
+.itemDiv h3 {
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 23px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.itemDiv img {
+  height: 80px;
+  display: block;
+  margin: 5px auto;
+  padding: 0.2rem;
+}
+
 .fromToDiv {
   width: 30%;
   display: flex;
@@ -56,5 +73,10 @@
     width: 95%;
     margin: 0px auto 5px;
     height: 110px;
+  }
+
+  .itemDiv img {
+    height: 60px;
+    margin: 0 auto;
   }
 }
