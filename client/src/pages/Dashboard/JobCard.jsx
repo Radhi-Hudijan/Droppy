@@ -2,9 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import style from "./JobCard.module.css";
+import Furniture from "../../assets/icons/furniture.svg";
+import Devices from "../../assets/icons/devices.svg";
+import BoxDelivery from "../../assets/icons/boxDelivery.svg";
 
 function JobCard({ job }) {
-  const { item, fromPostCode, toPostCode, date, width, height, length } = job;
+  const {
+    fromPostCode,
+    toPostCode,
+    date,
+    width,
+    height,
+    length,
+    category,
+    item,
+  } = job;
   const navigate = useNavigate();
 
   function toDetail(e) {
@@ -17,6 +29,18 @@ function JobCard({ job }) {
   return (
     <div className={style["job-card"]} onClick={toDetail}>
       <div className={style.itemDiv}>
+        <img
+          src={
+            category === "FURNITURE"
+              ? Furniture
+              : category === "ELECTRONICS"
+              ? Devices
+              : BoxDelivery
+          }
+        />
+        <h3>{category}</h3>
+      </div>
+      <div className={style.item}>
         <h3>{item}</h3>
       </div>
       <div className={style.fromToDiv}>

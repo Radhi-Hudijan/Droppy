@@ -37,6 +37,7 @@ const JobDetails = () => {
     length: "",
     date: "",
     phoneNo: "",
+    category: "",
   });
   const form = React.useRef();
   const { id } = useParams();
@@ -154,6 +155,20 @@ const JobDetails = () => {
       <h2 className={appStyles.h1Desktop}>Job Details</h2>
       {jobDetails.item && (
         <form className={styles.formClass} name="dropRequest" ref={form}>
+          <div className={styles.select}>
+            <select
+              name="category"
+              disabled={isLocked}
+              onChange={changeHandler}
+              required
+            >
+              <option value="">{jobDetails.category}</option>
+              <option value="FURNITURE">furniture</option>
+              <option value="ELECTRONICS">Electronics</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+
           <div className={styles.jobView}>
             <InputStyled
               name="item"
