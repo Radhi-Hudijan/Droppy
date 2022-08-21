@@ -18,7 +18,7 @@ const Toggle = (props) => {
 };
 
 Toggle.propTypes = {
-  isChecked: PropTypes.object.isRequired,
+  isChecked: PropTypes.bool,
   handleToggle: PropTypes.func.isRequired,
 };
 export default Toggle;

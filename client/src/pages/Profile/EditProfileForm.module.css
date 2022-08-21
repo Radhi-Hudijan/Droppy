@@ -1,0 +1,82 @@
+.editProfileForm {
+  width: 450px;
+  margin: auto;
+}
+
+.singleButton {
+  width: 450px;
+}
+
+.inputDiv {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid var(--highlight);
+  border-radius: 5px;
+  background-color: var(--beige);
+  color: var(--font-dark);
+  width: 450px;
+  height: 54px;
+  margin-bottom: 20px;
+  margin-top: 3px;
+}
+
+.inputDiv svg,
+.inputDimension svg {
+  margin: 0px 10px 0px 15px;
+}
+
+.inputDiv input {
+  border: none;
+  background-color: transparent;
+}
+
+.inputDiv input:focus,
+.inputDimension input:focus {
+  outline: none;
+}
+
+.dimensionsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dimensionDiv {
+  width: 130px;
+}
+
+.inputDimension {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid var(--highlight);
+  border-radius: 5px;
+  background-color: var(--beige);
+  color: var(--font-dark);
+  height: 54px;
+  margin-bottom: 20px;
+  margin-top: 3px;
+}
+
+.inputDimension input {
+  border: none;
+  background-color: transparent;
+  width: 60px;
+}
+
+@media screen and (max-width: 740px) {
+  .editProfileForm,
+  .inputDiv,
+  .singleButton {
+    width: 330px;
+  }
+
+  .dimensionDiv {
+    width: 100px;
+  }
+  .inputDimension input {
+    border: none;
+    background-color: transparent;
+    width: 30px;
+  }
+}

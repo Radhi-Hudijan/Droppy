@@ -25,8 +25,26 @@ import DefaultProfilePhoto from "../../components/DefaultProfilePhoto";
 // Hook
 import useFetch from "../../hooks/useFetch";
 import NotifierContext from "../../context/NotifierContext";
+import EditProfileForm from "./EditProfileForm";
+import UserInfoContext from "../../context/UserInfoContext";
 
 const ProfilePage = () => {
+  const { setEmail, setName, setSurname, setVehicleInfo } =
+    useContext(UserInfoContext);
+
+  const newUserDetails = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    vehicleInfo: {
+      phoneNo: "",
+      plateNo: "",
+      width: "",
+      length: "",
+      height: "",
+    },
+  };
+
   const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
@@ -43,6 +61,7 @@ const ProfilePage = () => {
   const [isDriver, setIsDriver] = useState();
   const [isChecked, setIsChecked] = useState();
   const [deleteHelper, setDeleteHelper] = useState(false);
+  const [editHelper, setEditHelper] = useState(false);
   const { id } = useParams();
   const { notifier } = useContext(NotifierContext);
 
@@ -58,8 +77,19 @@ const ProfilePage = () => {
   }
 
   const onSuccess = (onReceived) => {
-    setUserDetails(onReceived.result);
+    if (userDetails.email === "") {
+      setUserDetails(onReceived.result);
+    }
+
+    if (!editHelper) {
+      setName(newUserDetails.firstName);
+      setSurname(newUserDetails.lastName);
+      setEmail(newUserDetails.email);
+      setVehicleInfo(newUserDetails.vehicleInfo);
+    }
+
     notifier(onReceived.message);
+    setEditHelper(false);
   };
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
@@ -146,11 +176,34 @@ const ProfilePage = () => {
 
     localStorage.clear();
     window.reload();
+    return cancelFetch;
+  };
+
+  const editHandler = () => {
+    editHelper ? setEditHelper(false) : setEditHelper(true);
+  };
+
+  const editUserHandler = (user) => {
+    newUserDetails.firstName = user.firstName;
+    newUserDetails.lastName = user.lastName;
+    newUserDetails.email = user.email;
+    newUserDetails.vehicleInfo = user.vehicleInfo;
+
+    performFetch({
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ user }),
+    });
+
+    setEditHelper(false);
+    return cancelFetch;
   };
 
   return (
     <div>
-      <div className={style.ProfilePage}>
+      <div className={style.profilePage}>
         <div className={style.topBar}></div>
         <div className={style.userDefault}>
           <h2 className={appStyle.h2Desktop}>Profile</h2>
@@ -158,8 +211,8 @@ const ProfilePage = () => {
         </div>
         <div className={style.buttonDiv}>
           <div className={style.singleButton}>
-            <Button>
-              <FontAwesomeIcon icon={faPen} /> Edit
+            <Button buttonHandler={editHandler}>
+              <FontAwesomeIcon icon={faPen} /> {!editHelper ? "Edit" : "Cancel"}
             </Button>
           </div>
           <div className={style.singleButton}>
@@ -174,92 +227,102 @@ const ProfilePage = () => {
           <Toggle isChecked={isChecked} handleToggle={handleToggle} />
         </div>
         <div>
-          <div className={style.allDetails}>
-            <div className={style.userInfo}>
-              <div className={style.details}>
-                <h5 className={appStyle.boldBodyDesktop}>Personal Details</h5>
-              </div>
-              <div className={style.infoLine}>
-                <FontAwesomeIcon icon={faUser} />
-                <p className={appStyle.bodyDesktop}>First Name: </p>
-                <div className={style.results}>
-                  <p className={appStyle.bodyDesktop}>
-                    {userDetails.firstName}
-                  </p>
+          {!editHelper && (
+            <div className={style.allDetails}>
+              <div className={style.userInfo}>
+                <div className={style.details}>
+                  <h5 className={appStyle.boldBodyDesktop}>Personal Details</h5>
+                </div>
+                <div className={style.infoLine}>
+                  <FontAwesomeIcon icon={faUser} />
+                  <p className={appStyle.bodyDesktop}>First Name: </p>
+                  <div className={style.results}>
+                    <p className={appStyle.bodyDesktop}>
+                      {userDetails.firstName}
+                    </p>
+                  </div>
+                </div>
+                <div className={style.infoLine}>
+                  <FontAwesomeIcon icon={faUser} />
+                  <p className={appStyle.bodyDesktop}>Last Name: </p>
+                  <div className={style.results}>
+                    <p className={appStyle.bodyDesktop}>
+                      {userDetails.lastName}
+                    </p>
+                  </div>
+                </div>
+                <div className={style.infoLine}>
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  <p className={appStyle.bodyDesktop}>Email: </p>
+                  <div className={style.results}>
+                    <p className={appStyle.bodyDesktop}>{userDetails.email}</p>
+                  </div>
                 </div>
               </div>
-              <div className={style.infoLine}>
-                <FontAwesomeIcon icon={faUser} />
-                <p className={appStyle.bodyDesktop}>Last Name: </p>
-                <div className={style.results}>
-                  <p className={appStyle.bodyDesktop}>{userDetails.lastName}</p>
-                </div>
-              </div>
-              <div className={style.infoLine}>
-                <FontAwesomeIcon icon={faEnvelope} />
-                <p className={appStyle.bodyDesktop}>Email: </p>
-                <div className={style.results}>
-                  <p className={appStyle.bodyDesktop}>{userDetails.email}</p>
-                </div>
+              <div className={style.DriverInfoDiv}>
+                {isDriver && (
+                  <div className={style.driverInfo}>
+                    <div className={style.details}>
+                      <h5 className={appStyle.boldBodyDesktop}>
+                        Vehicle Details
+                      </h5>
+                    </div>
+                    <div className={style.infoLine}>
+                      <FontAwesomeIcon icon={faPhone} />
+                      <p className={appStyle.bodyDesktop}>Phone: </p>
+                      <div className={style.results}>
+                        <p className={appStyle.bodyDesktop}>
+                          {userDetails.vehicleInfo.phoneNo}
+                        </p>
+                      </div>
+                    </div>
+                    <div className={style.infoLine}>
+                      <FontAwesomeIcon icon={faCar} />
+                      <p className={appStyle.bodyDesktop}>Plate Number: </p>
+                      <div className={style.results}>
+                        <p className={appStyle.bodyDesktop}>
+                          {userDetails.vehicleInfo.plateNo}
+                        </p>
+                      </div>
+                    </div>
+                    <div className={style.infoLine}>
+                      <FontAwesomeIcon icon={faRuler} />
+                      <p className={appStyle.bodyDesktop}>Width: </p>
+                      <div className={style.results}>
+                        <p className={appStyle.bodyDesktop}>
+                          {userDetails.vehicleInfo.width}
+                        </p>
+                      </div>
+                    </div>
+                    <div className={style.infoLine}>
+                      <FontAwesomeIcon icon={faRuler} />
+                      <p className={appStyle.bodyDesktop}>Height: </p>
+                      <div className={style.results}>
+                        <p className={appStyle.bodyDesktop}>
+                          {userDetails.vehicleInfo.height}
+                        </p>
+                      </div>
+                    </div>
+                    <div className={style.infoLine}>
+                      <FontAwesomeIcon icon={faRuler} />
+                      <p className={appStyle.bodyDesktop}>Length: </p>
+                      <div className={style.results}>
+                        <p className={appStyle.bodyDesktop}>
+                          {userDetails.vehicleInfo.length}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-            <div className={style.DriverInfoDiv}>
-              {isDriver && (
-                <div className={style.driverInfo}>
-                  <div className={style.details}>
-                    <h5 className={appStyle.boldBodyDesktop}>
-                      Vehicle Details
-                    </h5>
-                  </div>
-                  <div className={style.infoLine}>
-                    <FontAwesomeIcon icon={faPhone} />
-                    <p className={appStyle.bodyDesktop}>Phone: </p>
-                    <div className={style.results}>
-                      <p className={appStyle.bodyDesktop}>
-                        {userDetails.vehicleInfo.phoneNo}
-                      </p>
-                    </div>
-                  </div>
-                  <div className={style.infoLine}>
-                    <FontAwesomeIcon icon={faCar} />
-                    <p className={appStyle.bodyDesktop}>Plate Number: </p>
-                    <div className={style.results}>
-                      <p className={appStyle.bodyDesktop}>
-                        {userDetails.vehicleInfo.plateNo}
-                      </p>
-                    </div>
-                  </div>
-                  <div className={style.infoLine}>
-                    <FontAwesomeIcon icon={faRuler} />
-                    <p className={appStyle.bodyDesktop}>Width: </p>
-                    <div className={style.results}>
-                      <p className={appStyle.bodyDesktop}>
-                        {userDetails.vehicleInfo.width}
-                      </p>
-                    </div>
-                  </div>
-                  <div className={style.infoLine}>
-                    <FontAwesomeIcon icon={faRuler} />
-                    <p className={appStyle.bodyDesktop}>Height: </p>
-                    <div className={style.results}>
-                      <p className={appStyle.bodyDesktop}>
-                        {userDetails.vehicleInfo.height}
-                      </p>
-                    </div>
-                  </div>
-                  <div className={style.infoLine}>
-                    <FontAwesomeIcon icon={faRuler} />
-                    <p className={appStyle.bodyDesktop}>Length: </p>
-                    <div className={style.results}>
-                      <p className={appStyle.bodyDesktop}>
-                        {userDetails.vehicleInfo.length}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          )}
+          {editHelper && (
+            <EditProfileForm
+              user={userDetails}
+              onSaveDetails={editUserHandler}
+            />
+          )}
         </div>
         {statusbar}
       </div>

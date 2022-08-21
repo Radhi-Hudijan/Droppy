@@ -1,10 +1,12 @@
+.profilePage {
+  margin-bottom: 50px;
+}
+
 .allDetails {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* margin-right: -20px !important; */
-  /* width: 50vw; */
   margin: auto;
 }
 
@@ -36,7 +38,6 @@
   margin-top: 0;
   margin-bottom: 0;
   margin-left: -5px;
-  /* padding-left: 8px; */
   padding: 5px 0px 5px 20px;
   background-color: var(--highlight);
   color: var(--font-light);
@@ -136,12 +137,8 @@
 .red {
   color: red;
 }
-@media screen and (max-width: 740px) {
-  .profilePage {
-    max-width: 90vw;
-    padding: 10px;
-  }
 
+@media screen and (max-width: 740px) {
   .allDetails {
     flex-direction: column;
     width: 100vw;
@@ -173,6 +170,10 @@
 
   .deletePrompt {
     width: 90%;
+  }
+
+  .toggle {
+    margin-bottom: 0px;
   }
 }
 

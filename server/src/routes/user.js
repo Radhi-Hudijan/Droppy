@@ -5,6 +5,7 @@ import {
   addCar,
   getUser,
   deleteUser,
+  updateUser,
 } from "../controllers/user.js";
 
 const userRouter = express.Router();
@@ -18,5 +19,7 @@ userRouter.patch("/create/add-car", addCar);
 userRouter.get("/:id", getUser);
 
 userRouter.delete("/:id", deleteUser);
+
+userRouter.patch("/:id", updateUser);
 
 export default userRouter;
