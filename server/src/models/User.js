@@ -36,4 +36,13 @@ export const validateUser = (data) => {
   return schema.validate(data);
 };
 
+export const validateUserUpdate = (data) => {
+  const schema = Joi.object({
+    email: Joi.string().email().required().label("email"),
+    name: Joi.string().required().label("Name"),
+    surname: Joi.string().required().label("Surname"),
+  });
+  return schema.validate(data);
+};
+
 export default User;

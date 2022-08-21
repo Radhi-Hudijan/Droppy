@@ -1,4 +1,4 @@
-import User, { validateUser } from "../models/User.js";
+import User, { validateUser, validateUserUpdate } from "../models/User.js";
 import { logError } from "../util/logging.js";
 import bcrypt from "bcrypt";
 
@@ -65,6 +65,10 @@ export const updateUser = async (req, res) => {
     user.vehicleInfo = req.body.user.vehicleInfo
       ? req.body.user.vehicleInfo
       : user.vehicleInfo;
+    user.password = req.body.user.password
+      ? req.body.user.password
+      : user.password;
+
     // job.width = req.body.job.width ? req.body.job.width : job.width;
     // job.height = req.body.job.height ? req.body.job.height : job.height;
     // job.date = req.body.job.date ? req.body.job.date : job.date;
@@ -79,6 +83,7 @@ export const updateUser = async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       vehicleInfo: user.vehicleInfo,
+      password: user.password,
       // width: user.width,
       // height: user.height,
       // length: user["length"],
@@ -86,7 +91,7 @@ export const updateUser = async (req, res) => {
       // phoneNo: user.phoneNo,
       // senderID: user.senderID,
     };
-    const { error } = validateUser(userToValidate);
+    const { error } = validateUserUpdate(userToValidate);
     if (error) {
       return res.status(400).send({
         message: `${error.details[0].path} field fails to match the required pattern`,
