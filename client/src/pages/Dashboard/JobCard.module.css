@@ -35,6 +35,11 @@
   padding-right: 30px;
 }
 
+.item {
+  width: 30%;
+  margin: auto;
+}
+
 .itemDiv {
   width: 30%;
   margin: auto;

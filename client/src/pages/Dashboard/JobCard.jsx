@@ -7,8 +7,16 @@ import Devices from "../../assets/icons/devices.svg";
 import BoxDelivery from "../../assets/icons/boxDelivery.svg";
 
 function JobCard({ job }) {
-  const { fromPostCode, toPostCode, date, width, height, length, category } =
-    job;
+  const {
+    fromPostCode,
+    toPostCode,
+    date,
+    width,
+    height,
+    length,
+    category,
+    item,
+  } = job;
   const navigate = useNavigate();
 
   function toDetail(e) {
@@ -31,6 +39,9 @@ function JobCard({ job }) {
           }
         />
         <h3>{category}</h3>
+      </div>
+      <div className={style.item}>
+        <h3>{item}</h3>
       </div>
       <div className={style.fromToDiv}>
         <h5>From: {fromPostCode}</h5>
