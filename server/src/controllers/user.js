@@ -22,12 +22,12 @@ export const getUser = async (req, res) => {
     res.status(200).json({
       success: true,
       result: {
-        firstName: user.name,
-        lastName: user.surname,
+        name: user.name,
+        surname: user.surname,
         email: user.email,
         vehicleInfo: {
-          phoneNo: user.vehicleInfo.contact,
-          plateNo: user.vehicleInfo.plate,
+          contact: user.vehicleInfo.contact,
+          plate: user.vehicleInfo.plate,
           width: user.vehicleInfo.width,
           length: user.vehicleInfo.length,
           height: user.vehicleInfo.height,
@@ -53,12 +53,12 @@ export const updateUser = async (req, res) => {
       });
     }
 
-    user.firstName = req.body.user.firstName
-      ? makeFirstLetterUpper(req.body.user.firstName)
-      : user.firstName;
-    user.lastName = req.body.user.lastName
-      ? makeFirstLetterUpper(req.body.user.lastName)
-      : user.lastName;
+    user.name = req.body.user.name
+      ? makeFirstLetterUpper(req.body.user.name)
+      : user.name;
+    user.surname = req.body.user.surname
+      ? makeFirstLetterUpper(req.body.user.surname)
+      : user.surname;
     user.email = req.body.user.email
       ? req.body.user.email.toLowerCase()
       : user.email;
@@ -69,32 +69,17 @@ export const updateUser = async (req, res) => {
       ? req.body.user.password
       : user.password;
 
-    // job.width = req.body.job.width ? req.body.job.width : job.width;
-    // job.height = req.body.job.height ? req.body.job.height : job.height;
-    // job.date = req.body.job.date ? req.body.job.date : job.date;
-    // job["length"] = req.body.job["length"]
-    //   ? req.body.job["length"]
-    //   : job["length"];
-    // job.phoneNo = req.body.job.phoneNo ? req.body.job.phoneNo : job.phoneNo;
-    // job.senderID = req.body.job.senderID ? req.body.job.senderID : job.senderID;
-
     const userToValidate = {
-      firstName: user.firstName,
-      lastName: user.lastName,
+      name: user.name,
+      surname: user.surname,
       email: user.email,
-      vehicleInfo: user.vehicleInfo,
-      password: user.password,
-      // width: user.width,
-      // height: user.height,
-      // length: user["length"],
-      // date: user.date,
-      // phoneNo: user.phoneNo,
-      // senderID: user.senderID,
     };
+
+    console.log(req.body);
     const { error } = validateUserUpdate(userToValidate);
     if (error) {
       return res.status(400).send({
-        message: `${error.details[0].path} field fails to match the required pattern`,
+        message: `${error.details[0].message} field fails to match the required pattern`,
       });
     }
     await user.save();

@@ -33,12 +33,12 @@ const ProfilePage = () => {
     useContext(UserInfoContext);
 
   const newUserDetails = {
-    firstName: "",
-    lastName: "",
+    name: "",
+    surname: "",
     email: "",
     vehicleInfo: {
-      phoneNo: "",
-      plateNo: "",
+      contact: "",
+      plate: "",
       width: "",
       length: "",
       height: "",
@@ -46,12 +46,12 @@ const ProfilePage = () => {
   };
 
   const [userDetails, setUserDetails] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+    surname: "",
     email: "",
     vehicleInfo: {
-      phoneNo: "",
-      plateNo: "",
+      contact: "",
+      plate: "",
       width: "",
       length: "",
       height: "",
@@ -110,7 +110,7 @@ const ProfilePage = () => {
       });
       return cancelFetch;
     }
-  }, [isChecked]);
+  }, [isChecked, userDetails]);
 
   useEffect(() => {
     isDriver ? setIsChecked(true) : setIsChecked(false);
@@ -184,8 +184,8 @@ const ProfilePage = () => {
   };
 
   const editUserHandler = (user) => {
-    newUserDetails.firstName = user.firstName;
-    newUserDetails.lastName = user.lastName;
+    newUserDetails.name = user.name;
+    newUserDetails.surname = user.surname;
     newUserDetails.email = user.email;
     newUserDetails.vehicleInfo = user.vehicleInfo;
 
@@ -198,7 +198,6 @@ const ProfilePage = () => {
     });
 
     setEditHelper(false);
-    return cancelFetch;
   };
 
   return (
@@ -237,9 +236,7 @@ const ProfilePage = () => {
                   <FontAwesomeIcon icon={faUser} />
                   <p className={appStyle.bodyDesktop}>First Name: </p>
                   <div className={style.results}>
-                    <p className={appStyle.bodyDesktop}>
-                      {userDetails.firstName}
-                    </p>
+                    <p className={appStyle.bodyDesktop}>{userDetails.name}</p>
                   </div>
                 </div>
                 <div className={style.infoLine}>
@@ -247,7 +244,7 @@ const ProfilePage = () => {
                   <p className={appStyle.bodyDesktop}>Last Name: </p>
                   <div className={style.results}>
                     <p className={appStyle.bodyDesktop}>
-                      {userDetails.lastName}
+                      {userDetails.surname}
                     </p>
                   </div>
                 </div>
@@ -272,7 +269,7 @@ const ProfilePage = () => {
                       <p className={appStyle.bodyDesktop}>Phone: </p>
                       <div className={style.results}>
                         <p className={appStyle.bodyDesktop}>
-                          {userDetails.vehicleInfo.phoneNo}
+                          {userDetails.vehicleInfo.contact}
                         </p>
                       </div>
                     </div>
@@ -281,7 +278,7 @@ const ProfilePage = () => {
                       <p className={appStyle.bodyDesktop}>Plate Number: </p>
                       <div className={style.results}>
                         <p className={appStyle.bodyDesktop}>
-                          {userDetails.vehicleInfo.plateNo}
+                          {userDetails.vehicleInfo.plate}
                         </p>
                       </div>
                     </div>

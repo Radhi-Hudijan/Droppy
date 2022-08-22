@@ -39,13 +39,15 @@ export default function EditProfileForm(props) {
 
     const userData = {
       email: enteredEmail,
-      firstName: enteredName,
-      lastName: enteredSurname,
-      phoneNo: enteredPhoneNo,
-      plateNo: enteredPlateNo,
-      width: enteredWidth,
-      length: enteredHeight,
-      height: enteredLength,
+      name: enteredName,
+      surname: enteredSurname,
+      vehicleInfo: {
+        contact: enteredPhoneNo,
+        plate: enteredPlateNo,
+        width: enteredWidth,
+        length: enteredHeight,
+        height: enteredLength,
+      },
     };
     props.onSaveDetails(userData);
   }
@@ -68,7 +70,7 @@ export default function EditProfileForm(props) {
                 id="name"
                 pattern="^[a-zA-Z0-9\s,-]{3,50}"
                 ref={nameInputRef}
-                defaultValue={props.user.firstName}
+                defaultValue={props.user.name}
                 aria-label="name"
                 placeholder="John"
                 className={appStyle.bodyDesktop}
@@ -85,7 +87,7 @@ export default function EditProfileForm(props) {
                 id="surname"
                 pattern="^[a-zA-Z0-9\s,-]{3,50}"
                 ref={surnameInputRef}
-                defaultValue={props.user.lastName}
+                defaultValue={props.user.surname}
                 aria-label="surname"
                 placeholder="Doe"
                 className={appStyle.bodyDesktop}
@@ -124,7 +126,7 @@ export default function EditProfileForm(props) {
                   ref={phoneNoInputRef}
                   id="contact"
                   aria-label="contact info"
-                  defaultValue={props.user.vehicleInfo.phoneNo}
+                  defaultValue={props.user.vehicleInfo.contact}
                   placeholder="0612345678"
                   data-err="Please enter a phone number like 0612345678"
                   pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
@@ -147,7 +149,7 @@ export default function EditProfileForm(props) {
                   required
                   aria-label="plate number"
                   placeholder="NL-01-AB"
-                  defaultValue={props.user.vehicleInfo.plateNo}
+                  defaultValue={props.user.vehicleInfo.plate}
                   className={appStyle.bodyDesktop}
                   // value={allInputs.plate}
                 />
@@ -232,7 +234,7 @@ export default function EditProfileForm(props) {
         {!addCar && (
           <div className={style.singleButton}>
             <Button buttonHandler={addCarHandler} class="buttonBorder">
-              {!props.user.vehicleInfo.phoneNo
+              {!props.user.vehicleInfo.contact
                 ? "Add car details"
                 : "Edit car details"}
             </Button>
@@ -247,6 +249,6 @@ export default function EditProfileForm(props) {
 }
 
 EditProfileForm.propTypes = {
-  onSaveDetails: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
+  onSaveDetails: PropTypes.func,
+  user: PropTypes.object,
 };
