@@ -3,11 +3,13 @@ import {
   createJob,
   deleteJob,
   updateJob,
+  acceptCancelJob,
+} from "../controllers/job.js";
+import {
   getActiveJobs,
   getAllJobs,
   getOneJob,
-  acceptCancelJob,
-} from "../controllers/job.js";
+} from "../controllers/getJobs.js";
 
 const jobRouter = express.Router();
 
