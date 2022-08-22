@@ -1,5 +1,4 @@
 import Job, { validateJob } from "../models/Job.js";
-// import User from "../models/User.js";
 import { logError } from "../util/logging.js";
 
 export const deleteJob = async (req, res) => {

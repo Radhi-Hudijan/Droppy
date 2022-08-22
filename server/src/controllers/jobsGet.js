@@ -94,3 +94,38 @@ export const getActiveJobs = async (req, res) => {
       .json({ success: false, message: "Unable to get jobs, try again later" });
   }
 };
+
+export const getJobsByFilter = async (req, res) => {
+  const page = req.query.page || 1;
+  // const size = req.query.size || true;
+  // const dateStart = req.query.dateStart || new Date();
+  // const dateEnd = req.query.dateEnd;
+  // const category = req.query.category || true;
+
+  // Put all your query params in here
+  const query = { ...req.query };
+
+  const skip = (page - 1) * ITEMS_PER_PAGE;
+  try {
+    const count = await Job.countDocuments(query);
+
+    // await Job.deleteMany();
+    const jobs = await Job.find(query)
+      .sort({ date: 1 })
+      .limit(ITEMS_PER_PAGE)
+      .skip(skip);
+
+    const pageCount = Math.ceil(count / ITEMS_PER_PAGE);
+
+    res.status(200).json({
+      success: true,
+      result: { jobs, pagination: { count, pageCount } },
+      message: "The job is brought successfully",
+    });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, message: "Unable to get jobs, try again later" });
+  }
+};

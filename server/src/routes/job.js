@@ -4,12 +4,12 @@ import {
   deleteJob,
   updateJob,
   acceptCancelJob,
-} from "../controllers/job.js";
+} from "../controllers/jobsManipulating.js";
 import {
   getActiveJobs,
   getAllJobs,
   getOneJob,
-} from "../controllers/getJobs.js";
+} from "../controllers/jobsGet.js";
 
 const jobRouter = express.Router();
 
