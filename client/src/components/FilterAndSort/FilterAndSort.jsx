@@ -6,6 +6,7 @@ import { useContext } from "react";
 
 function FilterAndSort() {
   const [categories, setCategories] = useState([]);
+  const [inputs, setInputs] = useState({});
   const { setQueries } = useContext(QueriesContext);
 
   const onSuccess = (onReceived) => {
@@ -28,15 +29,19 @@ function FilterAndSort() {
     const el = e.target;
     const name = el.name;
     const value = el.value;
-    setQueries((values) => ({ ...values, [name]: value.toUpperCase() }));
+    setInputs((values) => ({ ...values, [name]: value.toUpperCase() }));
+  };
+
+  const filterHandler = () => {
+    setQueries(inputs);
   };
 
   return (
     <div className={style.filters}>
       <div className={style.categories}>
         <h5>Categories</h5>
-        <select name="category">
-          <option value="">Category</option>
+        <select name="category" onChange={changeHandler}>
+          <option value="">All</option>
           {categories.map((category, i) => (
             <option key={i} value={category}>
               {category}
@@ -45,7 +50,7 @@ function FilterAndSort() {
         </select>
       </div>
       <div className={style.size}>
-        <h5>Size</h5>
+        <h5>Size (cm)</h5>
         <input
           name="width"
           className={style.whl}
@@ -71,7 +76,7 @@ function FilterAndSort() {
         />
       </div>
       <div className={style.date}>
-        <div className="dates">
+        <div className={style.dates}>
           <h5>Date Start</h5>
           <input
             name="dateStart"
@@ -80,7 +85,7 @@ function FilterAndSort() {
             onChange={changeHandler}
           ></input>
         </div>
-        <div className="dates">
+        <div className={style.dates}>
           <h5>Date End</h5>
           <input
             name="dateEnd"
@@ -89,6 +94,9 @@ function FilterAndSort() {
             onChange={changeHandler}
           ></input>
         </div>
+      </div>
+      <div className={style["btn-filter"]}>
+        <button onClick={filterHandler}>Filter</button>
       </div>
     </div>
   );
