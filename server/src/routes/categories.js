@@ -3,7 +3,7 @@ import { logError } from "../util/logging.js";
 
 const categoriesRouter = express.Router();
 
-const categories = ["Electronics", "Furniture", "Other"];
+export const categories = ["Electronics", "Furniture", "Other"];
 
 const getCategories = async (req, res) => {
   try {
