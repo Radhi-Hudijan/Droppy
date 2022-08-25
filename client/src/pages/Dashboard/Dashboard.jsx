@@ -3,6 +3,7 @@ import style from "./Dashboard.module.css";
 import { useNavigate } from "react-router-dom";
 import DashboardActive from "./DashboardActive";
 import DashboardAvailable from "./DashboardAvailable";
+import FilterAndSort from "../../components/FilterAndSort/FilterAndSort";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -71,6 +72,7 @@ function Dashboard() {
               </button>
             </div>
           </div>
+          <FilterAndSort />
           {pageToShow}
         </div>
       </div>
