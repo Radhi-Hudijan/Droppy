@@ -75,7 +75,6 @@ export const updateUser = async (req, res) => {
       email: user.email,
     };
 
-    console.log(req.body);
     const { error } = validateUserUpdate(userToValidate);
     if (error) {
       return res.status(400).send({

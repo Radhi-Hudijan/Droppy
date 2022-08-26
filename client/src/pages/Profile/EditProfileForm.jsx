@@ -31,11 +31,11 @@ export default function EditProfileForm(props) {
     const enteredEmail = emailInputRef.current.value;
     const enteredName = nameInputRef.current.value;
     const enteredSurname = surnameInputRef.current.value;
-    const enteredPhoneNo = phoneNoInputRef.current.value;
-    const enteredPlateNo = plateNoInputRef.current.value;
-    const enteredWidth = widthInputRef.current.value;
-    const enteredHeight = heightInputRef.current.value;
-    const enteredLength = lengthInputRef.current.value;
+    const enteredPhoneNo = addCar ? phoneNoInputRef.current.value : "";
+    const enteredPlateNo = addCar ? plateNoInputRef.current.value : "";
+    const enteredWidth = addCar ? widthInputRef.current.value : "";
+    const enteredHeight = addCar ? heightInputRef.current.value : "";
+    const enteredLength = addCar ? lengthInputRef.current.value : "";
 
     const userData = {
       email: enteredEmail,
@@ -45,8 +45,8 @@ export default function EditProfileForm(props) {
         contact: enteredPhoneNo,
         plate: enteredPlateNo,
         width: enteredWidth,
-        length: enteredHeight,
-        height: enteredLength,
+        length: enteredLength,
+        height: enteredHeight,
       },
     };
     props.onSaveDetails(userData);

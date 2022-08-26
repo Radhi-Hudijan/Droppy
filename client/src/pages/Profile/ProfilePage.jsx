@@ -32,19 +32,6 @@ const ProfilePage = () => {
   const { setEmail, setName, setSurname, setVehicleInfo } =
     useContext(UserInfoContext);
 
-  const newUserDetails = {
-    name: "",
-    surname: "",
-    email: "",
-    vehicleInfo: {
-      contact: "",
-      plate: "",
-      width: "",
-      length: "",
-      height: "",
-    },
-  };
-
   const [userDetails, setUserDetails] = useState({
     name: "",
     surname: "",
@@ -59,6 +46,7 @@ const ProfilePage = () => {
   });
 
   const [isDriver, setIsDriver] = useState();
+  const [hasDriverDetails, setHasDriverDetails] = useState(false);
   const [isChecked, setIsChecked] = useState();
   const [deleteHelper, setDeleteHelper] = useState(false);
   const [editHelper, setEditHelper] = useState(false);
@@ -77,18 +65,38 @@ const ProfilePage = () => {
   }
 
   const onSuccess = (onReceived) => {
+    notifier(onReceived.message);
+    onReceived.result.vehicleInfo.contact
+      ? setHasDriverDetails(true)
+      : setHasDriverDetails(false);
+
     if (userDetails.email === "") {
       setUserDetails(onReceived.result);
     }
 
     if (!editHelper) {
-      setName(newUserDetails.firstName);
-      setSurname(newUserDetails.lastName);
-      setEmail(newUserDetails.email);
-      setVehicleInfo(newUserDetails.vehicleInfo);
+      setName(userDetails.name);
+      setSurname(userDetails.surname);
+      setEmail(userDetails.email);
+      if (
+        userDetails.vehicleInfo.contact ||
+        userDetails.vehicleInfo.plate ||
+        userDetails.vehicleInfo.width ||
+        userDetails.vehicleInfo.height ||
+        userDetails.vehicleInfo.length
+      ) {
+        setVehicleInfo(userDetails.vehicleInfo);
+      } else {
+        setVehicleInfo({
+          contact: "",
+          plate: "",
+          width: "",
+          length: "",
+          height: "",
+        });
+      }
     }
 
-    notifier(onReceived.message);
     setEditHelper(false);
   };
 
@@ -183,18 +191,22 @@ const ProfilePage = () => {
     editHelper ? setEditHelper(false) : setEditHelper(true);
   };
 
-  const editUserHandler = (user) => {
-    newUserDetails.name = user.name;
-    newUserDetails.surname = user.surname;
-    newUserDetails.email = user.email;
-    newUserDetails.vehicleInfo = user.vehicleInfo;
+  const editUserHandler = (userData) => {
+    userData.vehicleInfo.contact
+      ? setUserDetails(userData)
+      : setUserDetails({
+          ...userDetails,
+          name: userData.name,
+          surname: userData.surname,
+          email: userData.email,
+        });
 
     performFetch({
       method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ user: newUserDetails }),
+      body: JSON.stringify({ user: userDetails }),
     });
 
     setEditHelper(false);
@@ -221,10 +233,12 @@ const ProfilePage = () => {
           </div>
         </div>
         {deleteHelper ? deletePrompt : ""}
-        <div className={style.toggle}>
-          <p className={appStyle.boldBodyDesktop}>Driver mode</p>
-          <Toggle isChecked={isChecked} handleToggle={handleToggle} />
-        </div>
+        {hasDriverDetails && (
+          <div className={style.toggle}>
+            <p className={appStyle.boldBodyDesktop}>Driver mode</p>
+            <Toggle isChecked={isChecked} handleToggle={handleToggle} />
+          </div>
+        )}
         <div>
           {!editHelper && (
             <div className={style.allDetails}>
