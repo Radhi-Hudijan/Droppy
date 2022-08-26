@@ -22,15 +22,15 @@ import ProfilePage from "./pages/Profile/ProfilePage";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState("");
-  const [isDriver, setIsDriver] = useState(null);
-  const { token } = useContext(UserInfoContext);
+  // const [isDriver, setIsDriver] = useState(null);
+  const { token, isDriver, setIsDriver } = useContext(UserInfoContext);
 
   useEffect(() => {
     setUser(localStorage.getItem("token"));
     localStorage.getItem("isDriver") === "true"
       ? setIsDriver(true)
       : setIsDriver(false);
-  }, [token]);
+  }, [token, isDriver]);
 
   const openHandler = () => {
     setIsOpen(!isOpen);

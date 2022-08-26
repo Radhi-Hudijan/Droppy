@@ -29,8 +29,14 @@ import EditProfileForm from "./EditProfileForm";
 import UserInfoContext from "../../context/UserInfoContext";
 
 const ProfilePage = () => {
-  const { setEmail, setName, setSurname, setVehicleInfo } =
-    useContext(UserInfoContext);
+  const {
+    setEmail,
+    setName,
+    setSurname,
+    setVehicleInfo,
+    setIsDriver,
+    isDriver,
+  } = useContext(UserInfoContext);
 
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -45,9 +51,8 @@ const ProfilePage = () => {
     },
   });
 
-  const [isDriver, setIsDriver] = useState();
   const [hasDriverDetails, setHasDriverDetails] = useState(false);
-  const [isChecked, setIsChecked] = useState();
+  const [isChecked, setIsChecked] = useState(isDriver);
   const [deleteHelper, setDeleteHelper] = useState(false);
   const [editHelper, setEditHelper] = useState(false);
   const { id } = useParams();
@@ -122,8 +127,8 @@ const ProfilePage = () => {
 
   // set the initial state of the toggle
   useEffect(() => {
-    isDriver ? setIsChecked(true) : setIsChecked(false);
-  }, [isDriver, isChecked]);
+    setIsChecked(isDriver);
+  }, [isDriver]);
 
   let statusbar;
   if (error) {
