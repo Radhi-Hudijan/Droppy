@@ -13,6 +13,7 @@ import {
   faCar,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function EditProfileForm(props) {
   const emailInputRef = useRef();
@@ -49,12 +50,17 @@ export default function EditProfileForm(props) {
         height: enteredHeight,
       },
     };
+
     props.onSaveDetails(userData);
   }
 
   const addCarHandler = () => {
     setAddCar(true);
   };
+
+  useEffect(() => {
+    if (props.hasDriverDetails) setAddCar(true);
+  }, []);
 
   return (
     <div className={style.editProfileForm}>
@@ -111,7 +117,16 @@ export default function EditProfileForm(props) {
             </div>
           </div>
         </div>
-        {addCar && (
+
+        {!addCar && (
+          <div className={style.singleButton}>
+            <Button buttonHandler={addCarHandler} class="buttonBorder">
+              Add a car to your profile
+            </Button>
+          </div>
+        )}
+
+        <div className={!addCar && style.opacity}>
           <div>
             <div>
               <label className={appStyle.bodyDesktop}>Phone Number</label>
@@ -119,10 +134,8 @@ export default function EditProfileForm(props) {
                 <FontAwesomeIcon icon={faPhone} />
                 <input
                   type="text"
-                  // onChange={(e) =>
-                  //   setAllInputs({ ...allInputs, contact: e.target.value })
-                  // }
-                  required
+                  required={addCar}
+                  disabled={!addCar}
                   ref={phoneNoInputRef}
                   id="contact"
                   aria-label="contact info"
@@ -131,7 +144,6 @@ export default function EditProfileForm(props) {
                   data-err="Please enter a phone number like 0612345678"
                   pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
                   className={appStyle.bodyDesktop}
-                  // value={allInputs.contact}
                 />
               </div>
             </div>
@@ -141,17 +153,14 @@ export default function EditProfileForm(props) {
                 <FontAwesomeIcon icon={faCar} />
                 <input
                   type="text"
-                  // onChange={(e) =>
-                  //   setAllInputs({ ...allInputs, plate: e.target.value })
-                  // }
                   id="plate"
                   ref={plateNoInputRef}
-                  required
+                  required={addCar}
+                  disabled={!addCar}
                   aria-label="plate number"
                   placeholder="NL-01-AB"
                   defaultValue={props.user.vehicleInfo.plate}
                   className={appStyle.bodyDesktop}
-                  // value={allInputs.plate}
                 />
               </div>
             </div>
@@ -166,17 +175,14 @@ export default function EditProfileForm(props) {
                       pattern="^[0-9]{1,}"
                       data-err="Please enter a number of centimeters"
                       min="0"
-                      required
+                      required={addCar}
+                      disabled={!addCar}
                       ref={widthInputRef}
-                      // onChange={(e) =>
-                      //   setAllInputs({ ...allInputs, width: e.target.value })
-                      // }
                       id="width"
                       aria-label="width"
                       defaultValue={props.user.vehicleInfo.width}
                       placeholder="00cm*"
                       className={appStyle.bodyDesktop}
-                      // value={allInputs.width}
                     />
                   </div>
                 </div>
@@ -187,10 +193,8 @@ export default function EditProfileForm(props) {
                     <input
                       type="number"
                       min="0"
-                      required
-                      // onChange={(e) =>
-                      //   setAllInputs({ ...allInputs, height: e.target.value })
-                      // }
+                      required={addCar}
+                      disabled={!addCar}
                       id="height"
                       ref={heightInputRef}
                       pattern="^[0-9]{1,}"
@@ -199,7 +203,6 @@ export default function EditProfileForm(props) {
                       aria-label="height"
                       placeholder="00cm*"
                       className={appStyle.bodyDesktop}
-                      // value={allInputs.height}
                     />
                   </div>
                 </div>
@@ -212,34 +215,22 @@ export default function EditProfileForm(props) {
                       min="0"
                       pattern="^[0-9]{1,}"
                       data-err="Please enter a number of centimeters"
-                      required
+                      required={addCar}
+                      disabled={!addCar}
                       ref={lengthInputRef}
-                      // onChange={(e) =>
-                      //   setAllInputs({ ...allInputs, length: e.target.value })
-                      // }
                       id="length"
                       defaultValue={props.user.vehicleInfo.length}
                       aria-label="length"
                       placeholder="00cm*"
                       className={appStyle.bodyDesktop}
-                      // value={allInputs.length}
                     />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
 
-        {!addCar && (
-          <div className={style.singleButton}>
-            <Button buttonHandler={addCarHandler} class="buttonBorder">
-              {!props.user.vehicleInfo.contact
-                ? "Add car details"
-                : "Edit car details"}
-            </Button>
-          </div>
-        )}
         <div className={style.singleButton}>
           <Button type="submit">Save Changes</Button>
         </div>
@@ -251,4 +242,5 @@ export default function EditProfileForm(props) {
 EditProfileForm.propTypes = {
   onSaveDetails: PropTypes.func,
   user: PropTypes.object,
+  hasDriverDetails: PropTypes.bool,
 };

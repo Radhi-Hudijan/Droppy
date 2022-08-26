@@ -65,12 +65,11 @@ const ProfilePage = () => {
   }
 
   const onSuccess = (onReceived) => {
-    notifier(onReceived.message);
     onReceived.result.vehicleInfo.contact
       ? setHasDriverDetails(true)
       : setHasDriverDetails(false);
 
-    if (userDetails.email === "") {
+    if (userDetails.name === "") {
       setUserDetails(onReceived.result);
     }
 
@@ -79,10 +78,10 @@ const ProfilePage = () => {
       setSurname(userDetails.surname);
       setEmail(userDetails.email);
       if (
-        userDetails.vehicleInfo.contact ||
-        userDetails.vehicleInfo.plate ||
-        userDetails.vehicleInfo.width ||
-        userDetails.vehicleInfo.height ||
+        userDetails.vehicleInfo.contact &&
+        userDetails.vehicleInfo.plate &&
+        userDetails.vehicleInfo.width &&
+        userDetails.vehicleInfo.height &&
         userDetails.vehicleInfo.length
       ) {
         setVehicleInfo(userDetails.vehicleInfo);
@@ -98,6 +97,7 @@ const ProfilePage = () => {
     }
 
     setEditHelper(false);
+    if (onReceived.message) notifier(onReceived.message);
   };
 
   const { error, isLoading, performFetch, cancelFetch } = useFetch(
@@ -120,6 +120,7 @@ const ProfilePage = () => {
     }
   }, [isChecked, userDetails]);
 
+  // set the initial state of the toggle
   useEffect(() => {
     isDriver ? setIsChecked(true) : setIsChecked(false);
   }, [isDriver, isChecked]);
@@ -192,22 +193,34 @@ const ProfilePage = () => {
   };
 
   const editUserHandler = (userData) => {
-    userData.vehicleInfo.contact
-      ? setUserDetails(userData)
-      : setUserDetails({
-          ...userDetails,
-          name: userData.name,
-          surname: userData.surname,
-          email: userData.email,
-        });
+    const newUSerDetails = {
+      name: userData.name,
+      surname: userData.surname,
+      email: userData.email,
+      vehicleInfo: {
+        contact: userData.contact
+          ? userData.contact
+          : userDetails.vehicleInfo.contact,
+        plate: userData.plate ? userData.plate : userDetails.vehicleInfo.plate,
+        width: userData.width ? userData.width : userDetails.vehicleInfo.width,
+        length: userData.length
+          ? userData.length
+          : userDetails.vehicleInfo.length,
+        height: userData.height
+          ? userData.height
+          : userDetails.vehicleInfo.height,
+      },
+    };
 
     performFetch({
       method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ user: userDetails }),
+      body: JSON.stringify({ user: newUSerDetails }),
     });
+
+    setUserDetails(newUSerDetails);
 
     setEditHelper(false);
   };
@@ -330,6 +343,7 @@ const ProfilePage = () => {
           )}
           {editHelper && (
             <EditProfileForm
+              hasDriverDetails={hasDriverDetails}
               user={userDetails}
               onSaveDetails={editUserHandler}
             />

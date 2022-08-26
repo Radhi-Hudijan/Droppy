@@ -3,6 +3,10 @@
   margin: auto;
 }
 
+.opacity {
+  opacity: 0.4;
+}
+
 .singleButton {
   width: 450px;
 }
