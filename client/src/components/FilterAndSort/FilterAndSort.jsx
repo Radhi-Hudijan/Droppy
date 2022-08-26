@@ -36,6 +36,10 @@ function FilterAndSort() {
     setQueries(inputs);
   };
 
+  const resetHandler = () => {
+    setQueries({});
+  };
+
   return (
     <div className={style.filters}>
       <div className={style.categories}>
@@ -97,6 +101,7 @@ function FilterAndSort() {
       </div>
       <div className={style["btn-filter"]}>
         <button onClick={filterHandler}>Filter</button>
+        <button onClick={resetHandler}>Reset</button>
       </div>
     </div>
   );
