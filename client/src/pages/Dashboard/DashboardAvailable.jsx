@@ -7,6 +7,7 @@ import QueriesContext from "../../context/QueriesContext";
 import objectToQueryParam from "../../util/objectToQueryParam";
 import Error from "../../components/Error/Error";
 import Loading from "../../components/Loading/Loading";
+import FilterAndSort from "../../components/FilterAndSort/FilterAndSort";
 
 function DashboardAvailable() {
   const [jobs, setJobs] = useState([]);
@@ -42,6 +43,9 @@ function DashboardAvailable() {
 
   return (
     <>
+      <FilterAndSort />
+      {isLoading && <Loading />}
+      {error != null && <Error error={error} />}
       <div className={style.cardsDiv}>
         <ul>
           {jobs ? (
@@ -56,8 +60,6 @@ function DashboardAvailable() {
         </ul>
       </div>
       <Pagination page={page} pageCount={pageCount} setPage={setPage} />
-      {isLoading && <Loading />}
-      {error != null && <Error error={error} />}
     </>
   );
 }

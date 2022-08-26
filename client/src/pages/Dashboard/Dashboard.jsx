@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import style from "./Dashboard.module.css";
 import { useNavigate } from "react-router-dom";
 import DashboardActive from "./DashboardActive";
 import DashboardAvailable from "./DashboardAvailable";
-import FilterAndSort from "../../components/FilterAndSort/FilterAndSort";
+import QueriesContext from "../../context/QueriesContext";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [isDriver, setIsDriver] = useState(false);
   const [isClickedToAvailable, setIsClickedToAvailable] = useState(true);
   const [pageToShow, setPageToShow] = useState(null);
+  const { setQueries } = useContext(QueriesContext);
 
   useEffect(() => {
     setIsDriver(localStorage.getItem("isDriver"));
@@ -22,11 +23,13 @@ function Dashboard() {
 
   function getAvailableJobsHandler() {
     setIsClickedToAvailable(true);
+    setQueries({});
     setPageToShow(<DashboardAvailable />);
   }
 
   function getActiveJobsHandler() {
     setIsClickedToAvailable(false);
+    setQueries({});
     setPageToShow(<DashboardActive />);
   }
 
@@ -72,7 +75,6 @@ function Dashboard() {
               </button>
             </div>
           </div>
-          <FilterAndSort />
           {pageToShow}
         </div>
       </div>
