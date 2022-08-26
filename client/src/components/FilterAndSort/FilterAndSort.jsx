@@ -37,6 +37,9 @@ function FilterAndSort() {
   };
 
   const resetHandler = () => {
+    document
+      .querySelectorAll(".filter-input")
+      .forEach((input) => (input.value = ""));
     setQueries({});
   };
 
@@ -44,7 +47,11 @@ function FilterAndSort() {
     <div className={style.filters}>
       <div className={style.categories}>
         <h5>Categories</h5>
-        <select name="category" onChange={changeHandler}>
+        <select
+          name="category"
+          className="filter-input"
+          onChange={changeHandler}
+        >
           <option value="">All</option>
           {categories.map((category, i) => (
             <option key={i} value={category}>
@@ -57,7 +64,7 @@ function FilterAndSort() {
         <h5>Size (cm)</h5>
         <input
           name="width"
-          className={style.whl}
+          className={`${style.whl} filter-input`}
           type="number"
           placeholder="w"
           onChange={changeHandler}
@@ -65,7 +72,7 @@ function FilterAndSort() {
         x
         <input
           name="height"
-          className={style.whl}
+          className={`${style.whl} filter-input`}
           type="number"
           placeholder="h"
           onChange={changeHandler}
@@ -73,7 +80,7 @@ function FilterAndSort() {
         x
         <input
           name="length"
-          className={style.whl}
+          className={`${style.whl} filter-input`}
           type="number"
           placeholder="l"
           onChange={changeHandler}
@@ -84,6 +91,7 @@ function FilterAndSort() {
           <h5>Date Start</h5>
           <input
             name="dateStart"
+            className="filter-input"
             type="date"
             required
             onChange={changeHandler}
@@ -92,6 +100,7 @@ function FilterAndSort() {
         <div className={style.dates}>
           <h5>Date End</h5>
           <input
+            className="filter-input"
             name="dateEnd"
             type="date"
             required
