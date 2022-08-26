@@ -6,10 +6,11 @@ const ITEMS_PER_PAGE = 5;
 
 export const getAllJobs = async (req, res) => {
   const page = req.query.page || 1;
-  const width = req.query.width || true;
-  const height = req.query.height || true;
-  const length = req.query["length"] || true;
-  const dateStart = req.query.dateStart || new Date();
+  const width = req.query.width || 10000;
+  const height = req.query.height || 10000;
+  const length = req.query["length"] || 10000;
+  const dateStart =
+    req.query.dateStart || new Date(new Date().setHours(0, 0, 0, 0));
   const dateEnd = req.query.dateEnd || new Date("2032-08-23");
   const category = req.query.category || {
     $in: categories.map((category) => category.toUpperCase()),
@@ -17,9 +18,9 @@ export const getAllJobs = async (req, res) => {
 
   // Put all your query params in here
   const query = {
-    width: { $gte: width },
-    height: { $gte: height },
-    length: { $gte: length },
+    width: { $lte: width },
+    height: { $lte: height },
+    length: { $lte: length },
     date: { $gte: dateStart, $lte: dateEnd },
     category: category,
   };
@@ -30,9 +31,9 @@ export const getAllJobs = async (req, res) => {
     const count = await Job.countDocuments(query);
 
     if (count === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
-        message: "No job with the filter",
+        message: "There is no result!",
       });
     }
 
@@ -59,10 +60,11 @@ export const getAllJobs = async (req, res) => {
 
 export const getActiveJobs = async (req, res) => {
   const page = req.query.page || 1;
-  const width = req.query.width || true;
-  const height = req.query.height || true;
-  const length = req.query["length"] || true;
-  const dateStart = req.query.dateStart || new Date();
+  const width = req.query.width || 10000;
+  const height = req.query.height || 10000;
+  const length = req.query["length"] || 10000;
+  const dateStart =
+    req.query.dateStart || new Date(new Date().setHours(0, 0, 0, 0));
   const dateEnd = req.query.dateEnd || new Date("2032-08-23");
   const category = req.query.category || {
     $in: categories.map((category) => category.toUpperCase()),
@@ -72,9 +74,9 @@ export const getActiveJobs = async (req, res) => {
 
   try {
     let query = {
-      width: { $gte: width },
-      height: { $gte: height },
-      length: { $gte: length },
+      width: { $lte: width },
+      height: { $lte: height },
+      length: { $lte: length },
       date: { $gte: dateStart, $lte: dateEnd },
       category: category,
     };
@@ -91,7 +93,7 @@ export const getActiveJobs = async (req, res) => {
     const count = await Job.countDocuments(query);
 
     if (count === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
         message: "No job with the filter",
       });
