@@ -100,9 +100,11 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
-    res
-      .status(200)
-      .json({ success: true, message: "Profile was successfully deleted" });
+    res.status(200).json({
+      success: true,
+      message: "Profile was successfully deleted",
+      isDelete: true,
+    });
   } catch (error) {
     logError(error);
     res.status(500).json({
