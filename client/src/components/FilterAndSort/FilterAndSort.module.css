@@ -39,9 +39,14 @@ input::-webkit-inner-spin-button {
   -moz-appearance: textfield;
 }
 
+.btn-filter {
+  display: flex;
+  gap: 1rem;
+}
+
 .btn-filter button {
   height: 70%;
-  width: 20rem;
+  width: 10rem;
   margin: 0.5rem 0;
   padding: 5px;
   border-radius: 4px;
@@ -49,11 +54,11 @@ input::-webkit-inner-spin-button {
   background-color: var(--highlight);
   color: var(--font-light);
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .btn-filter button:hover {
-  border: 2px solid var(--highlight);
   box-shadow: 3px 3px 10px var(--highlight-light);
-  transform: scale(1.005);
+  background-color: var(--font-light);
+  color: var(--highlight);
 }
