@@ -126,7 +126,7 @@ export default function EditProfileForm(props) {
           </div>
         )}
 
-        <div className={!addCar && style.opacity}>
+        <div className={!addCar ? style.opacity : ""}>
           <div>
             <div>
               <label className={appStyle.bodyDesktop}>Phone Number</label>
