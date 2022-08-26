@@ -78,12 +78,12 @@ function Login() {
             className={style.loginInput}
           />
         </div>
-        <div>
+        <div className={style.singleButton}>
           <Button type="submit">Log in</Button>
         </div>
       </form>
-      <div>
-        Do not have an account? <Link to="/user/create">Sign up here</Link>
+      <div className={appStyles.bodyDesktop}>
+        Don&apos;t have an account? <Link to="/user/create">Sign up</Link>
       </div>
       {isLoading && <Loading />}
       {error != null && <Error error={error} />}

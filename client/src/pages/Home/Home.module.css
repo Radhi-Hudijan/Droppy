@@ -65,6 +65,10 @@
   letter-spacing: -0.02em;
 }
 
+.singleButton {
+  width: 450px;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 740px) {
@@ -90,5 +94,9 @@
 
   .cardText {
     margin-top: 50px;
+  }
+
+  .singleButton {
+    width: 330px;
   }
 }

@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 50px;
+  padding: 5px;
 }
 .buttonsAndCardsDiv {
   display: flex;
@@ -12,6 +13,7 @@
 .buttonsDiv {
   display: flex;
   width: 100%;
+  justify-content: space-around;
 }
 .buttonDiv {
   width: 100%;
@@ -22,19 +24,29 @@
 .cardsDiv {
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   /* margin-left: 5px; */
   flex-direction: column;
 }
 .cardsDiv ul {
-  width: 99%;
+  width: 100%;
   display: flex;
   margin: auto;
   flex-direction: column;
+  justify-content: space-evenly;
   list-style: none;
 }
 .cardsDiv ul li {
-  width: 99%;
+  width: 100%;
+  margin: auto;
 }
+
+.jobCardContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .button {
   background: var(--highlight);
   width: 100%;
@@ -128,17 +140,38 @@
   }
 
   .buttonsDiv {
-    width: 98.5%;
+    width: 100%;
+    margin: auto;
   }
-  /* 
+
+  .buttonDiv {
+    margin: 0;
+  }
+
   .button {
-    margin: 10px;
-  } */
-  .button {
-    margin-right: 5px;
+    margin: 20px 5px 20px 10px;
   }
 
   .buttonOutline {
-    margin-left: 5px;
+    margin: 20px 10px 20px 5px;
+  }
+
+  .cardsDiv {
+    width: 98%;
+    margin: auto;
+  }
+
+  .cardsDiv ul {
+    width: 100%;
+    margin: 10px;
+  }
+
+  .cardsDiv li {
+    width: 100%;
+  }
+
+  .jobCardContainer {
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
 }

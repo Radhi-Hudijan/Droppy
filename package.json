@@ -51,6 +51,7 @@
     "husky": "^7.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "concurrently": "^6.4.0"
   }
 }
