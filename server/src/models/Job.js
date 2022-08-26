@@ -15,6 +15,7 @@ const jobSchema = new mongoose.Schema({
   length: { type: Number, min: 1, required: true },
   date: { type: Date, required: true },
   phoneNo: { type: String, required: true },
+  category: { type: String, required: true },
 });
 
 const Job = mongoose.model("jobs", jobSchema);
@@ -41,6 +42,7 @@ export const validateJob = (data) => {
       .phoneNumber({ defaultCountry: "NL", format: "national" })
       .required()
       .label("phoneNo"),
+    category: Joi.string().required().label("category"),
   });
   return schema.validate(data);
 };

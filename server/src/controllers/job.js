@@ -134,7 +134,7 @@ export const updateJob = async (req, res) => {
       : job["length"];
     job.phoneNo = req.body.job.phoneNo ? req.body.job.phoneNo : job.phoneNo;
     job.senderID = req.body.job.senderID ? req.body.job.senderID : job.senderID;
-
+    job.category = req.body.job.category ? req.body.job.category : job.category;
     const jobToValidate = {
       item: job.item,
       description: job.description,
@@ -146,6 +146,7 @@ export const updateJob = async (req, res) => {
       date: job.date,
       phoneNo: job.phoneNo,
       senderID: job.senderID,
+      category: job.category,
     };
     const { error } = validateJob(jobToValidate);
     if (error) {
