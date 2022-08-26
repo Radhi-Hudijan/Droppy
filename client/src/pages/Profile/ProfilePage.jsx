@@ -29,14 +29,7 @@ import EditProfileForm from "./EditProfileForm";
 import UserInfoContext from "../../context/UserInfoContext";
 
 const ProfilePage = () => {
-  const {
-    setEmail,
-    setName,
-    setSurname,
-    setVehicleInfo,
-    setIsDriver,
-    isDriver,
-  } = useContext(UserInfoContext);
+  const { setIsDriver, isDriver } = useContext(UserInfoContext);
 
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -70,35 +63,17 @@ const ProfilePage = () => {
   }
 
   const onSuccess = (onReceived) => {
+    if (onReceived.isDelete) {
+      localStorage.clear();
+      window.reload();
+      return;
+    }
     onReceived.result.vehicleInfo.contact
       ? setHasDriverDetails(true)
       : setHasDriverDetails(false);
 
     if (userDetails.name === "") {
       setUserDetails(onReceived.result);
-    }
-
-    if (!editHelper) {
-      setName(userDetails.name);
-      setSurname(userDetails.surname);
-      setEmail(userDetails.email);
-      if (
-        userDetails.vehicleInfo.contact &&
-        userDetails.vehicleInfo.plate &&
-        userDetails.vehicleInfo.width &&
-        userDetails.vehicleInfo.height &&
-        userDetails.vehicleInfo.length
-      ) {
-        setVehicleInfo(userDetails.vehicleInfo);
-      } else {
-        setVehicleInfo({
-          contact: "",
-          plate: "",
-          width: "",
-          length: "",
-          height: "",
-        });
-      }
     }
 
     setEditHelper(false);
@@ -111,9 +86,6 @@ const ProfilePage = () => {
   );
 
   useEffect(() => {
-    localStorage.getItem("isDriver") === "true"
-      ? setIsDriver(true)
-      : setIsDriver(false);
     if (id === localStorage.getItem("userID")) {
       performFetch({
         method: "GET",
@@ -144,11 +116,9 @@ const ProfilePage = () => {
   const handleToggle = (e) => {
     const value = e.target.checked;
     if (value) {
-      localStorage.removeItem("isDriver");
       localStorage.setItem("isDriver", "true");
       setIsDriver(true);
     } else {
-      localStorage.removeItem("isDriver");
       localStorage.setItem("isDriver", "false");
       setIsDriver(false);
     }
@@ -188,8 +158,6 @@ const ProfilePage = () => {
       },
     });
 
-    localStorage.clear();
-    window.reload();
     return cancelFetch;
   };
 
@@ -203,16 +171,20 @@ const ProfilePage = () => {
       surname: userData.surname,
       email: userData.email,
       vehicleInfo: {
-        contact: userData.contact
-          ? userData.contact
+        contact: userData.vehicleInfo.contact
+          ? userData.vehicleInfo.contact
           : userDetails.vehicleInfo.contact,
-        plate: userData.plate ? userData.plate : userDetails.vehicleInfo.plate,
-        width: userData.width ? userData.width : userDetails.vehicleInfo.width,
-        length: userData.length
-          ? userData.length
+        plate: userData.vehicleInfo.plate
+          ? userData.vehicleInfo.plate
+          : userDetails.vehicleInfo.plate,
+        width: userData.vehicleInfo.width
+          ? userData.vehicleInfo.width
+          : userDetails.vehicleInfo.width,
+        length: userData.vehicleInfo.length
+          ? userData.vehicleInfo.length
           : userDetails.vehicleInfo.length,
-        height: userData.height
-          ? userData.height
+        height: userData.vehicleInfo.height
+          ? userData.vehicleInfo.height
           : userDetails.vehicleInfo.height,
       },
     };
