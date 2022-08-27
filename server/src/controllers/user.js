@@ -1,4 +1,4 @@
-import User, { validateUser } from "../models/User.js";
+import User, { validateUser, validateUserUpdate } from "../models/User.js";
 import { logError } from "../util/logging.js";
 import bcrypt from "bcrypt";
 
@@ -11,6 +11,106 @@ export const getUsers = async (req, res) => {
     res
       .status(500)
       .json({ success: false, msg: "Unable to get users, try again later" });
+  }
+};
+
+// Find One user
+export const getUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findOne({ _id: id });
+    res.status(200).json({
+      success: true,
+      result: {
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
+        vehicleInfo: {
+          contact: user.vehicleInfo.contact,
+          plate: user.vehicleInfo.plate,
+          width: user.vehicleInfo.width,
+          length: user.vehicleInfo.length,
+          height: user.vehicleInfo.height,
+        },
+      },
+    });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get user, try again later" });
+  }
+};
+
+// Update One User
+export const updateUser = async (req, res) => {
+  try {
+    let user = await User.findOne({ _id: req.params.id });
+    if (!user) {
+      res.status(404).json({
+        success: false,
+        message: "The user does not exist",
+      });
+    }
+
+    user.name = req.body.user.name
+      ? makeFirstLetterUpper(req.body.user.name)
+      : user.name;
+    user.surname = req.body.user.surname
+      ? makeFirstLetterUpper(req.body.user.surname)
+      : user.surname;
+    user.email = req.body.user.email
+      ? req.body.user.email.toLowerCase()
+      : user.email;
+    user.vehicleInfo = req.body.user.vehicleInfo
+      ? req.body.user.vehicleInfo
+      : user.vehicleInfo;
+    user.password = req.body.user.password
+      ? req.body.user.password
+      : user.password;
+
+    const userToValidate = {
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+    };
+
+    const { error } = validateUserUpdate(userToValidate);
+    if (error) {
+      return res.status(400).send({
+        message: `${error.details[0].message} field fails to match the required pattern`,
+      });
+    }
+    await user.save();
+    res.status(200).json({
+      success: true,
+      result: user,
+      message: "User profile updated successfully",
+    });
+  } catch (error) {
+    logError(error);
+    res.status(500).json({
+      success: false,
+      message: "Unable to update the profile, try again later",
+    });
+  }
+};
+
+// Delete One User
+export const deleteUser = async (req, res) => {
+  try {
+    await User.deleteOne({ _id: req.params.id });
+    res.status(200).json({
+      success: true,
+      message: "Profile was successfully deleted",
+      isDelete: true,
+    });
+  } catch (error) {
+    logError(error);
+    res.status(500).json({
+      success: false,
+      message: "Unable to delete profile, try again later",
+    });
   }
 };
 
@@ -68,3 +168,7 @@ export const addCar = async (req, res) => {
       .send({ message: "internal server error while updating the user" });
   }
 };
+
+function makeFirstLetterUpper(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}

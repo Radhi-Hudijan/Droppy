@@ -55,11 +55,12 @@ const Home = () => {
         <p className={appStyle.h2Desktop}>
           Looking for help to move some stuff?
         </p>
-
-        <Button path="/user/create">GET STARTED</Button>
+        <div className={style.singleButton}>
+          <Button path="/user/create">GET STARTED</Button>
+        </div>
 
         <div className={appStyle.bodyDesktop}>
-          Already have an account? <Link to="/login">Log in here</Link>
+          Already have an account? <Link to="/login">Log in</Link>
         </div>
         <div className={style.allCards}>
           <InformationCard

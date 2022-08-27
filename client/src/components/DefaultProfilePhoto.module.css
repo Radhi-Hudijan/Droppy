@@ -1,0 +1,13 @@
+.profilePhotoContainer svg {
+  width: 101%;
+  height: 101%;
+  margin-bottom: -4.5px;
+}
+
+.profilePhotoContainer {
+  border: 6px solid var(--highlight);
+  border-radius: 50%;
+
+  background-color: var(--white);
+  margin-bottom: 0px;
+}

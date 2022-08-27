@@ -134,23 +134,27 @@ export default function AddCarForm(props) {
         {allFilled === true ? (
           <div>
             <p className={appStyle.bodyDesktop}>Let&apos; add your car!</p>
-            <Button type="submit" class="buttonBorder" buttonHandler={isCar}>
-              Register car and sign up
-            </Button>
+            <div className={style.singleBtn}>
+              <Button type="submit" class="buttonBorder" buttonHandler={isCar}>
+                Register car and sign up
+              </Button>
+            </div>
           </div>
         ) : (
           <div>
             <p className={appStyle.bodyDesktop}>
               Don&apos;t want to be a driver? No problem.
             </p>
-            <Button
-              path="/dashboard"
-              type="submit"
-              class="button"
-              buttonHandler={isNotCar}
-            >
-              Sign up without car
-            </Button>
+            <div className={style.singleBtn}>
+              <Button
+                path="/dashboard"
+                type="submit"
+                class="button"
+                buttonHandler={isNotCar}
+              >
+                Sign up without car
+              </Button>
+            </div>
           </div>
         )}
       </form>
