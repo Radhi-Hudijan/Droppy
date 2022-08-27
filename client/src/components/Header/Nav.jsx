@@ -16,9 +16,7 @@ import burger from "../../assets/icons/burger-icon.svg";
 import UserInfoContext from "../../context/UserInfoContext";
 
 const NAV_CONTENT = [
-  // { link: "/", id: TEST_ID.linkToHome, value: "Home" },
   { link: "/about", id: TEST_ID.linkToAbout, value: "About" },
-  // { link: "/login", id: TEST_ID.linkToLogin, value: "Login" },
 ];
 const Nav = ({ opened }) => {
   const isMdScreen = useMediaQuery(QUERIES.md);
@@ -34,7 +32,7 @@ const Nav = ({ opened }) => {
 
     useEffect(() => {
       setToken(localStorage.getItem("token"));
-    }, []);
+    }, [token]);
 
     return (
       <ul>

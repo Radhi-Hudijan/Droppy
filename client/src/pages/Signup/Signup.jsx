@@ -11,17 +11,12 @@ import Loading from "../../components/Loading/Loading";
 function Signup() {
   const navigate = useNavigate();
 
-  const { setEmail, setName, setSurname } = useContext(UserInfoContext);
-  const userDataOnSuccess = {
-    email: "",
-    name: "",
-    surname: "",
-  };
+  const { setToken } = useContext(UserInfoContext);
 
-  const onSuccess = () => {
-    setName(userDataOnSuccess.name);
-    setSurname(userDataOnSuccess.surname);
-    setEmail(userDataOnSuccess.email);
+  const onSuccess = (onReceived) => {
+    localStorage.setItem("token", onReceived.result.token);
+    setToken(onReceived.data);
+    localStorage.setItem("userID", onReceived.result.userID);
     navigate("/user/create/add-car", {
       replace: true,
     });
@@ -36,9 +31,6 @@ function Signup() {
   }, []);
 
   function addUserHandler(user) {
-    userDataOnSuccess.name = user.name;
-    userDataOnSuccess.surname = user.surname;
-    userDataOnSuccess.email = user.email;
     performFetch({
       method: "POST",
       headers: {

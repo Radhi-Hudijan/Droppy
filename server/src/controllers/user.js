@@ -1,6 +1,6 @@
+import bcrypt from "bcrypt";
 import User, { validateUser, validateUserUpdate } from "../models/User.js";
 import { logError } from "../util/logging.js";
-import bcrypt from "bcrypt";
 
 export const getUsers = async (req, res) => {
   try {
@@ -29,7 +29,7 @@ export const getUser = async (req, res) => {
           contact: user.vehicleInfo.contact,
           plate: user.vehicleInfo.plate,
           width: user.vehicleInfo.width,
-          length: user.vehicleInfo.length,
+          length: user.vehicleInfo["length"],
           height: user.vehicleInfo.height,
         },
       },
@@ -83,9 +83,20 @@ export const updateUser = async (req, res) => {
     }
     await user.save();
     res.status(200).json({
-      success: true,
-      result: user,
       message: "User profile updated successfully",
+      success: true,
+      result: {
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
+        vehicleInfo: {
+          contact: user.vehicleInfo.contact,
+          plate: user.vehicleInfo.plate,
+          width: user.vehicleInfo.width,
+          length: user.vehicleInfo["length"],
+          height: user.vehicleInfo.height,
+        },
+      },
     });
   } catch (error) {
     logError(error);
@@ -140,10 +151,14 @@ export const createUser = async (req, res) => {
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
     const hashPassword = await bcrypt.hash(user.password, salt);
 
-    await new User({ ...user, password: hashPassword }).save();
-    res
-      .status(201)
-      .send({ message: "User created successfully", success: true });
+    const newUser = await new User({ ...user, password: hashPassword });
+    await newUser.save();
+    const token = newUser.generateAuthToken();
+    res.status(201).send({
+      message: "User created successfully",
+      success: true,
+      result: { userID: newUser._id, token },
+    });
   } catch (error) {
     res
       .status(500)
@@ -154,18 +169,24 @@ export const createUser = async (req, res) => {
 export const addCar = async (req, res) => {
   try {
     const { vehicleInfo } = req.body;
-    const user = await User.findOne({ email: vehicleInfo.email });
+    const user = await User.findOne({ _id: vehicleInfo._id });
     user.vehicleInfo.contact = vehicleInfo.contact;
     user.vehicleInfo.plate = vehicleInfo.plate;
     user.vehicleInfo.width = vehicleInfo.width;
     user.vehicleInfo.height = vehicleInfo.height;
     user.vehicleInfo["length"] = vehicleInfo["length"];
     await user.save();
-    res.status(200).send({ message: "success", success: true, result: user });
+    res.status(200).send({
+      message: "success",
+      success: true,
+      result: {
+        isDriver: user.vehicleInfo.plate ? true : false,
+      },
+    });
   } catch (error) {
-    res
-      .status(500)
-      .send({ message: "internal server error while updating the user" });
+    res.status(500).send({
+      message: "internal server error while trying to add vehicle info!",
+    });
   }
 };
 
