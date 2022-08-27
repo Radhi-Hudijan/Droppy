@@ -42,6 +42,30 @@ export const getUser = async (req, res) => {
   }
 };
 
+// Find One user
+export const getAcceptedDrivers = async (req, res) => {
+  const { id } = req.body.id;
+  try {
+    const user = await User.findOne({ _id: id });
+    res.status(200).json({
+      notify: false,
+      success: true,
+      result: {
+        name: user.name,
+        vehicleInfo: {
+          contact: user.vehicleInfo.contact,
+          plate: user.vehicleInfo.plate,
+        },
+      },
+    });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get user, try again later" });
+  }
+};
+
 // Update One User
 export const updateUser = async (req, res) => {
   try {

@@ -6,6 +6,7 @@ import {
   getUser,
   deleteUser,
   updateUser,
+  getAcceptedDrivers,
 } from "../controllers/user.js";
 
 const userRouter = express.Router();
@@ -21,5 +22,7 @@ userRouter.get("/:id", getUser);
 userRouter.delete("/:id", deleteUser);
 
 userRouter.patch("/:id", updateUser);
+
+userRouter.get("/", getAcceptedDrivers);
 
 export default userRouter;

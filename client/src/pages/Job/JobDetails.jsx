@@ -39,12 +39,15 @@ const JobDetails = () => {
     phoneNo: "",
     category: "",
   });
+  // const [delivererIDs, setDelivererIDs] = useState([]);
   const form = React.useRef();
   const { id } = useParams();
   const { notifier } = useContext(NotifierContext);
 
   const onSuccess = (onReceived) => {
     setJobDetails(onReceived.result);
+    // setDelivererIDs(onReceived.result.delivererIDs);
+
     if (!isLocked) {
       notifier(onReceived.message);
     }
@@ -153,6 +156,7 @@ const JobDetails = () => {
   return (
     <div>
       <h2 className={appStyles.h1Desktop}>Job Details</h2>
+      {statusbar}
       {jobDetails.item && (
         <form className={styles.formClass} name="dropRequest" ref={form}>
           <div className={styles.select}>
@@ -275,6 +279,12 @@ const JobDetails = () => {
               onChange={changeHandler}
             ></InputStyled>
 
+            <div>
+              <p className={appStyles.boldBodyDesktop}>
+                These drivers would like to help you, get in touch with them!
+              </p>
+            </div>
+
             {isDriver ? (
               <div className={styles.buttonDiv}>
                 {isAccepted && (
@@ -311,7 +321,6 @@ const JobDetails = () => {
           </div>
         </form>
       )}
-      {statusbar}
     </div>
   );
 };

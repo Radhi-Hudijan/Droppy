@@ -38,7 +38,7 @@ const JobView = ({ jobHandler }) => {
       <div className={styles.select}>
         <select name="category" id="cars" onChange={changeHandler} required>
           <option value="">--Please choose a Category--</option>
-          <option value="furniture">furniture</option>
+          <option value="furniture">Furniture</option>
           <option value="electronics">Electronics</option>
           <option value="other">Other</option>
         </select>
@@ -48,7 +48,7 @@ const JobView = ({ jobHandler }) => {
         <InputStyled
           name="item"
           icon={<FontAwesomeIcon icon={faBox} />}
-          placeholder="Your item name"
+          placeholder="Dining chair"
           required
           data-err="Please enter an item name between 3 and 50 characters"
           pattern="^[a-zA-Z0-9\s,-]{3,50}"
@@ -112,7 +112,7 @@ const JobView = ({ jobHandler }) => {
         <InputStyled
           name="phoneNo"
           icon={<FontAwesomeIcon icon={faContactBook} />}
-          placeholder="Phone number"
+          placeholder="0612345678"
           type="tel"
           data-err="Please enter a phone number like 0612345678"
           pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
@@ -122,22 +122,26 @@ const JobView = ({ jobHandler }) => {
         <InputStyled
           name="description"
           icon={<FontAwesomeIcon icon={faNoteSticky} />}
-          placeholder="Description of request"
+          placeholder="Describe your item here"
           multiline
           onChange={changeHandler}
         ></InputStyled>
 
-        <div className={styles.sizes}>
-          <Button buttonClass="outline" path="/dashboard">
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            buttonHandler={submitHandler}
-            rest={{ form: "dropRequest" }}
-          >
-            Submit
-          </Button>
+        <div className={styles.buttonDiv}>
+          <div className={styles.singleButton}>
+            <Button buttonClass="outline" path="/dashboard">
+              Cancel
+            </Button>
+          </div>
+          <div className={styles.singleButton}>
+            <Button
+              type="submit"
+              buttonHandler={submitHandler}
+              rest={{ form: "dropRequest" }}
+            >
+              Submit
+            </Button>
+          </div>
         </div>
       </div>
     </form>
