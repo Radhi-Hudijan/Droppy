@@ -178,7 +178,7 @@ const JobDetails = () => {
               defaultValue={jobDetails.item}
               placeholder="Dining chair"
               data-err="Please enter a proper item name at least 3 characters"
-              pattern="^[a-zA-Z0-9\s,-]{3,}"
+              pattern="^[a-zA-Z0-9\s&,-]{3,}"
               onChange={changeHandler}
             ></InputStyled>
 
