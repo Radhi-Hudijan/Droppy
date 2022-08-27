@@ -14,6 +14,12 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+  const homeRoute = localStorage.getItem("token") ? "/dashboard" : "/";
+  const loginRoute = localStorage.getItem("token") ? "/dashboard" : "/login";
+  const signUpRoute = localStorage.getItem("token")
+    ? "/dashboard"
+    : "/user/create";
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -64,36 +70,20 @@ const Footer = () => {
           <h4 className={appStyle.h2Desktop}>Quick links</h4>
           <ul className={appStyle.bodyDesktop}>
             <li>
-              <Link to={"/"}>about us</Link>
+              <Link to={homeRoute}>home</Link>
             </li>
             <li>
-              <Link to={"/"}>careers</Link>
+              <Link to={"/about"}>about us</Link>
             </li>
             <li>
-              <Link to={"/"}>support center</Link>
+              <Link to={loginRoute}>login</Link>
             </li>
             <li>
-              <Link to={"/"}>Contact us</Link>
+              <Link to={signUpRoute}>Sign up</Link>
             </li>
           </ul>
         </div>
-        <div className={styles.footerCol}>
-          <h4 className={appStyle.h2Desktop}>legal</h4>
-          <ul className={appStyle.bodyDesktop}>
-            <li>
-              <Link to={"/"}>privacy Notice</Link>
-            </li>
-            <li>
-              <Link to={"/"}>terms of use</Link>
-            </li>
-            <li>
-              <Link to={"/"}>security</Link>
-            </li>
-            <li>
-              <Link to={"/"}>customers</Link>
-            </li>
-          </ul>
-        </div>
+
         <div className={styles.footerCol}>
           <h4 className={appStyle.h2Desktop}>follow us</h4>
           <div className={styles.socialLinks}>

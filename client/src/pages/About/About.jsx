@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import styles from "./About.module.css";
 import appStyle from "../../App.module.css";
 import DeliveryIcon from "../../assets/icons/deliveryIcon.svg";
 
 const About = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       <div className={styles.aboutSection}>
