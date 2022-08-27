@@ -32,10 +32,25 @@
 
 .dimensionsContainer input {
   width: 135px;
+  margin: 10px 0px 20px;
+}
+
+.dimensionsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 450px;
+  margin: 0 auto;
 }
 
 .invisible {
   color: transparent;
+}
+
+.singleButton,
+.singleBtn {
+  width: 450px;
+  margin: auto;
 }
 
 @media screen and (max-width: 740px) {
@@ -59,5 +74,16 @@
 
   .dimensionsContainer input {
     width: 96px;
+    margin: 10px 0px;
+    /* margin-left: 5px; */
+  }
+
+  .singleButton {
+    width: 330px;
+  }
+
+  .singleBtn {
+    width: 330px;
+    margin-top: 10px;
   }
 }

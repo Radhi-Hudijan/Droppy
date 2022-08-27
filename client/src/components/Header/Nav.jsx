@@ -90,9 +90,7 @@ const Nav = ({ opened }) => {
           data-testid="linkToLogin"
           onClick={() => {
             if (token) {
-              localStorage.removeItem("token");
-              localStorage.removeItem("isDriver");
-              localStorage.removeItem("userID");
+              localStorage.clear();
               window.reload();
             }
             if (isMdScreen) return;

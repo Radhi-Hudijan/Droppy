@@ -7,7 +7,7 @@
   gap: 10px;
   align-items: center;
   text-align: center;
-  margin: 5% auto;
+  margin: 12% auto;
 }
 
 .homePage p {
@@ -28,6 +28,18 @@
   justify-content: center;
   align-items: center;
   margin: auto;
+}
+
+.graphContainer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.graph {
+  width: 50%;
 }
 
 .allCards {
@@ -65,6 +77,10 @@
   letter-spacing: -0.02em;
 }
 
+.singleButton {
+  width: 450px;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 740px) {
@@ -90,5 +106,9 @@
 
   .cardText {
     margin-top: 50px;
+  }
+
+  .singleButton {
+    width: 330px;
   }
 }

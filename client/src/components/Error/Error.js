@@ -5,12 +5,12 @@ import styles from "./Error.module.css";
 const Error = ({ error }) => {
   return (
     <section className={styles.container}>
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <h3 className={styles.title}>Oops! An error occured!</h3>
-      </header>
+      </header> */}
       <div className={styles.body}>
         <p>
-          <strong>Error: {error.toString()}</strong>
+          <strong>{error.toString()}</strong>
         </p>
       </div>
     </section>

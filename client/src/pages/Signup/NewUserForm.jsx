@@ -76,9 +76,11 @@ export default function NewUserForm(props) {
           />
         </div>
         <div className={style["btn-next"]}>
-          <Button type="submit">
-            Next <FontAwesomeIcon icon={faArrowRight} />
-          </Button>
+          <div className={style.singleButton}>
+            <Button type="submit">
+              Next <FontAwesomeIcon icon={faArrowRight} />
+            </Button>
+          </div>
         </div>
       </form>
     </div>

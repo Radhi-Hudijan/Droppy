@@ -18,19 +18,20 @@ import JobDetails from "./pages/Job/JobDetails";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import UserInfoContext from "./context/UserInfoContext";
 import About from "./components/About/About";
+import ProfilePage from "./pages/Profile/ProfilePage";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState("");
-  const [isDriver, setIsDriver] = useState(null);
-  const { token } = useContext(UserInfoContext);
+  // const [isDriver, setIsDriver] = useState(null);
+  const { token, isDriver, setIsDriver } = useContext(UserInfoContext);
 
   useEffect(() => {
     setUser(localStorage.getItem("token"));
     localStorage.getItem("isDriver") === "true"
       ? setIsDriver(true)
       : setIsDriver(false);
-  }, [token]);
+  }, [token, isDriver]);
 
   const openHandler = () => {
     setIsOpen(!isOpen);
@@ -53,6 +54,7 @@ const App = () => {
         )}
         {user && <Route path="/dashboard" element={<Dashboard />} />}
         <Route path="/about" element={<About />} />
+        {user && <Route path="/profile/:id" element={<ProfilePage />} />}
       </Routes>
       <Footer />
     </motion.div>
