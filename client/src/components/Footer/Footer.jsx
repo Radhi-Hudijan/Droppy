@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "../../components/Logo";
 import appStyle from "../../App.module.css";
 import styles from "./Footer.module.css";
@@ -16,13 +16,15 @@ import UserInfoContext from "./../../context/UserInfoContext";
 
 const Footer = () => {
   const { setToken } = useContext(UserInfoContext);
-  const navigate = useNavigate();
 
+  function scrollTop() {
+    window.scrollTo(0, 0);
+  }
   let landingDashboard = "/";
   let loginLogout = {
     to: "/login",
     name: "Log in",
-    onClick: () => navigate("/login"),
+    onClick: scrollTop,
   };
   let signUpProfile = { to: "/user/create", name: "Sign up" };
   if (localStorage.getItem("token")) {
@@ -91,13 +93,17 @@ const Footer = () => {
           <h4 className={appStyle.h2Desktop}>Quick links</h4>
           <ul className={appStyle.bodyDesktop}>
             <li>
-              <Link to={landingDashboard}>home</Link>
+              <Link to={landingDashboard} onClick={scrollTop}>
+                Home
+              </Link>
             </li>
             <li>
               <Link to={"/about"}>about us</Link>
             </li>
             <li>
-              <Link to={signUpProfile.to}>{signUpProfile.name}</Link>
+              <Link to={signUpProfile.to} onClick={scrollTop}>
+                {signUpProfile.name}
+              </Link>
             </li>
             <li>
               <Link to={loginLogout.to} onClick={loginLogout.onClick}>
