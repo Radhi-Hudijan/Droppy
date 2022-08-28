@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../components/Logo";
 import appStyle from "../../App.module.css";
 import styles from "./Footer.module.css";
@@ -12,13 +12,34 @@ import {
   FaPhoneAlt,
   FaEnvelopeOpen,
 } from "react-icons/fa";
+import UserInfoContext from "./../../context/UserInfoContext";
 
 const Footer = () => {
-  const homeRoute = localStorage.getItem("token") ? "/dashboard" : "/";
-  const loginRoute = localStorage.getItem("token") ? "/dashboard" : "/login";
-  const signUpRoute = localStorage.getItem("token")
-    ? "/dashboard"
-    : "/user/create";
+  const { setToken } = useContext(UserInfoContext);
+  const navigate = useNavigate();
+
+  let landingDashboard = "/";
+  let loginLogout = {
+    to: "/login",
+    name: "Log in",
+    onClick: () => navigate("/login"),
+  };
+  let signUpProfile = { to: "/user/create", name: "Sign up" };
+  if (localStorage.getItem("token")) {
+    landingDashboard = "/dashboard";
+    signUpProfile = {
+      to: `/profile/${localStorage.getItem("userID")}`,
+      name: "Profile",
+    };
+    loginLogout = {
+      to: "/",
+      name: "Log out",
+      onClick: () => {
+        localStorage.clear();
+        setToken("");
+      },
+    };
+  }
 
   return (
     <div className={styles.container}>
@@ -70,16 +91,18 @@ const Footer = () => {
           <h4 className={appStyle.h2Desktop}>Quick links</h4>
           <ul className={appStyle.bodyDesktop}>
             <li>
-              <Link to={homeRoute}>home</Link>
+              <Link to={landingDashboard}>home</Link>
             </li>
             <li>
               <Link to={"/about"}>about us</Link>
             </li>
             <li>
-              <Link to={loginRoute}>login</Link>
+              <Link to={signUpProfile.to}>{signUpProfile.name}</Link>
             </li>
             <li>
-              <Link to={signUpRoute}>Sign up</Link>
+              <Link to={loginLogout.to} onClick={loginLogout.onClick}>
+                {loginLogout.name}
+              </Link>
             </li>
           </ul>
         </div>
