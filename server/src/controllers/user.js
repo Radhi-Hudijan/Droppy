@@ -42,21 +42,24 @@ export const getUser = async (req, res) => {
   }
 };
 
-// Find One user
+// Find Accepted Drivers
 export const getAcceptedDrivers = async (req, res) => {
-  const { id } = req.body.id;
+  const { delivererIDs } = req.body;
+
   try {
-    const user = await User.findOne({ _id: id });
-    res.status(200).json({
-      notify: false,
-      success: true,
-      result: {
+    const drivers = [];
+    for (let i = 0; i < delivererIDs.length; i++) {
+      const user = await User.findOne({ _id: delivererIDs[i] });
+      const driverInfo = {
         name: user.name,
-        vehicleInfo: {
-          contact: user.vehicleInfo.contact,
-          plate: user.vehicleInfo.plate,
-        },
-      },
+        contact: user.vehicleInfo.contact,
+      };
+      drivers.push(driverInfo);
+    }
+
+    res.status(200).json({
+      success: true,
+      result: drivers,
     });
   } catch (error) {
     logError(error);

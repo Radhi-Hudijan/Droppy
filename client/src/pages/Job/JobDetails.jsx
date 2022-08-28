@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import Button from "../../components/Button";
 import InputStyled from "../../components/InputStyled";
 import styles from "./JobDetails.module.css";
@@ -39,14 +39,17 @@ const JobDetails = () => {
     phoneNo: "",
     category: "",
   });
-  // const [delivererIDs, setDelivererIDs] = useState([]);
+  const [delivererIDs, setDelivererIDs] = useState([]);
+  const [acceptedBy, setAcceptedBy] = useState([]);
   const form = React.useRef();
   const { id } = useParams();
   const { notifier } = useContext(NotifierContext);
 
   const onSuccess = (onReceived) => {
     setJobDetails(onReceived.result);
-    // setDelivererIDs(onReceived.result.delivererIDs);
+    setDelivererIDs(onReceived.result.delivererIDs);
+
+    if (onReceived.notify) setAcceptedBy(onReceived.result);
 
     if (!isLocked) {
       notifier(onReceived.message);
@@ -80,6 +83,25 @@ const JobDetails = () => {
     });
     return cancelFetch;
   }, []);
+
+  const onDriverSuccess = (onReceived) => {
+    setAcceptedBy(onReceived.result);
+  };
+
+  const { performFetch: fetchDrivers, cancelFetch: cancelDriverFetch } =
+    useFetch("/user/accepted-drivers", onDriverSuccess);
+
+  useEffect(() => {
+    fetchDrivers({
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ delivererIDs }),
+    });
+
+    return cancelDriverFetch;
+  }, [delivererIDs]);
 
   const editHandler = (e) => {
     e.preventDefault();
@@ -281,8 +303,15 @@ const JobDetails = () => {
 
             <div>
               <p className={appStyles.boldBodyDesktop}>
-                These drivers would like to help you, get in touch with them!
+                These drivers would like to help you!
               </p>
+              <ul className={styles.acceptedDeliverers}>
+                {acceptedBy.map((driver, index) => (
+                  <li key={index}>
+                    {driver.name}: {driver.contact}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {isDriver ? (
@@ -325,7 +354,4 @@ const JobDetails = () => {
   );
 };
 
-JobDetails.propTypes = {
-  sendPutRequest: PropTypes.func,
-};
 export default JobDetails;

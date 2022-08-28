@@ -23,6 +23,6 @@ userRouter.delete("/:id", deleteUser);
 
 userRouter.patch("/:id", updateUser);
 
-userRouter.get("/", getAcceptedDrivers);
+userRouter.post("/accepted-drivers", getAcceptedDrivers);
 
 export default userRouter;
