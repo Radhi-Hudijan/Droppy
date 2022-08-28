@@ -20,7 +20,7 @@ const useCategories = () => {
     });
     return cancelFetch;
   }, []);
-  
+
   return categories;
 };
 export default useCategories;

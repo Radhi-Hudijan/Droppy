@@ -119,7 +119,8 @@ const JobDetails = () => {
     const el = e.target;
     const name = el.name;
     const value = el.value;
-    if (value !== "") setJobDetails((values) => ({ ...values, [name]: value.toUpperCase() }));
+    if (value !== "")
+      setJobDetails((values) => ({ ...values, [name]: value.toUpperCase() }));
   };
 
   function deleteHandler() {
@@ -183,10 +184,10 @@ const JobDetails = () => {
             >
               <option value="">{jobDetails.category}</option>
               {categories.map((category, i) => (
-            <option key={i} value={category}>
-              {category}
-            </option>
-          ))}
+                <option key={i} value={category}>
+                  {category}
+                </option>
+              ))}
             </select>
           </div>
 
