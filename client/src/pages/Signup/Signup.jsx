@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NewUserForm from "./NewUserForm";
 import useFetch from "../../hooks/useFetch";
@@ -34,6 +34,10 @@ function Signup() {
   useEffect(() => {
     return cancelFetch;
   }, []);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   function addUserHandler(user) {
     userDataOnSuccess.name = user.name;
