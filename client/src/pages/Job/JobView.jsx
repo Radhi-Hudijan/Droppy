@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../../components/Button";
 import InputStyled from "../../components/InputStyled";
@@ -12,10 +12,12 @@ import {
   faNoteSticky,
   faRuler,
 } from "@fortawesome/free-solid-svg-icons";
+import useCategories from "../../hooks/useCategories";
 
 const JobView = ({ jobHandler }) => {
-  const [inputs, setInputs] = React.useState({});
+  const [inputs, setInputs] = useState({});
   const form = React.useRef();
+  const categories = useCategories();
 
   const changeHandler = (e) => {
     const el = e.target;
@@ -38,9 +40,11 @@ const JobView = ({ jobHandler }) => {
       <div className={styles.select}>
         <select name="category" id="cars" onChange={changeHandler} required>
           <option value="">--Please choose a Category--</option>
-          <option value="furniture">furniture</option>
-          <option value="electronics">Electronics</option>
-          <option value="other">Other</option>
+          {categories.map((category, i) => (
+            <option key={i} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
       </div>
 

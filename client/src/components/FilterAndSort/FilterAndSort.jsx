@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
+import React, { useState, useContext } from "react";
 import style from "./FilterAndSort.module.css";
 import QueriesContext from "../../context/QueriesContext";
-import { useContext } from "react";
+import useCategories from "../../hooks/useCategories";
 
 function FilterAndSort() {
-  const [categories, setCategories] = useState([]);
   const [inputs, setInputs] = useState({});
   const { setQueries } = useContext(QueriesContext);
-
-  const onSuccess = (onReceived) => {
-    setCategories(onReceived.result);
-  };
-
-  const { performFetch, cancelFetch } = useFetch("/categories", onSuccess);
-
-  useEffect(() => {
-    performFetch({
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    return cancelFetch;
-  }, []);
+  const categories = useCategories();
 
   const changeHandler = (e) => {
     const el = e.target;
