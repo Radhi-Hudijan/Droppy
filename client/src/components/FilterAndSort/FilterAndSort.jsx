@@ -44,7 +44,7 @@ function FilterAndSort() {
         </select>
       </div>
       <div className={style.size}>
-        <h5>Size (cm)</h5>
+        <h5>Max Size (cm)</h5>
         <input
           name="width"
           className={`${style.whl} filter-input`}

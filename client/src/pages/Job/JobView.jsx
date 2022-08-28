@@ -55,7 +55,7 @@ const JobView = ({ jobHandler }) => {
           placeholder="Your item name"
           required
           data-err="Please enter an item name between 3 and 50 characters"
-          pattern="^[a-zA-Z0-9\s,-]{3,50}"
+          pattern="^[a-zA-Z0-9\s&,-]{3,50}"
           onChange={changeHandler}
         ></InputStyled>
         <div className={styles.sizes}>

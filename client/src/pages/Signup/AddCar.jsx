@@ -4,14 +4,18 @@ import useFetch from "../../hooks/useFetch";
 import UserInfoContext from "../../context/UserInfoContext";
 import style from "./Signup.module.css";
 import appStyles from "../../App.module.css";
+import { useNavigate } from "react-router-dom";
 
 function AddCar() {
-  const { setVehicleInfo } = useContext(UserInfoContext);
+  const { setIsDriver } = useContext(UserInfoContext);
+  const navigate = useNavigate();
 
-  let vehicleInfoOnSuccess;
-  const onSuccess = () => {
-    setVehicleInfo(vehicleInfoOnSuccess);
-    window.location = "/dashboard";
+  const onSuccess = (onReceived) => {
+    localStorage.setItem("isDriver", `${onReceived.result.isDriver}`);
+    setIsDriver(onReceived.result.isDriver);
+    navigate("/dashboard", {
+      replace: true,
+    });
   };
 
   const { isLoading, error, performFetch, cancelFetch } = useFetch(
@@ -24,7 +28,6 @@ function AddCar() {
   }, []);
 
   function addCarHandler(vehicleInfo) {
-    vehicleInfoOnSuccess = vehicleInfo;
     performFetch({
       method: "PATCH",
       headers: {

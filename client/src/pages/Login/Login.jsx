@@ -11,8 +11,7 @@ import Loading from "../../components/Loading/Loading";
 function Login() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const { setEmail, setName, setSurname, setVehicleInfo, setToken } =
-    useContext(UserInfoContext);
+  const { setIsDriver, setToken } = useContext(UserInfoContext);
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
@@ -24,10 +23,7 @@ function Login() {
     const isDriver = res.vehicleInfo.plate ? true : false;
     localStorage.setItem("isDriver", `${isDriver}`);
     localStorage.setItem("userID", res.id);
-    setEmail(res.email);
-    setName(res.name);
-    setSurname(res.surname);
-    setVehicleInfo(res.vehicleInfo);
+    setIsDriver(isDriver);
     setToken(res.data);
     navigate("/dashboard", {
       replace: true,
