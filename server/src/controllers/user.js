@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User, { validateUser, validateUserUpdate } from "../models/User.js";
 import { logError } from "../util/logging.js";
+import makeFirstLetterUpper from "../util/makeFirstLetterUpper.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -216,7 +217,3 @@ export const addCar = async (req, res) => {
     });
   }
 };
-
-function makeFirstLetterUpper(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}

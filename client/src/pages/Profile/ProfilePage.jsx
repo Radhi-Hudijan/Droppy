@@ -29,7 +29,7 @@ import EditProfileForm from "./EditProfileForm";
 import UserInfoContext from "../../context/UserInfoContext";
 
 const ProfilePage = () => {
-  const { setIsDriver, isDriver } = useContext(UserInfoContext);
+  const { setIsDriver, isDriver, setToken } = useContext(UserInfoContext);
 
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -65,7 +65,7 @@ const ProfilePage = () => {
   const onSuccess = (onReceived) => {
     if (onReceived.isDelete) {
       localStorage.clear();
-      window.reload();
+      setToken("");
       return;
     }
     onReceived.result.vehicleInfo.contact
