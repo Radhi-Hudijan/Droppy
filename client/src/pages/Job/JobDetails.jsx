@@ -20,9 +20,10 @@ import { useEffect } from "react";
 import { useState, useContext } from "react";
 import Loading from "../../components/Loading/Loading";
 import NotifierContext from "../../context/NotifierContext";
+import UserInfoContext from "../../context/UserInfoContext";
 
 const JobDetails = () => {
-  const [isDriver, setIsDriver] = useState(true);
+  const { setIsDriver, isDriver } = useContext(UserInfoContext);
   const [isLocked, setIsLocked] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -85,22 +86,24 @@ const JobDetails = () => {
   }, []);
 
   const onDriverSuccess = (onReceived) => {
-    setAcceptedBy(onReceived.result);
+    if (!isDriver) setAcceptedBy(onReceived.result);
   };
 
   const { performFetch: fetchDrivers, cancelFetch: cancelDriverFetch } =
     useFetch("/user/accepted-drivers", onDriverSuccess);
 
   useEffect(() => {
-    fetchDrivers({
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ delivererIDs }),
-    });
+    if (!isDriver) {
+      fetchDrivers({
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ delivererIDs }),
+      });
 
-    return cancelDriverFetch;
+      return cancelDriverFetch;
+    }
   }, [delivererIDs]);
 
   const editHandler = (e) => {
@@ -301,18 +304,20 @@ const JobDetails = () => {
               onChange={changeHandler}
             ></InputStyled>
 
-            <div>
-              <p className={appStyles.boldBodyDesktop}>
-                These drivers would like to help you!
-              </p>
-              <ul className={styles.acceptedDeliverers}>
-                {acceptedBy.map((driver, index) => (
-                  <li key={index}>
-                    {driver.name}: {driver.contact}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {!isDriver && (
+              <div className={styles.acceptedDriversSection}>
+                <p className={appStyles.boldBodyDesktop}>
+                  These drivers would like to help you!
+                </p>
+                <ul className={styles.acceptedDeliverers}>
+                  {acceptedBy.map((driver, index) => (
+                    <li key={index} className={appStyles.bodyDesktop}>
+                      {driver.name}: {driver.contact}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {isDriver ? (
               <div className={styles.buttonDiv}>

@@ -222,6 +222,7 @@ const ProfilePage = () => {
             </Button>
           </div>
         </div>
+        {statusbar}
         {deleteHelper ? deletePrompt : ""}
         {hasDriverDetails && (
           <div className={style.toggle}>
@@ -326,7 +327,6 @@ const ProfilePage = () => {
             />
           )}
         </div>
-        {statusbar}
       </div>
     </div>
   );
