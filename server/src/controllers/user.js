@@ -42,6 +42,33 @@ export const getUser = async (req, res) => {
   }
 };
 
+// Find Accepted Drivers
+export const getAcceptedDrivers = async (req, res) => {
+  const { delivererIDs } = req.body;
+
+  try {
+    const drivers = [];
+    for (let i = 0; i < delivererIDs.length; i++) {
+      const user = await User.findOne({ _id: delivererIDs[i] });
+      const driverInfo = {
+        name: user.name,
+        contact: user.vehicleInfo.contact,
+      };
+      drivers.push(driverInfo);
+    }
+
+    res.status(200).json({
+      success: true,
+      result: drivers,
+    });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get user, try again later" });
+  }
+};
+
 // Update One User
 export const updateUser = async (req, res) => {
   try {

@@ -54,6 +54,7 @@
 .select select::-ms-expand {
   display: none;
 }
+
 /* Custom Select wrapper */
 .select {
   position: relative;
@@ -78,6 +79,7 @@
   transition: 0.25s all ease;
   pointer-events: none;
 }
+
 /* Transition */
 .select:hover::after {
   color: var(--white);
@@ -89,7 +91,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .buttonDiv {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 1/-1;
+    gap: 20px;
+  }
+
   .formClass > * {
     grid-column: 2/-2;
+  }
+
+  .formClass {
+    width: 100vw;
   }
 }
