@@ -21,6 +21,7 @@ import { useState, useContext } from "react";
 import Loading from "../../components/Loading/Loading";
 import NotifierContext from "../../context/NotifierContext";
 import UserInfoContext from "../../context/UserInfoContext";
+import useCategories from "../../hooks/useCategories";
 
 const JobDetails = () => {
   const { setIsDriver, isDriver } = useContext(UserInfoContext);
@@ -28,6 +29,8 @@ const JobDetails = () => {
   const [isAccepted, setIsAccepted] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [isSaveClicked, setIsSaveClicked] = useState(false);
+  const categories = useCategories();
+
   const [jobDetails, setJobDetails] = useState({
     item: "",
     description: "",
@@ -144,7 +147,8 @@ const JobDetails = () => {
     const el = e.target;
     const name = el.name;
     const value = el.value;
-    if (value !== "") setJobDetails((values) => ({ ...values, [name]: value }));
+    if (value !== "")
+      setJobDetails((values) => ({ ...values, [name]: value.toUpperCase() }));
   };
 
   function deleteHandler() {
@@ -178,6 +182,22 @@ const JobDetails = () => {
     return invertedDate;
   };
 
+  // const onSuccess = (onReceived) => {
+  //   setCategories(onReceived.result);
+  // };
+
+  // const { performFetch, cancelFetch } = useFetch("/categories", onSuccess);
+
+  // useEffect(() => {
+  //   performFetch({
+  //     method: "GET",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //   });
+  //   return cancelFetch;
+  // }, []);
+
   return (
     <div>
       <h2 className={appStyles.h1Desktop}>Job Details</h2>
@@ -192,9 +212,11 @@ const JobDetails = () => {
               required
             >
               <option value="">{jobDetails.category}</option>
-              <option value="FURNITURE">furniture</option>
-              <option value="ELECTRONICS">Electronics</option>
-              <option value="OTHER">Other</option>
+              {categories.map((category, i) => (
+                <option key={i} value={category}>
+                  {category}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -207,7 +229,7 @@ const JobDetails = () => {
               defaultValue={jobDetails.item}
               placeholder="Dining chair"
               data-err="Please enter a proper item name at least 3 characters"
-              pattern="^[a-zA-Z0-9\s,-]{3,}"
+              pattern="^[a-zA-Z0-9\s&,-]{3,}"
               onChange={changeHandler}
             ></InputStyled>
 

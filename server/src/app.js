@@ -3,6 +3,7 @@ import cors from "cors";
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/authentication.js";
 import jobRouter from "./routes/job.js";
+import graphsRouter from "./routes/graphs.js";
 import categoriesRouter from "./routes/categories.js";
 
 // Create an express server
@@ -22,6 +23,7 @@ app.use("/api/user", userRouter);
 app.use("/api/profile", userRouter);
 app.use("/api/authentication", authRouter);
 app.use("/api/jobs", jobRouter);
+app.use("/api/graphs", graphsRouter);
 app.use("/api/categories", categoriesRouter);
 
 export default app;

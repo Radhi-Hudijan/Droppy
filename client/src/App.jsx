@@ -17,6 +17,7 @@ import Notifier from "./components/Notifier";
 import JobDetails from "./pages/Job/JobDetails";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import UserInfoContext from "./context/UserInfoContext";
+import About from "./pages/About/About";
 import ProfilePage from "./pages/Profile/ProfilePage";
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/jobs/create" element={<CreateJobController />} />
         )}
         {user && <Route path="/dashboard" element={<Dashboard />} />}
+        <Route path="/about" element={<About />} />
         {user && <Route path="/profile/:id" element={<ProfilePage />} />}
       </Routes>
       <Footer />

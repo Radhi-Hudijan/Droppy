@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useLayoutEffect } from "react";
 import style from "./Dashboard.module.css";
 import appStyle from "../../App.module.css";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,10 @@ function Dashboard() {
   const [isClickedToAvailable, setIsClickedToAvailable] = useState(true);
   const [pageToShow, setPageToShow] = useState(null);
   const { setQueries } = useContext(QueriesContext);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   useEffect(() => {
     if (localStorage.getItem("isDriver") === "true") {

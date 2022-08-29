@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import UserInfoContext from "../../context/UserInfoContext";
 
 // Component
 import Button from "../../components/Button";
@@ -11,7 +10,6 @@ import appStyle from "../../App.module.css";
 import NotifierContext from "../../context/NotifierContext";
 
 export default function AddCarForm(props) {
-  const { email } = useContext(UserInfoContext);
   const { notifier } = useContext(NotifierContext);
 
   const [allInputs, setAllInputs] = useState({
@@ -49,7 +47,7 @@ export default function AddCarForm(props) {
     e.preventDefault();
 
     const vehicleInfo = {
-      email,
+      _id: localStorage.getItem("userID"),
       ...allInputs,
     };
 

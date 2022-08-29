@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, useLayoutEffect } from "react";
 import Button from "../../components/Button";
 import useFetch from "../../hooks/useFetch";
 import style from "./Login.module.css";
@@ -11,19 +11,19 @@ import Loading from "../../components/Loading/Loading";
 function Login() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const { setEmail, setName, setSurname, setVehicleInfo, setToken } =
-    useContext(UserInfoContext);
+  const { setIsDriver, setToken } = useContext(UserInfoContext);
   const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   const onSuccess = (res) => {
     localStorage.setItem("token", res.data);
     const isDriver = res.vehicleInfo.plate ? true : false;
     localStorage.setItem("isDriver", `${isDriver}`);
     localStorage.setItem("userID", res.id);
-    setEmail(res.email);
-    setName(res.name);
-    setSurname(res.surname);
-    setVehicleInfo(res.vehicleInfo);
+    setIsDriver(isDriver);
     setToken(res.data);
     navigate("/dashboard", {
       replace: true,

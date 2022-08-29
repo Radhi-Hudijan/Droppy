@@ -5,27 +5,27 @@ import { categories } from "../routes/categories.js";
 const ITEMS_PER_PAGE = 5;
 
 export const getAllJobs = async (req, res) => {
-  const page = req.query.page || 1;
-  const width = req.query.width || 10000;
-  const height = req.query.height || 10000;
-  const length = req.query["length"] || 10000;
-  const dateStart =
-    req.query.dateStart || new Date(new Date().setHours(0, 0, 0, 0));
-  const dateEnd = req.query.dateEnd || new Date("2032-08-23");
-  const category = req.query.category || {
+  const { page, width, height, length, dateStart, dateEnd, category } =
+    req.query;
+  const pageQuery = page || 1;
+  const widthQuery = width || 10000;
+  const heightQuery = height || 10000;
+  const lengthQuery = length || 10000;
+  const dateStartQuery = dateStart || new Date(new Date().setHours(0, 0, 0, 0));
+  const dateEndQuery = dateEnd || new Date("2032-08-23");
+  const categoryQuery = category || {
     $in: categories.map((category) => category.toUpperCase()),
   };
 
-  // Put all your query params in here
   const query = {
-    width: { $lte: width },
-    height: { $lte: height },
-    length: { $lte: length },
-    date: { $gte: dateStart, $lte: dateEnd },
-    category: category,
+    width: { $lte: widthQuery },
+    height: { $lte: heightQuery },
+    length: { $lte: lengthQuery },
+    date: { $gte: dateStartQuery, $lte: dateEndQuery },
+    category: categoryQuery,
   };
 
-  const skip = (page - 1) * ITEMS_PER_PAGE;
+  const skip = (pageQuery - 1) * ITEMS_PER_PAGE;
 
   try {
     const count = await Job.countDocuments(query);
@@ -37,7 +37,6 @@ export const getAllJobs = async (req, res) => {
       });
     }
 
-    // await Job.deleteMany();
     const jobs = await Job.find(query)
       .sort({ date: 1 })
       .limit(ITEMS_PER_PAGE)
@@ -59,26 +58,26 @@ export const getAllJobs = async (req, res) => {
 };
 
 export const getActiveJobs = async (req, res) => {
-  const page = req.query.page || 1;
-  const width = req.query.width || 10000;
-  const height = req.query.height || 10000;
-  const length = req.query["length"] || 10000;
-  const dateStart =
-    req.query.dateStart || new Date(new Date().setHours(0, 0, 0, 0));
-  const dateEnd = req.query.dateEnd || new Date("2032-08-23");
-  const category = req.query.category || {
+  const { page, width, height, length, dateStart, dateEnd, category } =
+    req.query;
+  const pageQuery = page || 1;
+  const widthQuery = width || 10000;
+  const heightQuery = height || 10000;
+  const lengthQuery = length || 10000;
+  const dateStartQuery = dateStart || new Date(new Date().setHours(0, 0, 0, 0));
+  const dateEndQuery = dateEnd || new Date("2032-08-23");
+  const categoryQuery = category || {
     $in: categories.map((category) => category.toUpperCase()),
   };
-
-  const skip = (page - 1) * ITEMS_PER_PAGE;
+  const skip = (pageQuery - 1) * ITEMS_PER_PAGE;
 
   try {
     let query = {
-      width: { $lte: width },
-      height: { $lte: height },
-      length: { $lte: length },
-      date: { $gte: dateStart, $lte: dateEnd },
-      category: category,
+      width: { $lte: widthQuery },
+      height: { $lte: heightQuery },
+      length: { $lte: lengthQuery },
+      date: { $gte: dateStartQuery, $lte: dateEndQuery },
+      category: categoryQuery,
     };
 
     req.body.isDriver !== "true"
@@ -93,10 +92,17 @@ export const getActiveJobs = async (req, res) => {
     const count = await Job.countDocuments(query);
 
     if (count === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "No job with the filter",
-      });
+      if (Object.keys(req.query).length === 1) {
+        return res.status(404).json({
+          success: false,
+          message: "There is no job yet!",
+        });
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: "There is no result!",
+        });
+      }
     }
 
     const pageCount = Math.ceil(count / ITEMS_PER_PAGE);

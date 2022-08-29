@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../components/Logo";
 import appStyle from "../../App.module.css";
@@ -12,8 +12,37 @@ import {
   FaPhoneAlt,
   FaEnvelopeOpen,
 } from "react-icons/fa";
+import UserInfoContext from "./../../context/UserInfoContext";
 
 const Footer = () => {
+  const { setToken } = useContext(UserInfoContext);
+
+  function scrollTop() {
+    window.scrollTo(0, 0);
+  }
+  let landingDashboard = "/";
+  let loginLogout = {
+    to: "/login",
+    name: "Log in",
+    onClick: scrollTop,
+  };
+  let signUpProfile = { to: "/user/create", name: "Sign up" };
+  if (localStorage.getItem("token")) {
+    landingDashboard = "/dashboard";
+    signUpProfile = {
+      to: `/profile/${localStorage.getItem("userID")}`,
+      name: "Profile",
+    };
+    loginLogout = {
+      to: "/",
+      name: "Log out",
+      onClick: () => {
+        localStorage.clear();
+        setToken("");
+      },
+    };
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -64,36 +93,26 @@ const Footer = () => {
           <h4 className={appStyle.h2Desktop}>Quick links</h4>
           <ul className={appStyle.bodyDesktop}>
             <li>
-              <Link to={"/"}>about us</Link>
+              <Link to={landingDashboard} onClick={scrollTop}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to={"/"}>careers</Link>
+              <Link to={"/about"}>about us</Link>
             </li>
             <li>
-              <Link to={"/"}>support center</Link>
+              <Link to={signUpProfile.to} onClick={scrollTop}>
+                {signUpProfile.name}
+              </Link>
             </li>
             <li>
-              <Link to={"/"}>Contact us</Link>
+              <Link to={loginLogout.to} onClick={loginLogout.onClick}>
+                {loginLogout.name}
+              </Link>
             </li>
           </ul>
         </div>
-        <div className={styles.footerCol}>
-          <h4 className={appStyle.h2Desktop}>legal</h4>
-          <ul className={appStyle.bodyDesktop}>
-            <li>
-              <Link to={"/"}>privacy Notice</Link>
-            </li>
-            <li>
-              <Link to={"/"}>terms of use</Link>
-            </li>
-            <li>
-              <Link to={"/"}>security</Link>
-            </li>
-            <li>
-              <Link to={"/"}>customers</Link>
-            </li>
-          </ul>
-        </div>
+
         <div className={styles.footerCol}>
           <h4 className={appStyle.h2Desktop}>follow us</h4>
           <div className={styles.socialLinks}>

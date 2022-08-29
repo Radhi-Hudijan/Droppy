@@ -62,7 +62,11 @@ function DashboardActive() {
           )}
         </ul>
       </div>
-      <Pagination page={page} pageCount={pageCount} setPage={setPage} />
+      {pageCount > 1 ? (
+        <Pagination page={page} pageCount={pageCount} setPage={setPage} />
+      ) : (
+        <div></div>
+      )}
     </>
   );
 }
