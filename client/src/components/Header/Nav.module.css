@@ -81,6 +81,11 @@ ul a {
   margin-left: -90px;
 }
 
+.bodyDesktop {
+  font-size: 13px;
+  line-height: 15px;
+}
+
 @media screen and (min-width: 1400px) {
   .logoDiv svg {
     margin-left: 170%;
