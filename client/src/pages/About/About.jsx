@@ -5,7 +5,7 @@ import DeliveryIcon from "../../assets/icons/deliveryIcon.svg";
 import useFetch from "../../hooks/useFetch";
 
 // Graph
-import DemoPie from "../../components/Graphs/pieChart";
+import DemoPie from "../../components/Graphs/PieChart";
 import DemoBar from "../../components/Graphs/BarChart";
 
 const About = () => {
