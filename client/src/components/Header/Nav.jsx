@@ -53,7 +53,7 @@ const Nav = ({ opened }) => {
           </li>
         </Link>
         <Link
-          key={1}
+          key="2"
           to={"/about"}
           data-testid="linkToAbout"
           onClick={() => {
