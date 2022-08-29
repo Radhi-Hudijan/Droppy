@@ -19,7 +19,6 @@ const useFetch = (route, onReceived) => {
    * For more info: https://developer.mozilla.org/en-US/docs/Web/API/AbortController
    */
   const controller = new AbortController();
-  const signal = controller.signal;
   const cancelFetch = () => {
     controller.abort();
   };
@@ -46,7 +45,7 @@ const useFetch = (route, onReceived) => {
       // We add the /api subsection here to make it a single point of change if our configuration changes
       const url = `${process.env.BASE_SERVER_URL}/api${route}`;
 
-      const res = await fetch(url, { ...options, signal });
+      const res = await fetch(url, { ...options, signal: controller.signal });
 
       if (!res.ok) {
         setError(
@@ -72,15 +71,18 @@ const useFetch = (route, onReceived) => {
       setIsLoading(false);
     };
 
-    try {
-      fetchUsers();
-    } catch (error) {
+    fetchUsers().catch((error) => {
       setError(error);
       setIsLoading(false);
-    }
+    });
   };
 
-  return { isLoading, error, performFetch, cancelFetch };
+  return {
+    isLoading,
+    error,
+    performFetch,
+    cancelFetch,
+  };
 };
 
 export default useFetch;
