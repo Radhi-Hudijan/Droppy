@@ -5,6 +5,8 @@ import UserInfoContext from "../../context/UserInfoContext";
 import style from "./Signup.module.css";
 import appStyles from "../../App.module.css";
 import { useNavigate } from "react-router-dom";
+import Error from "../../components/Error/Error";
+import Loading from "../../components/Loading/Loading";
 
 function AddCar() {
   const { setIsDriver } = useContext(UserInfoContext);
@@ -39,11 +41,9 @@ function AddCar() {
 
   let statusComponent = null;
   if (error != null) {
-    statusComponent = (
-      <div>Error while trying to add car: {error.toString()}</div>
-    );
+    statusComponent = <Error error={error.toString()} />;
   } else if (isLoading) {
-    statusComponent = <div>Adding car....</div>;
+    statusComponent = <Loading />;
   }
 
   return (
