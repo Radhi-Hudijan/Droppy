@@ -1,5 +1,6 @@
 import Job, { validateJob } from "../models/Job.js";
 import { logError } from "../util/logging.js";
+import makeFirstLetterUpper from "../util/makeFirstLetterUpper.js";
 
 export const deleteJob = async (req, res) => {
   try {
@@ -142,6 +143,3 @@ export const createJob = async (req, res) => {
       .send({ message: "internal server error while creating job" });
   }
 };
-function makeFirstLetterUpper(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}
