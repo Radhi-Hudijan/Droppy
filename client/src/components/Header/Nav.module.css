@@ -22,6 +22,9 @@
 .navNormal {
   pointer-events: all;
 }
+.burger {
+  z-index: 11;
+}
 
 .navDesktop {
   display: flex;
@@ -86,6 +89,17 @@ ul a {
   line-height: 15px;
 }
 
+.centerLogo {
+  min-width: 20%;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
+
+.centerLogo svg {
+  width: 100%;
+}
 @media screen and (min-width: 1400px) {
   .logoDiv svg {
     margin-left: 170%;
