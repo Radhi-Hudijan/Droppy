@@ -1,6 +1,7 @@
 .formClass {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  max-width: 100%;
 }
 
 .formClass > * {
@@ -34,12 +35,19 @@
   max-width: 40%;
 }
 
-/* .buttonDiv {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column: 1/-1;
-  gap: 20px;
-} */
+.acceptedDeliverers {
+  list-style: none;
+}
+.acceptedDeliverers li {
+  padding: 5px 0px 5px 0px;
+  border-bottom: 2px solid var(--font-dark);
+}
+
+.acceptedDriversSection p {
+  background-color: var(--highlight);
+  color: var(--font-light);
+  padding: 5px 0px 5px 0px;
+}
 
 /* <select> styles */
 .select select {

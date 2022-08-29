@@ -61,6 +61,7 @@
     "framer-motion": "^6.4.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-countup": "^6.3.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.0.2"

@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User, { validateUser, validateUserUpdate } from "../models/User.js";
 import { logError } from "../util/logging.js";
+import makeFirstLetterUpper from "../util/makeFirstLetterUpper.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -33,6 +34,33 @@ export const getUser = async (req, res) => {
           height: user.vehicleInfo.height,
         },
       },
+    });
+  } catch (error) {
+    logError(error);
+    res
+      .status(500)
+      .json({ success: false, msg: "Unable to get user, try again later" });
+  }
+};
+
+// Find Accepted Drivers
+export const getAcceptedDrivers = async (req, res) => {
+  const { delivererIDs } = req.body;
+
+  try {
+    const drivers = [];
+    for (let i = 0; i < delivererIDs.length; i++) {
+      const user = await User.findOne({ _id: delivererIDs[i] });
+      const driverInfo = {
+        name: user.name,
+        contact: user.vehicleInfo.contact,
+      };
+      drivers.push(driverInfo);
+    }
+
+    res.status(200).json({
+      success: true,
+      result: drivers,
     });
   } catch (error) {
     logError(error);
@@ -189,7 +217,3 @@ export const addCar = async (req, res) => {
     });
   }
 };
-
-function makeFirstLetterUpper(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}

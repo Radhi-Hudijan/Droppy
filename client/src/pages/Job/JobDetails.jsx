@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import Button from "../../components/Button";
 import InputStyled from "../../components/InputStyled";
 import styles from "./JobDetails.module.css";
@@ -20,10 +20,11 @@ import { useEffect } from "react";
 import { useState, useContext } from "react";
 import Loading from "../../components/Loading/Loading";
 import NotifierContext from "../../context/NotifierContext";
+import UserInfoContext from "../../context/UserInfoContext";
 import useCategories from "../../hooks/useCategories";
 
 const JobDetails = () => {
-  const [isDriver, setIsDriver] = useState(true);
+  const { setIsDriver, isDriver } = useContext(UserInfoContext);
   const [isLocked, setIsLocked] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -42,12 +43,18 @@ const JobDetails = () => {
     phoneNo: "",
     category: "",
   });
+  const [delivererIDs, setDelivererIDs] = useState([]);
+  const [acceptedBy, setAcceptedBy] = useState([]);
   const form = React.useRef();
   const { id } = useParams();
   const { notifier } = useContext(NotifierContext);
 
   const onSuccess = (onReceived) => {
     setJobDetails(onReceived.result);
+    setDelivererIDs(onReceived.result.delivererIDs);
+
+    if (onReceived.notify) setAcceptedBy(onReceived.result);
+
     if (!isLocked) {
       notifier(onReceived.message);
     }
@@ -80,6 +87,27 @@ const JobDetails = () => {
     });
     return cancelFetch;
   }, []);
+
+  const onDriverSuccess = (onReceived) => {
+    if (!isDriver) setAcceptedBy(onReceived.result);
+  };
+
+  const { performFetch: fetchDrivers, cancelFetch: cancelDriverFetch } =
+    useFetch("/user/accepted-drivers", onDriverSuccess);
+
+  useEffect(() => {
+    if (!isDriver) {
+      fetchDrivers({
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ delivererIDs }),
+      });
+
+      return cancelDriverFetch;
+    }
+  }, [delivererIDs]);
 
   const editHandler = (e) => {
     e.preventDefault();
@@ -173,6 +201,7 @@ const JobDetails = () => {
   return (
     <div>
       <h2 className={appStyles.h1Desktop}>Job Details</h2>
+      {statusbar}
       {jobDetails.item && (
         <form className={styles.formClass} name="dropRequest" ref={form}>
           <div className={styles.select}>
@@ -297,6 +326,21 @@ const JobDetails = () => {
               onChange={changeHandler}
             ></InputStyled>
 
+            {!isDriver && (
+              <div className={styles.acceptedDriversSection}>
+                <p className={appStyles.boldBodyDesktop}>
+                  These drivers would like to help you!
+                </p>
+                <ul className={styles.acceptedDeliverers}>
+                  {acceptedBy.map((driver, index) => (
+                    <li key={index} className={appStyles.bodyDesktop}>
+                      {driver.name}: {driver.contact}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {isDriver ? (
               <div className={styles.buttonDiv}>
                 {isAccepted && (
@@ -333,12 +377,8 @@ const JobDetails = () => {
           </div>
         </form>
       )}
-      {statusbar}
     </div>
   );
 };
 
-JobDetails.propTypes = {
-  sendPutRequest: PropTypes.func,
-};
 export default JobDetails;
