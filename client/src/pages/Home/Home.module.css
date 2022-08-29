@@ -1,6 +1,6 @@
 .homePage {
   width: 95vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,9 +18,9 @@
   width: 450px;
 }
 
-.homepageContainer {
+/* .homepageContainer {
   height: 100vh;
-}
+} */
 
 .logoContainer {
   width: 450px;
@@ -28,18 +28,6 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-}
-
-.graphContainer {
-  margin-top: 20px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.graph {
-  width: 50%;
 }
 
 .allCards {
@@ -81,6 +69,42 @@
   width: 450px;
 }
 
+/* statistics */
+.statContainer {
+  width: 70%;
+  padding: 2rem;
+  box-shadow: rgba(2, 43, 58, 0.3) 0px 4px 12px;
+  margin-top: 5rem;
+}
+.statContainer .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.statContainer .statsText {
+  font-size: 25px;
+  margin-top: 15px;
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.statsLine {
+  margin: 12px auto 0;
+  width: 55px;
+  height: 4px;
+  background-color: var(--highlight);
+}
+
+.statIcon {
+  font-size: 35px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  float: none;
+  display: table;
+  color: var(--highlight);
+}
 /* Media Queries */
 
 @media screen and (max-width: 740px) {
@@ -110,5 +134,15 @@
 
   .singleButton {
     width: 330px;
+  }
+
+  .statContainer {
+    margin: 3rem;
+  }
+  .statContainer .row {
+    flex-direction: column;
+  }
+  .statContainer .col {
+    margin: 1rem;
   }
 }

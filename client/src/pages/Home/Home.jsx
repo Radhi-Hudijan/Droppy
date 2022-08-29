@@ -14,21 +14,17 @@ import Button from "../../components/Button";
 import Logo from "../../components/Logo";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-// Graph
-import DemoPie from "../../components/Graphs/pieChart";
-import DemoBar from "../../components/Graphs/BarChart";
+import CountUp from "react-countup";
+
+import { FaUser, FaCar, FaClipboardCheck } from "react-icons/fa";
 
 const Home = () => {
-  const [availableJobAmount, setAvailableJobAmount] = useState();
   const [totalJobAmount, setTotalJobAmount] = useState();
-  const [takenJobAmount, setTakenJobAmount] = useState();
   const [sendersAmount, setSendersAmount] = useState();
   const [deliverersAmount, setDeliverersAmount] = useState();
 
   const onSuccess = (onReceived) => {
-    setAvailableJobAmount(onReceived.result.numOfAvailableJobs);
     setTotalJobAmount(onReceived.result.numOfTotalJobs);
-    setTakenJobAmount(onReceived.result.numOfTakenJobs);
     setSendersAmount(onReceived.result.numOfSenders);
     setDeliverersAmount(onReceived.result.numOfDeliverers);
   };
@@ -44,7 +40,6 @@ const Home = () => {
     });
     return cancelFetch;
   }, []);
-
   return (
     <div data-testid={TEST_ID.container}>
       <div className={style.homePage}>
@@ -78,16 +73,44 @@ const Home = () => {
             text={"Add your car to your profile to sign up as a driver today!"}
           />
         </div>
-        <div className={style.graphContainer}>
-          <div className={style.graph}>
-            <DemoBar senders={sendersAmount} deliverers={deliverersAmount} />
-          </div>
-          <div className={style.graph}>
-            <DemoPie
-              availableJobs={availableJobAmount}
-              activeJobs={takenJobAmount}
-              totalJobs={totalJobAmount}
-            />
+        <div className={style.statContainer}>
+          <div className={style.row}>
+            <div className={style.col}>
+              <FaClipboardCheck className={style.statIcon} />
+              <div className={style.counter}>
+                <CountUp end={totalJobAmount} className={appStyle.h2Desktop} />
+                <div className={style.statsLine}></div>
+                <p className={`${appStyle.h2Desktop} ${style.statsText}`}>
+                  Jobs
+                </p>
+              </div>
+            </div>
+            <div className={style.col}>
+              <FaUser className={style.statIcon} />
+              <div className={style.counter}>
+                <CountUp
+                  end={sendersAmount + deliverersAmount}
+                  className={appStyle.h2Desktop}
+                />
+                <div className={style.statsLine}></div>
+                <p className={`${appStyle.h2Desktop} ${style.statsText}`}>
+                  Users
+                </p>
+              </div>
+            </div>
+            <div className={style.col}>
+              <FaCar className={style.statIcon} />
+              <div className={style.counter}>
+                <CountUp
+                  end={deliverersAmount}
+                  className={appStyle.h2Desktop}
+                />
+                <div className={style.statsLine}></div>
+                <p className={`${appStyle.h2Desktop} ${style.statsText}`}>
+                  Drivers
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
