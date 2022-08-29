@@ -28,10 +28,8 @@ export const authenticate = async (req, res) => {
     return res.status(200).send({
       id: user._id,
       data: token,
-      email: req.body.email,
-      name: user.name,
-      surname: user.surname,
-      vehicleInfo: user.vehicleInfo,
+      initials: `${user.name[0]}. ${user.surname[0]}.`,
+      isDriver: user.vehicleInfo.plate ? true : false,
       success: true,
       message: "Logged In",
     });
