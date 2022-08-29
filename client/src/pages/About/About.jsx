@@ -1,9 +1,39 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useEffect, useState } from "react";
 import styles from "./About.module.css";
 import appStyle from "../../App.module.css";
 import DeliveryIcon from "../../assets/icons/deliveryIcon.svg";
+import useFetch from "../../hooks/useFetch";
+
+// Graph
+import DemoPie from "../../components/Graphs/pieChart";
+import DemoBar from "../../components/Graphs/BarChart";
 
 const About = () => {
+  const [availableJobAmount, setAvailableJobAmount] = useState();
+  const [totalJobAmount, setTotalJobAmount] = useState();
+  const [takenJobAmount, setTakenJobAmount] = useState();
+  const [sendersAmount, setSendersAmount] = useState();
+  const [deliverersAmount, setDeliverersAmount] = useState();
+
+  const onSuccess = (onReceived) => {
+    setAvailableJobAmount(onReceived.result.numOfAvailableJobs);
+    setTotalJobAmount(onReceived.result.numOfTotalJobs);
+    setTakenJobAmount(onReceived.result.numOfTakenJobs);
+    setSendersAmount(onReceived.result.numOfSenders);
+    setDeliverersAmount(onReceived.result.numOfDeliverers);
+  };
+
+  const { performFetch, cancelFetch } = useFetch("/graphs/values", onSuccess);
+
+  useEffect(() => {
+    performFetch({
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    return cancelFetch;
+  }, []);
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -62,7 +92,7 @@ const About = () => {
 
         <main>
           <div className={styles.profile}>
-            <figure data-value="product owner" className={appStyle.bodyDesktop}>
+            <figure data-value="tech lead" className={appStyle.bodyDesktop}>
               <img src="https://ca.slack-edge.com/T0EJTUQ87-U01A50MBL7J-ff88a4792fab-512" />
               <figcaption>Riccardo Bevilacqua</figcaption>
             </figure>
@@ -76,7 +106,7 @@ const About = () => {
           </div>
 
           <div className={styles.profile}>
-            <figure data-value="tech lead" className={appStyle.bodyDesktop}>
+            <figure data-value="DevOps" className={appStyle.bodyDesktop}>
               <img src="https://avatars.githubusercontent.com/u/23367061?v=4" />
               <figcaption>Rob van Kruijsdijke</figcaption>
             </figure>
@@ -103,6 +133,24 @@ const About = () => {
             </figure>
           </div>
         </main>
+      </div>
+
+      <div className={styles.graphSection}>
+        <h1 className={appStyle.h1Desktop}>Latest Statistics</h1>
+        <div className={styles.container}>
+          <div className={styles.graphContainer}>
+            <div className={styles.graph}>
+              <DemoBar senders={sendersAmount} deliverers={deliverersAmount} />
+            </div>
+            <div className={styles.graph}>
+              <DemoPie
+                availableJobs={availableJobAmount}
+                activeJobs={takenJobAmount}
+                totalJobs={totalJobAmount}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

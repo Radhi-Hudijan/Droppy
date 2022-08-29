@@ -30,18 +30,6 @@
   margin: auto;
 }
 
-.graphContainer {
-  margin-top: 20px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.graph {
-  width: 50%;
-}
-
 .allCards {
   display: flex;
   justify-content: space-evenly;
