@@ -3,6 +3,10 @@ import { Pie, G2 } from "@ant-design/plots";
 
 // eslint-disable-next-line react/prop-types
 const DemoPie = ({ availableJobs, activeJobs }) => {
+  if (availableJobs == null || activeJobs == null) {
+    return null;
+  }
+
   const G = G2.getEngine("canvas");
   const data = [
     {

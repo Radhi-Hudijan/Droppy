@@ -10,14 +10,12 @@ import DemoBar from "../../components/Graphs/BarChart";
 
 const About = () => {
   const [availableJobAmount, setAvailableJobAmount] = useState();
-  const [totalJobAmount, setTotalJobAmount] = useState();
   const [takenJobAmount, setTakenJobAmount] = useState();
   const [sendersAmount, setSendersAmount] = useState();
   const [deliverersAmount, setDeliverersAmount] = useState();
 
   const onSuccess = (onReceived) => {
     setAvailableJobAmount(onReceived.result.numOfAvailableJobs);
-    setTotalJobAmount(onReceived.result.numOfTotalJobs);
     setTakenJobAmount(onReceived.result.numOfTakenJobs);
     setSendersAmount(onReceived.result.numOfSenders);
     setDeliverersAmount(onReceived.result.numOfDeliverers);
@@ -108,7 +106,7 @@ const About = () => {
           <div className={styles.profile}>
             <figure data-value="DevOps" className={appStyle.bodyDesktop}>
               <img src="https://avatars.githubusercontent.com/u/23367061?v=4" />
-              <figcaption>Rob van Kruijsdijke</figcaption>
+              <figcaption>Rob van Kruijsdijk</figcaption>
             </figure>
           </div>
 
@@ -146,7 +144,6 @@ const About = () => {
               <DemoPie
                 availableJobs={availableJobAmount}
                 activeJobs={takenJobAmount}
-                totalJobs={totalJobAmount}
               />
             </div>
           </div>
