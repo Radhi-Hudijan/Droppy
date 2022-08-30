@@ -210,7 +210,7 @@ export default function EditProfileForm(props) {
                   </div>
                 </div>
                 <div className={style.dimensionDiv}>
-                  <label className={appStyle.bodyDesktop}>Length (cm)</label>
+                  <label className={appStyle.bodyDesktop}>Length(cm)</label>
                   <div className={style.inputDimension}>
                     <FontAwesomeIcon icon={faRuler} />
                     <input
