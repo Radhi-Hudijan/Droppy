@@ -182,22 +182,6 @@ const JobDetails = () => {
     return invertedDate;
   };
 
-  // const onSuccess = (onReceived) => {
-  //   setCategories(onReceived.result);
-  // };
-
-  // const { performFetch, cancelFetch } = useFetch("/categories", onSuccess);
-
-  // useEffect(() => {
-  //   performFetch({
-  //     method: "GET",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //   });
-  //   return cancelFetch;
-  // }, []);
-
   return (
     <div>
       <h2 className={appStyles.h1Desktop}>Job Details</h2>
@@ -328,9 +312,11 @@ const JobDetails = () => {
 
             {!isDriver && (
               <div className={styles.acceptedDriversSection}>
-                <p className={appStyles.boldBodyDesktop}>
-                  These drivers would like to help you!
-                </p>
+                {isAccepted && (
+                  <p className={appStyles.boldBodyDesktop}>
+                    These drivers would like to help you!
+                  </p>
+                )}
                 <ul className={styles.acceptedDeliverers}>
                   {acceptedBy.map((driver, index) => (
                     <li key={index} className={appStyles.bodyDesktop}>

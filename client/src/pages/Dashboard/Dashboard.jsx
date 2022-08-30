@@ -50,12 +50,12 @@ function Dashboard() {
       <div className={style.container}>
         {isDriver && (
           <div>
-            <h2 className={appStyle.h2Desktop}>Jobs created by other users</h2>
+            <h2 className={appStyle.h1Desktop}>Jobs created by other users</h2>
           </div>
         )}
         {!isDriver && (
           <div>
-            <h2 className={appStyle.h2Desktop}>Your jobs</h2>
+            <h2 className={appStyle.h1Desktop}>Your jobs</h2>
           </div>
         )}
         <div className={style.buttonsAndCardsDiv}>

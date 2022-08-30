@@ -207,7 +207,7 @@ const ProfilePage = () => {
       <div className={style.profilePage}>
         <div className={style.topBar}></div>
         <div className={style.userDefault}>
-          <h2 className={appStyle.h2Desktop}>Profile</h2>
+          <h2 className={appStyle.h1Desktop}>Profile</h2>
           <DefaultProfilePhoto />
         </div>
         <div className={style.buttonDiv}>

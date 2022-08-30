@@ -1,12 +1,10 @@
 :root {
   --nav-height: 80px;
-  /* --horizontal-shadow: drop-shadow(0px 5px 13px rgba(0, 0, 0, 0.43)); */
   --font-dark: #022b3a;
   --font-light: #ffffff;
   --shadow: #022b3a;
   --highlight: #022b3a;
   --highlight-light: #1f7a8c;
-  /* --background: #caafb3; */
   --background-opacity: rgba(255, 255, 255, 0.337);
   --beige: #e1e5f2;
   --white: #ffffff;
@@ -15,10 +13,10 @@
 .h1Desktop {
   font-family: "Teko", sans-serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 48px;
+  font-weight: 400;
+  font-size: 38px;
   line-height: 69px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
 }
 
 .h2Desktop {
@@ -55,8 +53,6 @@
 }
 
 .container {
-  /* background-color: var(--background); */
-  /* box-shadow: -10px 0px 10px 1px rgba(0, 0, 0, 0.24); */
   background-image: url("assets/images/van.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -65,10 +61,8 @@
   background-color: var(--white);
 }
 
-/* Style from public/style.css */
 html {
   background-image: url("assets/images/van.jpg");
-  /* background-color: var(--background-opacity); */
   background-color: var(--highlight);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -76,15 +70,9 @@ html {
   background-size: cover;
 }
 
-/* #root {
-  overflow-x: hidden;
-  background-color: aqua !important;
-} */
-
 @media screen and (max-width: 450px) {
   .h1Desktop {
-    font-size: 48px;
-    line-height: 69px;
+    font-size: 28px;
   }
 
   .h2Desktop {

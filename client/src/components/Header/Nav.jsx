@@ -31,17 +31,31 @@ const Nav = ({ opened }) => {
 
     return (
       <ul>
-        <Link
-          key="1"
-          to={token ? "/dashboard" : "/"}
-          data-testid="linkToHome"
-          onClick={() => {
-            if (isMdScreen) return;
-            setIsOpen(false);
-            opened();
-          }}
-        >
-          <li className={appStyle.h2Desktop}>
+        <li className={styles.logoNav}>
+          <Link
+            key="0"
+            to={token ? "/dashboard" : "/"}
+            data-testid="linkToHome"
+            onClick={() => {
+              if (isMdScreen) return;
+              setIsOpen(false);
+              opened();
+            }}
+          >
+            <Logo />
+          </Link>
+        </li>
+        <li className={appStyle.h1Desktop}>
+          <Link
+            key="1"
+            to={token ? "/dashboard" : "/"}
+            data-testid="linkToHome"
+            onClick={() => {
+              if (isMdScreen) return;
+              setIsOpen(false);
+              opened();
+            }}
+          >
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -50,19 +64,19 @@ const Nav = ({ opened }) => {
               <span>Home</span>
               {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
             </motion.div>
-          </li>
-        </Link>
-        <Link
-          key="2"
-          to={"/about"}
-          data-testid="linkToAbout"
-          onClick={() => {
-            if (isMdScreen) return;
-            setIsOpen(false);
-            opened();
-          }}
-        >
-          <li className={appStyle.h2Desktop}>
+          </Link>
+        </li>
+        <li className={appStyle.h1Desktop}>
+          <Link
+            key="2"
+            to={"/about"}
+            data-testid="linkToAbout"
+            onClick={() => {
+              if (isMdScreen) return;
+              setIsOpen(false);
+              opened();
+            }}
+          >
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -71,20 +85,20 @@ const Nav = ({ opened }) => {
               <span>About</span>
               {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
             </motion.div>
-          </li>
-        </Link>
+          </Link>
+        </li>
         {token && (
-          <Link
-            key="3"
-            to={`/profile/${localStorage.getItem("userID")}`}
-            data-testid="linkToLogin"
-            onClick={() => {
-              if (isMdScreen) return;
-              setIsOpen(false);
-              opened();
-            }}
-          >
-            <li className={appStyle.h2Desktop}>
+          <li className={appStyle.h1Desktop}>
+            <Link
+              key="3"
+              to={`/profile/${localStorage.getItem("userID")}`}
+              data-testid="linkToLogin"
+              onClick={() => {
+                if (isMdScreen) return;
+                setIsOpen(false);
+                opened();
+              }}
+            >
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -93,24 +107,24 @@ const Nav = ({ opened }) => {
                 <span>Profile</span>
                 {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
               </motion.div>
-            </li>
-          </Link>
+            </Link>
+          </li>
         )}
-        <Link
-          key="4"
-          to={token ? "/" : "/login"}
-          data-testid="linkToLogin"
-          onClick={() => {
-            if (token) {
-              localStorage.clear();
-              window.reload();
-            }
-            if (isMdScreen) return;
-            setIsOpen(false);
-            opened();
-          }}
-        >
-          <li className={appStyle.h2Desktop}>
+        <li className={appStyle.h1Desktop}>
+          <Link
+            key="4"
+            to={token ? "/" : "/login"}
+            data-testid="linkToLogin"
+            onClick={() => {
+              if (token) {
+                localStorage.clear();
+                window.reload();
+              }
+              if (isMdScreen) return;
+              setIsOpen(false);
+              opened();
+            }}
+          >
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -121,8 +135,8 @@ const Nav = ({ opened }) => {
               </span>
               {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
             </motion.div>
-          </li>
-        </Link>
+          </Link>
+        </li>
       </ul>
     );
   };
@@ -143,10 +157,6 @@ const Nav = ({ opened }) => {
       )}
 
       <div className={styles.drawer}>
-        <div className={styles.logoDiv}>
-          <Logo />
-        </div>
-
         {!isMdScreen && <Divider />}
         {getNavLinks()}
       </div>

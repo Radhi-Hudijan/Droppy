@@ -142,6 +142,10 @@
   color: red;
 }
 
+.userDefault h2 {
+  margin-bottom: 0px;
+}
+
 @media screen and (max-width: 740px) {
   .allDetails {
     flex-direction: column;
@@ -173,21 +177,25 @@
   }
 
   .deletePrompt {
-    width: 90%;
+    min-width: 90%;
   }
 
   .toggle {
+    margin-bottom: 0px;
+  }
+
+  .userDefault h2 {
     margin-bottom: 0px;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .deletePrompt {
-    width: 35%;
+    width: 45%;
   }
 }
 @media screen and (max-width: 1000px) {
   .deletePrompt {
-    width: 60%;
+    width: 65%;
   }
 }
