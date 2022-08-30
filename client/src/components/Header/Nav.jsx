@@ -90,7 +90,7 @@ const Nav = ({ opened }) => {
                 whileTap={{ scale: 0.9 }}
                 style={{ flexDirection: "row" }}
               >
-                <span>Profile {localStorage.getItem("initials")}</span>
+                <span>Profile</span>
                 {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
               </motion.div>
             </li>
