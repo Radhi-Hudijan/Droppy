@@ -22,6 +22,7 @@
 .navNormal {
   pointer-events: all;
 }
+
 .burger {
   z-index: 11;
 }
@@ -31,7 +32,7 @@
   align-items: center;
   height: var(--nav-height);
   width: 100%;
-  justify-content: space-around;
+  justify-content: flex-start;
   position: fixed;
   padding: 10px 10px;
   background-color: var(--highlight);
@@ -41,18 +42,24 @@
   width: 240px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   transform: translateX(-100%);
   height: 100vh;
   z-index: 3;
-  /* box-shadow: 0px -7px 6px black; */
   background-color: var(--font-dark);
 }
 
-ul a {
+.nav ul li {
   list-style: none;
   text-decoration: none;
   pointer-events: all;
   color: var(--font-light);
+}
+
+.nav a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .nav svg {
@@ -62,14 +69,31 @@ ul a {
   align-self: center;
 }
 
-.drawer li div {
+.drawer a div {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 10px;
+  max-width: 240px;
 }
 
-.drawer li div svg {
+.drawer span {
+  margin: 0px;
+}
+
+.drawer a {
+  max-width: 240px;
+}
+
+.drawer li {
+  max-width: 240px;
+}
+
+.drawer svg {
+  max-width: 240px;
+}
+
+.drawer a div svg {
   width: 20px;
   height: 20px;
   padding: 0;
@@ -77,11 +101,7 @@ ul a {
 }
 
 .logoDiv {
-  margin-right: auto;
-}
-
-.logoDiv svg {
-  margin-left: -90px;
+  width: 160px;
 }
 
 .bodyDesktop {
@@ -100,16 +120,6 @@ ul a {
 .centerLogo svg {
   width: 100%;
 }
-@media screen and (min-width: 1400px) {
-  .logoDiv svg {
-    margin-left: 170%;
-  }
-}
-@media screen and (min-width: 1000px) {
-  .logoDiv svg {
-    margin-left: 100%;
-  }
-}
 
 @media screen and (min-width: 840px) {
   .drawer {
@@ -118,7 +128,7 @@ ul a {
     align-items: center;
     height: var(--nav-height);
     width: 100%;
-    justify-content: space-around;
+    justify-content: flex-start;
     position: fixed;
     padding: 10px 10px;
     background-color: var(--highlight);
@@ -127,11 +137,12 @@ ul a {
 
   .nav ul {
     display: flex;
+    width: 100%;
     gap: 20px;
     margin-right: 15%;
   }
 
-  .nav ul a {
+  .nav ul li {
     color: var(--white);
     cursor: pointer;
   }
@@ -144,7 +155,32 @@ ul a {
     align-self: center;
   }
 
-  .logoDiv svg {
-    margin-left: 70%;
+  .logoNav {
+    margin-left: 15%;
+    margin-right: auto;
+  }
+
+  .drawer a div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 10px 0;
+    max-width: 240px;
+  }
+
+  .drawer span {
+    margin: 0px;
+  }
+
+  .drawer a {
+    max-width: 240px;
+  }
+
+  .drawer li {
+    max-width: 240px;
+  }
+
+  .drawer svg {
+    max-width: 240px;
   }
 }

@@ -182,22 +182,6 @@ const JobDetails = () => {
     return invertedDate;
   };
 
-  // const onSuccess = (onReceived) => {
-  //   setCategories(onReceived.result);
-  // };
-
-  // const { performFetch, cancelFetch } = useFetch("/categories", onSuccess);
-
-  // useEffect(() => {
-  //   performFetch({
-  //     method: "GET",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //   });
-  //   return cancelFetch;
-  // }, []);
-
   return (
     <div>
       <h2 className={appStyles.h1Desktop}>Job Details</h2>
