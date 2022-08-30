@@ -13,17 +13,17 @@ Check out a deployed version below.
 
 <div>
     <p>Screenshot 1/6</p>
-    <img src="../client/src/assets/Screenshots/ss-1.png"/>
+    <img src="https://github.com/HackYourFuture/class36-project/blob/develop/client/src/assets/Screenshots/ss-1.png"/>
     <p>Screenshot 2/6</p>
-    <img src="../client/src/assets/Screenshots/ss-2.png"/>
+    <img src="https://github.com/HackYourFuture/class36-project/blob/develop/client/src/assets/Screenshots/ss-2.png"/>
     <p>Screenshot 3/6</p>
-    <img src="../client/src/assets/Screenshots/ss-3.png"/>
+    <img src="https://github.com/HackYourFuture/class36-project/blob/develop/client/src/assets/Screenshots/ss-3.png"/>
     <p>Screenshot 4/6</p>
-    <img src="../client/src/assets/Screenshots/ss-4.png"/>
+    <img src="https://github.com/HackYourFuture/class36-project/blob/develop/client/src/assets/Screenshots/ss-4.png"/>
     <p>Screenshot 5/6</p>
-    <img src="../client/src/assets/Screenshots/ss-5.png"/>
+    <img src="https://github.com/HackYourFuture/class36-project/blob/develop/client/src/assets/Screenshots/ss-5.png"/>
     <p>Screenshot 6/6</p>
-    <img src="../client/src/assets/Screenshots/ss-6.png"/>
+    <img src="https://github.com/HackYourFuture/class36-project/blob/develop/client/src/assets/Screenshots/ss-6.png"/>
 </div>
 
 ## 1. Setup
