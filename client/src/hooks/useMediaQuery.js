@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const QUERIES = {
   sm: "(min-width: 360px)",
-  md: "(min-width: 740px)",
+  md: "(min-width: 840px)",
   lg: "(min-width: 1200px)",
 };
 

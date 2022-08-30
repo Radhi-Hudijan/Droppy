@@ -164,10 +164,13 @@ export default function EditProfileForm(props) {
                 />
               </div>
             </div>
+            <h6 className={`${appStyle.boldBodyDesktop} ${style.header6}`}>
+              Available car space:
+            </h6>
             <div>
               <div className={style.dimensionsContainer}>
                 <div className={style.dimensionDiv}>
-                  <label className={appStyle.bodyDesktop}>Width</label>
+                  <label className={appStyle.bodyDesktop}>Width (cm)</label>
                   <div className={style.inputDimension}>
                     <FontAwesomeIcon icon={faRuler} />
                     <input
@@ -187,7 +190,7 @@ export default function EditProfileForm(props) {
                   </div>
                 </div>
                 <div className={style.dimensionDiv}>
-                  <label className={appStyle.bodyDesktop}>Height</label>
+                  <label className={appStyle.bodyDesktop}>Height (cm)</label>
                   <div className={style.inputDimension}>
                     <FontAwesomeIcon icon={faRuler} />
                     <input
@@ -207,7 +210,7 @@ export default function EditProfileForm(props) {
                   </div>
                 </div>
                 <div className={style.dimensionDiv}>
-                  <label className={appStyle.bodyDesktop}>Length</label>
+                  <label className={appStyle.bodyDesktop}>Length (cm)</label>
                   <div className={style.inputDimension}>
                     <FontAwesomeIcon icon={faRuler} />
                     <input

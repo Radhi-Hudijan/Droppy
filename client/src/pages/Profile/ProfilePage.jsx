@@ -239,14 +239,14 @@ const ProfilePage = () => {
                 </div>
                 <div className={style.infoLine}>
                   <FontAwesomeIcon icon={faUser} />
-                  <p className={appStyle.bodyDesktop}>First Name: </p>
+                  <p className={appStyle.boldBodyDesktop}>First Name: </p>
                   <div className={style.results}>
                     <p className={appStyle.bodyDesktop}>{userDetails.name}</p>
                   </div>
                 </div>
                 <div className={style.infoLine}>
                   <FontAwesomeIcon icon={faUser} />
-                  <p className={appStyle.bodyDesktop}>Last Name: </p>
+                  <p className={appStyle.boldBodyDesktop}>Last Name: </p>
                   <div className={style.results}>
                     <p className={appStyle.bodyDesktop}>
                       {userDetails.surname}
@@ -255,7 +255,7 @@ const ProfilePage = () => {
                 </div>
                 <div className={style.infoLine}>
                   <FontAwesomeIcon icon={faEnvelope} />
-                  <p className={appStyle.bodyDesktop}>Email: </p>
+                  <p className={appStyle.boldBodyDesktop}>Email: </p>
                   <div className={style.results}>
                     <p className={appStyle.bodyDesktop}>{userDetails.email}</p>
                   </div>
@@ -271,7 +271,7 @@ const ProfilePage = () => {
                     </div>
                     <div className={style.infoLine}>
                       <FontAwesomeIcon icon={faPhone} />
-                      <p className={appStyle.bodyDesktop}>Phone: </p>
+                      <p className={appStyle.boldBodyDesktop}>Phone: </p>
                       <div className={style.results}>
                         <p className={appStyle.bodyDesktop}>
                           {userDetails.vehicleInfo.contact}
@@ -280,37 +280,42 @@ const ProfilePage = () => {
                     </div>
                     <div className={style.infoLine}>
                       <FontAwesomeIcon icon={faCar} />
-                      <p className={appStyle.bodyDesktop}>Plate Number: </p>
+                      <p className={appStyle.boldBodyDesktop}>Plate Number: </p>
                       <div className={style.results}>
                         <p className={appStyle.bodyDesktop}>
                           {userDetails.vehicleInfo.plate}
                         </p>
                       </div>
                     </div>
+                    <div className={`${style.details} ${style.space}`}>
+                      <h6 className={appStyle.boldBodyDesktop}>
+                        Available Car Space
+                      </h6>
+                    </div>
                     <div className={style.infoLine}>
                       <FontAwesomeIcon icon={faRuler} />
-                      <p className={appStyle.bodyDesktop}>Width: </p>
+                      <p className={appStyle.boldBodyDesktop}>Width: </p>
                       <div className={style.results}>
                         <p className={appStyle.bodyDesktop}>
-                          {userDetails.vehicleInfo.width}
+                          {userDetails.vehicleInfo.width} cm
                         </p>
                       </div>
                     </div>
                     <div className={style.infoLine}>
                       <FontAwesomeIcon icon={faRuler} />
-                      <p className={appStyle.bodyDesktop}>Height: </p>
+                      <p className={appStyle.boldBodyDesktop}>Height: </p>
                       <div className={style.results}>
                         <p className={appStyle.bodyDesktop}>
-                          {userDetails.vehicleInfo.height}
+                          {userDetails.vehicleInfo.height} cm
                         </p>
                       </div>
                     </div>
                     <div className={style.infoLine}>
                       <FontAwesomeIcon icon={faRuler} />
-                      <p className={appStyle.bodyDesktop}>Length: </p>
+                      <p className={appStyle.boldBodyDesktop}>Length: </p>
                       <div className={style.results}>
                         <p className={appStyle.bodyDesktop}>
-                          {userDetails.vehicleInfo.length}
+                          {userDetails.vehicleInfo.length} cm
                         </p>
                       </div>
                     </div>
