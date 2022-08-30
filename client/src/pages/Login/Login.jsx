@@ -20,7 +20,7 @@ function Login() {
 
   const onSuccess = (res) => {
     localStorage.setItem("token", res.data);
-    const isDriver = res.vehicleInfo.plate ? true : false;
+    const isDriver = res.isDriver;
     localStorage.setItem("isDriver", `${isDriver}`);
     localStorage.setItem("userID", res.id);
     setIsDriver(isDriver);
