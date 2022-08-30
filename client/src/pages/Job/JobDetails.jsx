@@ -312,9 +312,11 @@ const JobDetails = () => {
 
             {!isDriver && (
               <div className={styles.acceptedDriversSection}>
-                <p className={appStyles.boldBodyDesktop}>
-                  These drivers would like to help you!
-                </p>
+                {isAccepted && (
+                  <p className={appStyles.boldBodyDesktop}>
+                    These drivers would like to help you!
+                  </p>
+                )}
                 <ul className={styles.acceptedDeliverers}>
                   {acceptedBy.map((driver, index) => (
                     <li key={index} className={appStyles.bodyDesktop}>
