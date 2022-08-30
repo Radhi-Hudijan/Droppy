@@ -20,7 +20,6 @@ function Login() {
 
   const onSuccess = (res) => {
     localStorage.setItem("token", res.data);
-    localStorage.setItem("initials", res.initials);
     const isDriver = res.isDriver;
     localStorage.setItem("isDriver", `${isDriver}`);
     localStorage.setItem("userID", res.id);

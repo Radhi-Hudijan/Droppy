@@ -90,7 +90,7 @@ const Nav = ({ opened }) => {
                 whileTap={{ scale: 0.9 }}
                 style={{ flexDirection: "row" }}
               >
-                <span>Profile {localStorage.getItem("initials")}</span>
+                <span>Profile</span>
                 {!isMdScreen && <FontAwesomeIcon icon={faArrowRight} />}
               </motion.div>
             </li>
@@ -132,10 +132,16 @@ const Nav = ({ opened }) => {
       {!isMdScreen && (
         <motion.div className={styles.navNormal}>
           <motion.div whileTap={{ scale: 0.9 }} onClick={openHandler}>
-            <img src={burger} />
+            <img src={burger} className={styles.burger} />
           </motion.div>
+          <Link to={localStorage.getItem("token") ? "/dashboard" : "/"}>
+            <div className={styles.centerLogo}>
+              <Logo />
+            </div>
+          </Link>
         </motion.div>
       )}
+
       <div className={styles.drawer}>
         <div className={styles.logoDiv}>
           <Logo />
