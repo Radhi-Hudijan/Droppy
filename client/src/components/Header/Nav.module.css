@@ -111,7 +111,7 @@ ul a {
   }
 }
 
-@media screen and (min-width: 740px) {
+@media screen and (min-width: 840px) {
   .drawer {
     display: flex;
     flex-direction: row;

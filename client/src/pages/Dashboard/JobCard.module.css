@@ -95,7 +95,7 @@
   width: 30%;
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 840px) {
   .job-card {
     min-width: 100%;
     margin: 5px 0px;
